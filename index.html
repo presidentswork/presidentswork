@@ -962,14 +962,105 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 #heroA .slot.br .split,#heroC .slot.br .split{justify-content:flex-end}
 @media(max-width:639.98px){#heroA,#heroC{--hf:min(26vw, 12.5svh)}#heroA .display,#heroC .display{font-size:var(--hf);line-height:.86}
 #heroA .slot.tl,#heroC .slot.tl{top:calc(6.5rem + 3vh) !important}
-#heroA .slot.br,#heroC .slot.br{top:calc(6.5rem + 3vh + 1.72 * var(--hf) + 1.25rem) !important;bottom:auto !important}
-.scroll-cue{bottom:6.75rem !important}.scroll-cue i{height:1.75rem}}
+#heroA .slot.br,#heroC .slot.br{top:auto !important;bottom:8.25rem !important;width:min-content !important}
+#heroA .slot.br .split,#heroC .slot.br .split{flex-direction:column;align-items:flex-end}
+.scroll-cue{left:var(--m) !important;translate:0 0 !important;bottom:8.5rem !important;align-items:flex-start !important}.scroll-cue.gone,.scroll-cue.timed{translate:0 .75rem !important}.scroll-cue i{height:1.75rem}}
 .scroll-cue.timed{opacity:0 !important;translate:-50% .75rem !important;pointer-events:none}
 footer .f-acts .f-main{border-bottom:0 !important;padding-bottom:0 !important;text-decoration:none !important}
 #capEnter,.caption #capEnter,.caption:not(.cta-end) #capEnter{text-transform:none !important;letter-spacing:.01em !important;font-size:.95rem !important}
 /* v16: stop title and Enter centred under the frame */
 .caption:not(.cta-end){left:0 !important;right:0 !important;margin:0 auto !important;bottom:7rem !important;width:max-content !important;max-width:calc(100vw - 2.5rem) !important;align-items:center !important;text-align:center}
 @media(max-width:767.98px){.caption:not(.cta-end){bottom:6.75rem !important}}
+/* v16: in-site browser window */
+.ib{position:fixed;inset:0;z-index:400;display:grid;place-items:center;padding:clamp(.75rem,3vw,2.5rem);background:rgba(8,9,8,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:background .45s var(--ease-glide),backdrop-filter .45s var(--ease-glide),-webkit-backdrop-filter .45s var(--ease-glide)}
+.ib.on{background:rgba(8,9,8,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ib-win{width:min(1280px,100%);height:min(88svh,100%);display:flex;flex-direction:column;background:#f4f3ef;border-radius:14px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08);opacity:0;transform:translateY(28px) scale(.96);transition:opacity .45s var(--ease-glide),transform .55s var(--ease-settle)}
+.ib.on .ib-win{opacity:1;transform:none}
+.ib-bar{position:relative;flex:none;display:flex;align-items:center;gap:.6rem;height:3rem;padding:0 .6rem 0 1rem;background:#e7e5df;color:#2a2a27;border-bottom:1px solid rgba(0,0,0,.08)}
+.ib-dots{display:flex;gap:.4rem}.ib-dots i{width:.72rem;height:.72rem;border-radius:50%;background:#cfccc4}.ib-dots i:first-child{background:#ec6a5e}.ib-dots i:nth-child(2){background:#f4bf4f}.ib-dots i:nth-child(3){background:#61c554}
+.ib-url{flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;height:1.9rem;margin:0 .5rem;border-radius:.55rem;background:#f8f7f4;font:500 .82rem/1 "Instrument Sans",system-ui,sans-serif;letter-spacing:.01em;color:#4a4944;min-width:0;white-space:nowrap;overflow:hidden}
+.ib-url svg{width:.8rem;height:.8rem;flex:none;opacity:.6}
+.ib-btn{flex:none;display:grid;place-items:center;width:2.2rem;height:2.2rem;border:0;border-radius:.55rem;background:none;color:#2a2a27;cursor:pointer;text-decoration:none}
+.ib-btn svg{width:1.05rem;height:1.05rem}
+@media(hover:hover){.ib-btn:hover{background:rgba(0,0,0,.07)}}
+.ib-btn:focus-visible{outline:2px solid #2a2a27;outline-offset:1px}
+.ib-load{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:#2a2a27;transform-origin:left;transform:scaleX(0);animation:ibload 2.4s cubic-bezier(.2,.7,.2,1) forwards}
+.ib.loaded .ib-load{animation:ibdone .5s ease forwards}
+@keyframes ibload{to{transform:scaleX(.82)}}
+@keyframes ibdone{0%{transform:scaleX(.82);opacity:1}60%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.ib-view{flex:1;position:relative;background:#fff}
+.ib-view iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .5s var(--ease-glide)}
+.ib.loaded .ib-view iframe{opacity:1}
+@media(max-width:639.98px){.ib{padding:.5rem;align-items:end}.ib-win{height:calc(100svh - 1.5rem);border-radius:14px 14px 10px 10px}.ib-dots{display:none}.ib-bar{padding-left:.5rem}}
+@media(prefers-reduced-motion:reduce){.ib,.ib-win,.ib-view iframe{transition:none}.ib-load{animation:none}}
+/* v16: testimonial star zooms over the whole screen */
+.wx .q.zq{height:240vh;height:240svh;padding:0 !important;position:relative;overflow:clip}
+.wx .q.zq>.wrap{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
+.wx .q.zq figure,.wx .q.zq blockquote{position:static}
+.wx .q.zq .qstar{position:absolute;left:50%;top:50%;width:min(62vw,24rem);translate:none;transform:translate(-50%,-50%);will-change:transform;opacity:1;fill:var(--yel)}
+.wx .q.zq blockquote p,.wx .q.zq figcaption{position:relative;z-index:1;transition:color .5s var(--ease-glide),border-color .5s var(--ease-glide)}
+.wx .q.zq.qfill blockquote p,.wx .q.zq.qfill figcaption{color:#121212}
+.wx .q.zq.qfill figcaption span{color:rgba(18,18,18,.6)}
+.wx .q.zq.qfill figcaption{border-top-color:rgba(18,18,18,.25)}
+/* v16: footer slides up over the page */
+.site main.ftuck{position:sticky;z-index:0}
+.site main.ftuck::after{content:"";position:absolute;inset:0;background:#000;opacity:calc(var(--fc,0) * .55);pointer-events:none}
+.site footer.f-page{z-index:2 !important;box-shadow:0 -30px 60px rgba(0,0,0,.18)}
+/* v16: capabilities, grouped */
+.wx .capx{padding:6rem 0 5rem;background:var(--pbg);color:var(--pfg)}
+.wx .capx-k{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--pmut);margin:0 0 1rem}
+.wx .capx-h{margin:0 0 1rem !important;max-width:14ch}
+.wx .capx-s{max-width:34rem;margin:0 0 3rem}
+.wx .capx-l{list-style:none;margin:0;padding:0;counter-reset:none}
+.wx .capx-r{display:grid;grid-template-columns:1fr;gap:1.1rem;padding:2rem 0;border-top:1px solid var(--pline)}
+.wx .capx-r:last-child{border-bottom:1px solid var(--pline)}
+.wx .capx-t{display:grid;grid-template-columns:2.5rem 1fr;column-gap:.5rem;align-items:baseline}
+.wx .capx-n{font-size:.78rem;color:var(--pmut);font-variant-numeric:tabular-nums}
+.wx .capx-t h3{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,1.5rem + 1.6vw,2.8rem);line-height:1;letter-spacing:-.01em}
+.wx .capx-t p{grid-column:2;margin:.5rem 0 0;color:var(--pmut);font-size:.98rem;line-height:1.45}
+.wx .capx-i{list-style:none;margin:0;padding:0 0 0 3rem;display:grid;grid-template-columns:1fr;gap:.55rem}
+.wx .capx-i li{font-size:1rem;line-height:1.35;position:relative;padding-left:1rem}
+.wx .capx-i li::before{content:"";position:absolute;left:0;top:.6em;width:.35rem;height:1px;background:currentColor;opacity:.5}
+.wx .capx-p{margin:.4rem 0 0;padding-left:3rem;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;font-size:.78rem}
+.wx .capx-p span{color:var(--pmut);letter-spacing:.14em;text-transform:uppercase;font-size:.66rem;margin-right:.25rem}
+.wx .capx-p a{color:inherit;text-decoration:none;border:1px solid var(--pline);border-radius:999px;padding:.3rem .7rem;transition:background .25s,color .25s,border-color .25s}
+@media(hover:hover){.wx .capx-p a:hover{background:var(--pfg);color:var(--pbg);border-color:var(--pfg)}}
+@media(min-width:900px){.wx .capx{padding:9rem 0 8rem}.wx .capx-r{grid-template-columns:minmax(0,5fr) minmax(0,5fr) minmax(0,3fr);gap:2.5rem;padding:2.75rem 0;align-items:start}.wx .capx-i{padding:0;grid-template-columns:1fr 1fr;column-gap:2rem}.wx .capx-p{padding:0;flex-direction:column;align-items:flex-start}}
+/* v16: programs as stacked cards that slide over one another */
+.wx .prog{display:block;padding:1rem 0 12vh}
+.wx .prog article{position:sticky;top:calc(1rem + var(--i,0) * .55rem);min-height:calc(100svh - 8.5rem);margin:0 0 7vh;border:0 !important;border-radius:22px;padding:2rem 1.6rem 2.25rem;background:var(--cbg,#f2f0eb);color:var(--pfg);box-shadow:0 -14px 44px rgba(0,0,0,.10);transform-origin:50% 0;will-change:transform,filter;align-content:space-between;overflow:hidden}
+.wx .prog article:last-child{margin-bottom:0}
+.wx .prog article:nth-child(6n+1){--cbg:#f2f0eb}
+.wx .prog article:nth-child(6n+2){--cbg:#e2e1dc}
+.wx .prog article:nth-child(6n+3){--cbg:#0d1932;--pfg:#fff;--pmut:rgba(255,255,255,.62);--pline:rgba(255,255,255,.2)}
+.wx .prog article:nth-child(6n+4){--cbg:#ffca6e;--pfg:#151515;--pmut:rgba(21,21,21,.58);--pline:rgba(21,21,21,.2)}
+.wx .prog article:nth-child(6n+5){--cbg:#141414;--pfg:#fff;--pmut:rgba(255,255,255,.62);--pline:rgba(255,255,255,.2)}
+.wx .prog article:nth-child(6n+6){--cbg:#e4ece0}
+html[data-mode="dark"] .wx .prog article:nth-child(6n+1){--cbg:#1c1c1b;--pfg:#fff;--pmut:rgba(255,255,255,.6);--pline:rgba(255,255,255,.16)}
+html[data-mode="dark"] .wx .prog article:nth-child(6n+2){--cbg:#2a2a28;--pfg:#fff;--pmut:rgba(255,255,255,.6);--pline:rgba(255,255,255,.16)}
+html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#fff;--pmut:rgba(255,255,255,.6);--pline:rgba(255,255,255,.16)}
+.wx .prog article .pn,.wx .prog article .pn b,.wx .prog article .pc,.wx .prog article .pc *{color:inherit}
+.wx .prog article .pn{color:var(--pmut)}
+.wx .prog article .pn b{color:var(--pfg)}
+.wx .prog article .pi{color:var(--pfg)}
+.wx .prog article .icon{width:min(42vw,11rem)}
+.wx .prog article .pc h3{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(2.1rem,1.6rem + 2.4vw,3.6rem) !important;line-height:1;letter-spacing:-.015em;margin:1.5rem 0 1rem}
+.wx .prog article .pc .body{color:var(--pmut);max-width:34rem}
+.wx .prog article .pc a{color:var(--pfg)}
+.wx .prog article .pn,.wx .prog article .icon,.wx .prog article .pc>*{opacity:0;translate:0 1.25rem;transition:opacity .8s var(--ease-settle),translate .9s var(--ease-settle)}
+.wx .prog article.sin .pn,.wx .prog article.sin .icon,.wx .prog article.sin .pc>*{opacity:1;translate:0 0}
+.wx .prog article.sin .icon{transition-delay:.12s}.wx .prog article.sin .pc>*:nth-child(1){transition-delay:.18s}.wx .prog article.sin .pc>*:nth-child(2){transition-delay:.26s}.wx .prog article.sin .pc>*:nth-child(3){transition-delay:.34s}.wx .prog article.sin .pc>*:nth-child(4){transition-delay:.42s}
+@media(min-width:900px){.wx .prog{padding:2rem 0 16vh}.wx .prog article{top:calc(6rem + var(--i,0) * .8rem);min-height:min(74vh,44rem);padding:3.75rem 4rem;border-radius:28px;margin-bottom:10vh}.wx .prog article .icon{width:12rem}}
+@media(prefers-reduced-motion:reduce){.wx .prog article .pn,.wx .prog article .icon,.wx .prog article .pc>*{opacity:1;translate:none;transition:none}}
+.pj-next{position:relative}
+.pj-next .nx::after{content:"" !important;position:absolute;left:50%;bottom:7.5rem;width:2.75rem;height:2.75rem;margin-left:-1.375rem;padding:0 !important;border:0 !important;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16M14 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16M14 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .35s var(--ease-glide),opacity .3s}
+@media(hover:hover){.pj-next:hover .nx::after{transform:translateX(.4rem);opacity:1}}
+@media(max-width:767.98px){.pj-next .nx::after{bottom:8.5rem}}
+#pjBack{display:flex;width:2.75rem;height:2.75rem;align-items:center;justify-content:center;padding:0;border:1px solid var(--pline,rgba(255,255,255,.2));border-radius:0;background:none;color:inherit;outline:none;transition:background-color .35s var(--ease-glide),border-color .35s var(--ease-glide)}
+#pjBack svg{width:1rem;height:1rem}
+#pjBack:focus-visible,.pj-btn:focus-visible{outline:1.5px solid currentColor;outline-offset:2px}
+#pjBack:focus:not(:focus-visible),.pj-btn:focus:not(:focus-visible){outline:none}
+@media(hover:hover) and (min-width:769px){#pjBack:hover{border-color:currentColor}}
 </style>
 </head>
 <body>
@@ -1101,13 +1192,81 @@ footer .f-acts .f-main{border-bottom:0 !important;padding-bottom:0 !important;te
   </header>
   <div id="pjBody"></div>
   <button class="pj-next" id="pjNextBig" type="button">
-    <span class="caps">Next project</span>
+    <span class="caps">Next</span>
     <span class="nx"><span class="display" id="pjNextName"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 7l10 10"/><path d="M17 9v8H9"/></svg></span>
   </button>
 </article>
 
 <script src="js/lottie_svg.min.js" defer></script>
 <script type="module">
+/* programs: each card eases back and dims as the next one slides over it */
+const stackTick = () => {
+  const vh = innerHeight;
+  document.querySelectorAll(".wx .prog").forEach((list) => {
+    const cards = [...list.querySelectorAll(":scope > article")];
+    cards.forEach((c, i) => {
+      c.style.setProperty("--i", i);
+      const r = c.getBoundingClientRect();
+      if (r.top < vh * 0.8) c.classList.add("sin");
+      const nx = cards[i + 1]; let k = 0;
+      if (nx) { const nr = nx.getBoundingClientRect(); k = Math.min(1, Math.max(0, (r.top + r.height - nr.top) / Math.max(1, r.height))); }
+      c.style.transform = k > 0.001 ? `scale(${(1 - k * 0.07).toFixed(4)})` : "";
+      c.style.filter = k > 0.001 ? `brightness(${(1 - k * 0.35).toFixed(3)})` : "";
+    });
+  });
+};
+document.addEventListener("scroll", () => requestAnimationFrame(stackTick), { capture: true, passive: true });
+addEventListener("resize", stackTick);
+setInterval(() => { if (document.querySelector(".wx .prog article:not(.sin)")) stackTick(); }, 700);
+
+/* testimonial star: on scroll it turns and zooms until it fills the screen, behind the words */
+const starTick = () => {
+  const vh = innerHeight;
+  document.querySelectorAll(".wx .q.zq").forEach((q) => {
+    const r = q.getBoundingClientRect(); if (r.bottom < -vh || r.top > vh * 2) return;
+    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh))), e = p * p * (3 - 2 * p);
+    const st = q.querySelector(".qstar"); if (!st) return;
+    st.style.transform = `translate(-50%,-50%) rotate(${(e * 225).toFixed(2)}deg) scale(${(1 + e * e * 26).toFixed(3)})`;
+    q.classList.toggle("qfill", e > 0.55);
+  });
+};
+document.addEventListener("scroll", () => requestAnimationFrame(starTick), { capture: true, passive: true });
+addEventListener("resize", starTick);
+/* pages: the content stops at its end and the footer slides up over it */
+const footStick = () => {
+  const m = document.getElementById("siteMain"); if (!m) return;
+  const f = m.parentElement && m.parentElement.querySelector("footer.f-page");
+  if (!f || document.getElementById("site").classList.contains("mr-immersive")) { m.style.top = ""; m.classList.remove("ftuck"); return; }
+  m.classList.add("ftuck"); m.style.top = Math.min(0, innerHeight - m.offsetHeight) + "px";
+  const fr = f.getBoundingClientRect(), cover = Math.min(1, Math.max(0, 1 - fr.top / innerHeight));
+  m.style.setProperty("--fc", cover.toFixed(3));
+};
+document.addEventListener("scroll", () => requestAnimationFrame(footStick), { capture: true, passive: true });
+addEventListener("resize", footStick);
+try { new ResizeObserver(footStick).observe(document.getElementById("siteMain")); } catch (e) { /* no ResizeObserver */ }
+
+/* an in-site browser window: external pages open over the site instead of leaving it */
+document.addEventListener("click", (e) => { const a = e.target.closest && e.target.closest('a[href*="buildingnothing.com"], a[href*="brandorder.presidents.work"]'); if (!a || a.closest(".ib") || e.metaKey || e.ctrlKey) return; e.preventDefault(); e.stopPropagation(); inBrowser(a.href); }, true);
+const inBrowser = (href) => {
+  let host = href; try { host = new URL(href).host.replace(/^www\./, ""); } catch (e) { /* keep href */ }
+  const ov = document.createElement("div"); ov.className = "ib"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", host);
+  ov.innerHTML = `<div class="ib-win"><div class="ib-bar"><span class="ib-dots"><i></i><i></i><i></i></span><span class="ib-url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>${host}</span><a class="ib-btn" href="${href}" target="_blank" rel="noopener" aria-label="Open in a new tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><button class="ib-btn ib-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><b class="ib-load"></b></div><div class="ib-view"><iframe src="${href}" title="${host}" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>`;
+  document.body.appendChild(ov);
+  const fr = ov.querySelector("iframe"), prevFocus = document.activeElement;
+  fr.addEventListener("load", () => ov.classList.add("loaded"));
+  try { if (window.lenis) window.lenis.stop(); } catch (e) { /* no lenis */ }
+  document.documentElement.classList.add("ib-open");
+  const close = () => {
+    ov.classList.remove("on"); document.removeEventListener("keydown", key);
+    setTimeout(() => { ov.remove(); document.documentElement.classList.remove("ib-open"); try { if (window.lenis) window.lenis.start(); } catch (e) { /* no lenis */ } if (prevFocus && prevFocus.focus) prevFocus.focus(); }, 450);
+  };
+  const key = (e) => { if (e.key === "Escape") close(); };
+  document.addEventListener("keydown", key);
+  ov.querySelector(".ib-x").addEventListener("click", close);
+  ov.addEventListener("click", (e) => { if (e.target === ov) close(); });
+  requestAnimationFrame(() => requestAnimationFrame(() => { ov.classList.add("on"); ov.querySelector(".ib-x").focus(); }));
+};
+
 /* the logo animation: the eagle rises, then the rays sweep round from the top and the bottom and settle */
 const PW_D = "M31.8237,15.0926c.0171-.3022.0278-.6061.0278-.9126,0-.2642-.0072-.5267-.0199-.7878l-9.3584-.0158,9.0513-2.421c-.1153-.5609-.2625-1.1099-.4351-1.6476l-9.1085,2.4361,8.1722-4.7183c-.2563-.5087-.5391-1.0015-.8466-1.4771l-8.2429,4.7616.1812-.1682,6.5625-6.5626c-.3786-.424-.778-.8289-1.1994-1.2103l-6.7086,6.7087L24.646.8562c-.4741-.3109-.966-.5963-1.4735-.8562l-4.3397,7.5167-.0669.1196c-1.1545-.8982-.9947-3.5958-1.1571-4.5184-.2284-1.2973-1.8277-1.8194-2.9792-1.5723-.4949.1062-.9583.35-1.3311.6917-.3536.324-.7968.8712-.586,1.3819,0,0,.5036-.4324,1.3982-.1935,1.0583.2828.4839,3.1646-.974,4.2948L8.679,0c-.5075.2599-.9994.5452-1.4735.8562l4.7466,8.2214L5.2436,2.369c-.4215.3815-.821.7865-1.1997,1.2106l6.6992,6.7003L2.5458,5.5473c-.3078.476-.5908.9691-.8473,1.4783l8.1969,4.7324L.7612,9.3105c-.1725.5377-.3196,1.0867-.4348,1.6476l8.8784,2.379-9.1825.0026c-.0145.2783-.0223.5584-.0223.8403,0,.2903.0088.5785.0242.865h9.6646L.3662,17.5742c.1218.5609.274,1.1101.4532,1.6472l8.999-2.4292L1.7561,21.447c.2607.5072.5466.9991.8584,1.4729l8.1329-4.6905-6.6172,6.6506c.3665.4038.7547.7874,1.1605,1.1518.0247.0084.049.0177.0739.0259l6.6862-6.686-4.1856,7.2495c.1856.0237.3739.0384.5616.0551l-.6763,1.1714c.1623.0973.3265.1916.4925.2832l.8162-1.4136c.1817.0078.3627.0187.5464.0187.0549,0,.1089-.0035.1636-.0041l3.7572-6.5078-1.6954,6.3275c.1525-.0251.3041-.0531.4549-.0831l-.8049,3.0039c.2268.0658.4553.1272.6861.183l.9027-3.369c.2173-.0569.4331-.117.646-.1845l1.4567-5.4367v4.8781c.1113-.05.2176-.1086.3272-.1614v4.7131c.142.0037.2831.0108.426.0108s.284-.007.426-.0108v-5.1619c.176-.1008.3539-.1988.5249-.3073v-3.9608l.8961,3.3443c.0709-.0533.1371-.1125.2069-.1672l1.5663,5.8454c.3241-.0754.645-.159.9612-.2538l-1.6897-6.306c.1295-.1195.2622-.2354.3869-.3598l-.6816-2.5439,1.1713,2.029c.0397-.0439.0754-.0913.1145-.1357l3.5494,6.1477c.3356-.1774.6638-.3665.9846-.5667l-3.7723-6.5338c.0863-.1179.1768-.2324.2594-.3531l-.7804-1.3518,1.012.9981c.0082-.0127.0151-.0262.0232-.0389l5.5496,5.5496c.3504-.3185.685-.654,1.0059-1.0022l-5.8358-5.8357c.0368-.0746.0779-.1464.1133-.2218l-.5126-.5056,7.8299,4.5206c.3123-.4745.5988-.967.8599-1.475l-8.0419-4.6488,8.988,2.3964c.1803-.5436.3335-1.0993.4551-1.6671l-9.079-2.4578,9.407.0214ZM15.9258,18.8838c-2.526,0-4.5737-2.0477-4.5737-4.5736s2.0477-4.5737,4.5737-4.5737,4.5736,2.0477,4.5736,4.5737-2.0477,4.5736-4.5736,4.5736Z";
 let pwAnimN = 0;
@@ -1280,7 +1439,7 @@ const PROJECTS = [
 const N = PROJECTS.length;
 /* ═════ v10: the work, from the presidents.work repository ═════ */
 const CLIENTS = ["Alchemy", "Areivim", "B&H Auto", "BBQ Events", "Bevel", "Black Hanger", "Bound Logistics", "Burger Bar", "BYG", "Cafe 28", "Camp Shabbat", "Cashable", "Certified Roofing", "Chat Care", "Cheetah Builders", "Chesed Air", "Citi Collision", "Cityplex Group", "Clearknox", "Cresta Sport Hotel", "Dark White Studios", "Décorect", "Dirah Spot", "Drizzle", "Eastern Silver", "Element Formation", "Eli Feinstein Interiors", "Eyeball", "Fein Studio", "Foreview Ventures", "Friedmans Jewellery", "Frothy Carwash", "Frummys Isalon", "Generations Maternity", "Glatt A La Carte", "Grand Flooring", "GW Lighting", "Hatzolah Central Jersey", "Heichel", "High Energy Saver", "Highstyle Event Rentals", "HireEnds", "Hookahman", "Iris Studios", "JHP & SON", "Joyride Auto Leasing", "Kernel & Co", "Keyphone", "King David IT", "KRM", "Kugs Power", "Linen Lounge", "Longs Bedding", "Meating", "MedEvac", "MedRite Urgent Care", "Moonwalk Orthotics", "Moshe Grunfeld Studios", "Motty Breier", "Now/Then", "Nussi Rubin", "OJC Fund", "Orchids London", "Pedal", "Petscaping", "Pics by Bee", "Pingate", "Prime Doors", "Ptex Group", "Pyle", "Regalia", "Rode Logistics", "Shir V’shevach", "Shloime Daskal", "Shtendig", "SpecialtyRx", "SpritzOnMe", "Strategic Bank", "Tauber Solutions", "Tikkun Chatzos Band", "Tile Builders Inc", "Toby Wigs Salon", "US Tiles", "VitalOne", "WellTab", "Yakar Steakhouse", "Yeedle Kahan", "YID Info", "Yogo Vision"];
-const WORKDATA = {"specialtyrx": {"id": "specialtyrx", "name": "SpecialtyRx", "services": "Website Design, Trade Show Booth, Content Architecture", "tagline": "A human-first presence for one of the nation’s leading long-term care pharmacy providers.", "type": "Scale Up", "client": "SpecialtyRx", "overview": "Built with care. Designed for clarity.", "body": ["SpecialtyRx needed a website that matched the scale of its operations. Growing to over 17 states across the United States, and with multiple internal stakeholders, the existing site had grown complex, fragmented, and outdated. Our approach centered on alignment — across leadership, marketing, development, and copywriting teams — to ensure every page worked harder.", "From strategic content mapping to moodboard direction blending professionalism and warmth, we crafted a user experience that’s clear, scalable, and grounded in care. The final website delivers intuitive navigation, modern visual clarity, and a deeply human tone, proving that pharmacy services can feel both operationally strong and emotionally smart."], "card": "work/specialtyrx/card.jpg", "hero": "work/specialtyrx/hero.jpg", "media": ["work/specialtyrx/hero.mp4", "work/specialtyrx/01.jpg", "work/specialtyrx/02.jpg", "work/specialtyrx/03.jpg", "work/specialtyrx/04.jpg", "work/specialtyrx/05.jpg", "work/specialtyrx/06.jpg", "work/specialtyrx/07.jpg", "work/specialtyrx/08.jpg", "work/specialtyrx/09.jpg"], "c1": "#2f6fb5", "c2": "#0d1722", "glow": "#4a86d8", "sector": "Scale Up", "scope": ["Website Design", "Trade Show Booth", "Content Architecture"], "art": "photo"}, "pyle": {"id": "pyle", "name": "Pyle", "services": "Visual Brand Identity, Logo Redesign, Website Design, Amazon Store", "tagline": "An iconic audio brand refined for a new era, where legacy and culture meet modern performance.", "type": "Scale Up", "client": "Pyle USA", "overview": "Sound that’s here to play.", "body": ["Pyle is a brand with decades of recognition and trust. Our role wasn’t to replace that legacy but to refine it with intention. We rebuilt the logo from the inside out, redrawing every letter by hand and elevating the mark without losing what made it familiar. From there, we developed a full identity system designed for real-world impact: packaging that commands the shelf, a visual language that signals sound and energy, and a toolkit built to scale across platforms and products.", "Beyond the core brand, we shaped Pyle’s future with a clear brand architecture, introducing Pyle Pro for serious creators and Pyle Vintage for those drawn to nostalgia and story. Each sub-brand carries Pyle’s DNA with its own rhythm and voice. We even brought the brand to life with “Max,” Pyle’s animated megaphone, an expressive character that adds personality, guidance, and delight across touchpoints. This was a return to what made Pyle trusted — clarity, confidence, and craft — designed to carry the brand forward."], "card": "work/pyle/card.jpg", "hero": "work/pyle/hero.jpg", "media": ["work/pyle/01.mp4", "work/pyle/02.jpg", "work/pyle/03.jpg", "work/pyle/04.jpg", "work/pyle/05.jpg", "work/pyle/06.jpg", "work/pyle/07.jpg", "work/pyle/08.jpg", "work/pyle/09.jpg", "work/pyle/10.jpg", "work/pyle/11.jpg", "work/pyle/12.jpg", "work/pyle/13.mp4", "work/pyle/14.jpg", "work/pyle/15.jpg", "work/pyle/16.jpg", "work/pyle/17.jpg", "work/pyle/18.jpg", "work/pyle/19.jpg", "work/pyle/20.jpg", "work/pyle/21.jpg", "work/pyle/22.jpg", "work/pyle/23.jpg", "work/pyle/24.jpg", "work/pyle/25.jpg", "work/pyle/26.jpg", "work/pyle/27.jpg", "work/pyle/28.jpg", "work/pyle/29.jpg", "work/pyle/30.jpg", "work/pyle/31.jpg", "work/pyle/32.jpg", "work/pyle/33.jpg", "work/pyle/34.jpg", "work/pyle/35.jpg", "work/pyle/36.jpg", "work/pyle/37.jpg", "work/pyle/38.jpg", "work/pyle/39.jpg", "work/pyle/40.jpg", "work/pyle/41.jpg", "work/pyle/42.jpg", "work/pyle/44.mp4", "work/pyle/45.jpg", "work/pyle/46.jpg", "work/pyle/47.jpg", "work/pyle/48.jpg", "work/pyle/49.jpg", "work/pyle/50.jpg", "work/pyle/51.jpg", "work/pyle/52.jpg", "work/pyle/53.jpg", "work/pyle/54.jpg"], "c1": "#c2352b", "c2": "#141212", "glow": "#e05244", "sector": "Scale Up", "scope": ["Visual Brand Identity", "Logo Redesign", "Website Design", "Amazon Store"], "art": "photo"}, "hireends": {"id": "hireends", "name": "HireEnds", "services": "Visual Identity, Brand Messaging, Website", "tagline": "A global hiring company built around performance and end-to-end team management.", "type": "Start Up", "client": "HireEnds", "overview": "Talent, on track.", "body": ["HireEnds needed a brand that could match the ambition of its model: helping companies build global teams through a complete end-to-end operating system. From sourcing and onboarding to KPI tracking and performance management, the business was not simply offering outsourcing. It was creating a more structured way for growing companies to hire, manage, and scale with confidence.", "We developed a visual identity built around global movement, structured growth, and measurable performance, and the website extended the brand into a clear sales experience, explaining the full HireEnds workflow and structured outsourcing model.", "The result is a confident brand and digital presence that positions HireEnds as a serious partner for companies ready to grow their team with more clarity, accountability, and control."], "card": "work/hireends/card.jpg", "hero": "work/hireends/hero.jpg", "media": ["work/hireends/01.jpg", "work/hireends/02.jpg", "work/hireends/03.jpg", "work/hireends/04.jpg", "work/hireends/05.jpg", "work/hireends/06.jpg", "work/hireends/07.jpg", "work/hireends/08.jpg", "work/hireends/09.jpg", "work/hireends/10.jpg", "work/hireends/11.jpg", "work/hireends/12.jpg", "work/hireends/13.jpg", "work/hireends/14.jpg", "work/hireends/15.jpg", "work/hireends/16.jpg", "work/hireends/17.jpg", "work/hireends/18.jpg", "work/hireends/19.jpg", "work/hireends/20.jpg"], "c1": "#1f5f57", "c2": "#0b1412", "glow": "#3aa08f", "sector": "Start Up", "scope": ["Visual Identity", "Brand Messaging", "Website"], "art": "photo"}, "spritzonme": {"id": "spritzonme", "name": "SpritzOnMe", "services": "Visual Identity, Product Design, Video, Website, Sales Materials, Pitch Deck, Social Media", "tagline": "A premium on-demand brand built to turn brand-name fragrance into a modern experience.", "type": "Start Up", "client": "SpritzOnMe", "overview": "Luxury fragrance, made instantly accessible.", "body": ["SpritzOnMe was created around a simple but powerful idea: premium fragrance should fit the way people actually live now. The brand introduces on-demand scent into high-traffic environments like gyms, hotels, nightlife venues, lounges, malls, workplaces, and travel spaces, making luxury fragrance available anytime, anywhere through a clean and modern experience.", "We built the full SpritzOnMe brand system across identity, product, digital, and sales, creating a refined visual identity, color palette, and premium machine presence. We also designed the B2C and B2B websites, sales materials, pitch deck, and video assets to communicate the consumer experience and business opportunity clearly.", "The result is a complete brand ecosystem: elegant enough for hospitality, clear enough for business buyers, exciting enough for consumers, and scalable across machines, websites, video, pitch materials, and real-world placements."], "card": "work/spritzonme/card.jpg", "hero": "work/spritzonme/hero.jpg", "media": ["work/spritzonme/02.mp4", "work/spritzonme/03.jpg", "work/spritzonme/04.mp4", "work/spritzonme/05.jpg", "work/spritzonme/06.jpg", "work/spritzonme/07.jpg", "work/spritzonme/08.jpg", "work/spritzonme/09.jpg", "work/spritzonme/10.jpg", "work/spritzonme/11.jpg", "work/spritzonme/12.jpg", "work/spritzonme/13.jpg", "work/spritzonme/14.jpg", "work/spritzonme/15.jpg", "work/spritzonme/16.jpg", "work/spritzonme/17.jpg", "work/spritzonme/18.jpg", "work/spritzonme/19.jpg", "work/spritzonme/20.jpg", "work/spritzonme/21.jpg", "work/spritzonme/22.jpg", "work/spritzonme/23.jpg", "work/spritzonme/24.jpg", "work/spritzonme/25.jpg", "work/spritzonme/26.jpg"], "c1": "#b08d57", "c2": "#15120e", "glow": "#d8b271", "sector": "Start Up", "scope": ["Visual Identity", "Product Design", "Video", "Website", "Sales Materials", "Pitch Deck", "Social Media"], "art": "photo"}, "pedal": {"id": "pedal", "name": "Pedal", "services": "Brand Strategy, Naming, Visual Brand Identity", "tagline": "Rolling out a reliable, always-on, optimized local bike delivery service.", "type": "Start up", "client": "Pedal", "overview": "All-day delivery, on a roll.", "body": ["We’re introducing a local messenger service that runs on delivery bikes, enabling quick, efficient package delivery between businesses, consumers, and loved ones within the local community. Beyond speed, reliability, and high-touch service, we focus on technology and optimization to deliver the best user experience."], "card": "work/pedal/card.jpg", "hero": "work/pedal/hero.jpg", "media": ["work/pedal/01.jpg", "work/pedal/02.jpg", "work/pedal/03.jpg", "work/pedal/04.jpg", "work/pedal/05.jpg", "work/pedal/06.jpg", "work/pedal/07.jpg", "work/pedal/08.jpg", "work/pedal/09.jpg", "work/pedal/10.jpg", "work/pedal/11.jpg", "work/pedal/12.jpg", "work/pedal/13.jpg", "work/pedal/14.jpg", "work/pedal/15.jpg", "work/pedal/16.jpg", "work/pedal/17.jpg", "work/pedal/18.jpg"], "c1": "#4e8f3a", "c2": "#0e160c", "glow": "#6fc44f", "sector": "Start Up", "scope": ["Brand Strategy", "Naming", "Visual Brand Identity"], "art": "photo"}, "moonwalk-orthotics": {"id": "moonwalk-orthotics", "name": "Moonwalk Orthotics", "services": "Brand Strategy, Naming, Visual Brand Identity", "tagline": "Putting the bounce back in your everyday step.", "type": "Start up", "client": "Moonwalk Orthotics", "overview": "Make every step a light, pain-free experience.", "body": ["Moonwalk Orthotics believes being active should be a light, airy, comfortable experience, and they’re here to make that a reality for you.", "Whether you are experiencing foot or leg pain, you are pre or post surgery, pregnant or nursing, Moonwalk is here to make every step an easy one."], "card": null, "hero": null, "media": [], "c1": "#5f7fa8", "c2": "#101519", "glow": "#8fb0d6", "sector": "Start Up", "scope": ["Brand Strategy", "Naming", "Visual Brand Identity"], "art": "wordmark"}, "book": {"id": "x-book", "kind": "link", "href": "https://www.buildingnothing.com", "label": "Preview the book", "name": "Building Nothing", "sector": "Reference guide", "scope": ["The book on brand strategy by Yanky Perl"]}, "brandorder": {"id": "x-brandorder", "kind": "link", "href": "https://brandorder.presidents.work", "label": "Take the free assessment", "name": "BrandOrder™", "sector": "Free assessment", "scope": ["Find the gap first"]}, "clients": {"id": "x-clients", "kind": "index", "label": "See all clients", "name": "Our clients", "sector": "Clients", "scope": ["89 brands"], "art": "clients", "c1": "#efe7d6", "c2": "#efe7d6"}};
+const WORKDATA = {"specialtyrx": {"id": "specialtyrx", "name": "SpecialtyRx", "services": "Website Design, Trade Show Booth, Content Architecture", "tagline": "A human-first presence for one of the nation’s leading long-term care pharmacy providers.", "type": "Scale Up", "client": "SpecialtyRx", "overview": "Built with care. Designed for clarity.", "body": ["SpecialtyRx needed a website that matched the scale of its operations. Growing to over 17 states across the United States, and with multiple internal stakeholders, the existing site had grown complex, fragmented, and outdated. Our approach centered on alignment — across leadership, marketing, development, and copywriting teams — to ensure every page worked harder.", "From strategic content mapping to moodboard direction blending professionalism and warmth, we crafted a user experience that’s clear, scalable, and grounded in care. The final website delivers intuitive navigation, modern visual clarity, and a deeply human tone, proving that pharmacy services can feel both operationally strong and emotionally smart."], "card": "work/specialtyrx/card.jpg", "hero": "work/specialtyrx/hero.jpg", "media": ["work/specialtyrx/hero.mp4", "work/specialtyrx/01.jpg", "work/specialtyrx/02.jpg", "work/specialtyrx/03.jpg", "work/specialtyrx/04.jpg", "work/specialtyrx/05.jpg", "work/specialtyrx/06.jpg", "work/specialtyrx/07.jpg", "work/specialtyrx/08.jpg", "work/specialtyrx/09.jpg"], "c1": "#2f6fb5", "c2": "#0d1722", "glow": "#4a86d8", "sector": "Scale Up", "scope": ["Website Design", "Trade Show Booth", "Content Architecture"], "art": "photo"}, "pyle": {"id": "pyle", "name": "Pyle", "services": "Visual Brand Identity, Logo Redesign, Website Design, Amazon Store", "tagline": "An iconic audio brand refined for a new era, where legacy and culture meet modern performance.", "type": "Scale Up", "client": "Pyle USA", "overview": "Sound that’s here to play.", "body": ["Pyle is a brand with decades of recognition and trust. Our role wasn’t to replace that legacy but to refine it with intention. We rebuilt the logo from the inside out, redrawing every letter by hand and elevating the mark without losing what made it familiar. From there, we developed a full identity system designed for real-world impact: packaging that commands the shelf, a visual language that signals sound and energy, and a toolkit built to scale across platforms and products.", "Beyond the core brand, we shaped Pyle’s future with a clear brand architecture, introducing Pyle Pro for serious creators and Pyle Vintage for those drawn to nostalgia and story. Each sub-brand carries Pyle’s DNA with its own rhythm and voice. We even brought the brand to life with “Max,” Pyle’s animated megaphone, an expressive character that adds personality, guidance, and delight across touchpoints. This was a return to what made Pyle trusted — clarity, confidence, and craft — designed to carry the brand forward."], "card": "work/pyle/card.jpg", "hero": "work/pyle/hero.jpg", "media": ["work/pyle/01.mp4", "work/pyle/02.jpg", "work/pyle/03.jpg", "work/pyle/04.jpg", "work/pyle/05.jpg", "work/pyle/06.jpg", "work/pyle/07.jpg", "work/pyle/08.jpg", "work/pyle/09.jpg", "work/pyle/10.jpg", "work/pyle/11.jpg", "work/pyle/12.jpg", "work/pyle/13.mp4", "work/pyle/14.jpg", "work/pyle/15.jpg", "work/pyle/16.jpg", "work/pyle/17.jpg", "work/pyle/18.jpg", "work/pyle/19.jpg", "work/pyle/20.jpg", "work/pyle/21.jpg", "work/pyle/22.jpg", "work/pyle/23.jpg", "work/pyle/24.jpg", "work/pyle/25.jpg", "work/pyle/26.jpg", "work/pyle/27.jpg", "work/pyle/28.jpg", "work/pyle/29.jpg", "work/pyle/30.jpg", "work/pyle/31.jpg", "work/pyle/32.jpg", "work/pyle/33.jpg", "work/pyle/34.jpg", "work/pyle/35.jpg", "work/pyle/36.jpg", "work/pyle/37.jpg", "work/pyle/38.jpg", "work/pyle/39.jpg", "work/pyle/40.jpg", "work/pyle/41.jpg", "work/pyle/42.jpg", "work/pyle/44.mp4", "work/pyle/45.jpg", "work/pyle/46.jpg", "work/pyle/47.jpg", "work/pyle/48.jpg", "work/pyle/49.jpg", "work/pyle/50.jpg", "work/pyle/51.jpg", "work/pyle/52.jpg", "work/pyle/53.jpg", "work/pyle/54.jpg"], "c1": "#c2352b", "c2": "#141212", "glow": "#e05244", "sector": "Scale Up", "scope": ["Visual Brand Identity", "Logo Redesign", "Website Design", "Amazon Store"], "art": "photo"}, "hireends": {"id": "hireends", "name": "HireEnds", "services": "Visual Identity, Brand Messaging, Website", "tagline": "A global hiring company built around performance and end-to-end team management.", "type": "Start Up", "client": "HireEnds", "overview": "Talent, on track.", "body": ["HireEnds needed a brand that could match the ambition of its model: helping companies build global teams through a complete end-to-end operating system. From sourcing and onboarding to KPI tracking and performance management, the business was not simply offering outsourcing. It was creating a more structured way for growing companies to hire, manage, and scale with confidence.", "We developed a visual identity built around global movement, structured growth, and measurable performance, and the website extended the brand into a clear sales experience, explaining the full HireEnds workflow and structured outsourcing model.", "The result is a confident brand and digital presence that positions HireEnds as a serious partner for companies ready to grow their team with more clarity, accountability, and control."], "card": "work/hireends/card.jpg", "hero": "work/hireends/hero.jpg", "media": ["work/hireends/01.jpg", "work/hireends/02.jpg", "work/hireends/03.jpg", "work/hireends/04.jpg", "work/hireends/05.jpg", "work/hireends/06.jpg", "work/hireends/07.jpg", "work/hireends/08.jpg", "work/hireends/09.jpg", "work/hireends/10.jpg", "work/hireends/11.jpg", "work/hireends/12.jpg", "work/hireends/13.jpg", "work/hireends/14.jpg", "work/hireends/15.jpg", "work/hireends/16.jpg", "work/hireends/17.jpg", "work/hireends/18.jpg", "work/hireends/19.jpg", "work/hireends/20.jpg"], "c1": "#1f5f57", "c2": "#0b1412", "glow": "#3aa08f", "sector": "Start Up", "scope": ["Visual Identity", "Brand Messaging", "Website"], "art": "photo"}, "spritzonme": {"id": "spritzonme", "name": "SpritzOnMe", "services": "Visual Identity, Product Design, Video, Website, Sales Materials, Pitch Deck, Social Media", "tagline": "A premium on-demand brand built to turn brand-name fragrance into a modern experience.", "type": "Start Up", "client": "SpritzOnMe", "overview": "Luxury fragrance, made instantly accessible.", "body": ["SpritzOnMe was created around a simple but powerful idea: premium fragrance should fit the way people actually live now. The brand introduces on-demand scent into high-traffic environments like gyms, hotels, nightlife venues, lounges, malls, workplaces, and travel spaces, making luxury fragrance available anytime, anywhere through a clean and modern experience.", "We built the full SpritzOnMe brand system across identity, product, digital, and sales, creating a refined visual identity, color palette, and premium machine presence. We also designed the B2C and B2B websites, sales materials, pitch deck, and video assets to communicate the consumer experience and business opportunity clearly.", "The result is a complete brand ecosystem: elegant enough for hospitality, clear enough for business buyers, exciting enough for consumers, and scalable across machines, websites, video, pitch materials, and real-world placements."], "card": "work/spritzonme/card.jpg", "hero": "work/spritzonme/hero.jpg", "media": ["work/spritzonme/02.mp4", "work/spritzonme/03.jpg", "work/spritzonme/04.mp4", "work/spritzonme/05.jpg", "work/spritzonme/06.jpg", "work/spritzonme/07.jpg", "work/spritzonme/08.jpg", "work/spritzonme/09.jpg", "work/spritzonme/10.jpg", "work/spritzonme/11.jpg", "work/spritzonme/12.jpg", "work/spritzonme/13.jpg", "work/spritzonme/14.jpg", "work/spritzonme/15.jpg", "work/spritzonme/16.jpg", "work/spritzonme/17.jpg", "work/spritzonme/18.jpg", "work/spritzonme/19.jpg", "work/spritzonme/20.jpg", "work/spritzonme/21.jpg", "work/spritzonme/22.jpg", "work/spritzonme/23.jpg", "work/spritzonme/24.jpg", "work/spritzonme/25.jpg", "work/spritzonme/26.jpg"], "c1": "#b08d57", "c2": "#15120e", "glow": "#d8b271", "sector": "Start Up", "scope": ["Visual Identity", "Product Design", "Video", "Website", "Sales Materials", "Pitch Deck", "Social Media"], "art": "photo"}, "pedal": {"id": "pedal", "name": "Pedal", "services": "Brand Strategy, Naming, Visual Brand Identity", "tagline": "Rolling out a reliable, always-on, optimized local bike delivery service.", "type": "Start up", "client": "Pedal", "overview": "All-day delivery, on a roll.", "body": ["We’re introducing a local messenger service that runs on delivery bikes, enabling quick, efficient package delivery between businesses, consumers, and loved ones within the local community. Beyond speed, reliability, and high-touch service, we focus on technology and optimization to deliver the best user experience."], "card": "work/pedal/card.jpg", "hero": "work/pedal/hero.jpg", "media": ["work/pedal/01.jpg", "work/pedal/02.jpg", "work/pedal/03.jpg", "work/pedal/04.jpg", "work/pedal/05.jpg", "work/pedal/06.jpg", "work/pedal/07.jpg", "work/pedal/08.jpg", "work/pedal/09.jpg", "work/pedal/10.jpg", "work/pedal/11.jpg", "work/pedal/12.jpg", "work/pedal/13.jpg", "work/pedal/14.jpg", "work/pedal/15.jpg", "work/pedal/16.jpg", "work/pedal/17.jpg", "work/pedal/18.jpg"], "c1": "#4e8f3a", "c2": "#0e160c", "glow": "#6fc44f", "sector": "Start Up", "scope": ["Brand Strategy", "Naming", "Visual Brand Identity"], "art": "photo"}, "moonwalk-orthotics": {"id": "moonwalk-orthotics", "name": "Moonwalk Orthotics", "services": "Brand Strategy, Naming, Visual Brand Identity", "tagline": "Putting the bounce back in your everyday step.", "type": "Start up", "client": "Moonwalk Orthotics", "overview": "Make every step a light, pain-free experience.", "body": ["Moonwalk Orthotics believes being active should be a light, airy, comfortable experience, and they’re here to make that a reality for you.", "Whether you are experiencing foot or leg pain, you are pre or post surgery, pregnant or nursing, Moonwalk is here to make every step an easy one."], "card": "work/moonwalk-orthotics/card.jpg", "hero": "work/moonwalk-orthotics/hero.jpg", "media": ["work/moonwalk-orthotics/01.jpg", "work/moonwalk-orthotics/02.jpg", "work/moonwalk-orthotics/03.jpg", "work/moonwalk-orthotics/04.jpg", "work/moonwalk-orthotics/05.jpg", "work/moonwalk-orthotics/06.jpg", "work/moonwalk-orthotics/07.jpg", "work/moonwalk-orthotics/08.jpg", "work/moonwalk-orthotics/09.jpg", "work/moonwalk-orthotics/10.jpg", "work/moonwalk-orthotics/11.jpg", "work/moonwalk-orthotics/12.jpg", "work/moonwalk-orthotics/13.jpg", "work/moonwalk-orthotics/14.jpg", "work/moonwalk-orthotics/15.jpg", "work/moonwalk-orthotics/16.jpg", "work/moonwalk-orthotics/17.jpg", "work/moonwalk-orthotics/18.jpg", "work/moonwalk-orthotics/19.jpg"], "c1": "#2f6b62", "c2": "#0f1f1c", "glow": "#4f9a8c", "sector": "Start Up", "scope": ["Brand Strategy", "Naming", "Visual Brand Identity"], "art": "photo"}, "book": {"id": "x-book", "kind": "link", "href": "https://www.buildingnothing.com", "label": "Preview the book", "name": "Building Nothing", "sector": "Reference guide", "scope": ["The book on brand strategy by Yanky Perl"]}, "brandorder": {"id": "x-brandorder", "kind": "link", "href": "https://brandorder.presidents.work", "label": "Take the free assessment", "name": "BrandOrder™", "sector": "Free assessment", "scope": ["Find the gap first"]}, "clients": {"id": "x-clients", "kind": "index", "label": "See all clients", "name": "Our clients", "sector": "Clients", "scope": ["89 brands"], "art": "clients", "c1": "#efe7d6", "c2": "#efe7d6"}};
 const WORKMAP = {"keter-judaica": "specialtyrx", "sefira": "pyle", "arc-live": "hireends", "building-nothing": "book", "vitalone": "spritzonme", "friday": "pedal", "sphere": "brandorder", "jhp-and-son": "moonwalk-orthotics", "hadran": "clients"};
 PROJECTS.forEach((P) => {
   const nd = WORKDATA[WORKMAP[P.id]]; if (!nd) return;
@@ -1412,7 +1571,7 @@ const ART = {
 };
 
 const artTexs = [];
-const FRAME_PIC = { specialtyrx: "work/specialtyrx/frame.jpg", pyle: "work/pyle/frame.jpg", hireends: "work/hireends/frame.jpg", spritzonme: "work/spritzonme/frame.jpg", pedal: "work/pedal/frame.jpg" };
+const FRAME_PIC = { specialtyrx: "work/specialtyrx/frame.jpg", pyle: "work/pyle/frame.jpg", hireends: "work/hireends/frame.jpg", spritzonme: "work/spritzonme/frame.jpg", pedal: "work/pedal/frame.jpg", "moonwalk-orthotics": "work/moonwalk-orthotics/frame.jpg" };
 const openExt = (href) => { let w = null; try { w = window.open(href, "_blank"); } catch (e) { w = null; } if (w) { try { w.opener = null; } catch (e) { /* cross-origin */ } } else { location.href = href; } };
 ART.photo = (c, P, i) => {
   const g = c.createLinearGradient(0, 0, 0, AH); g.addColorStop(0, P.c1); g.addColorStop(1, P.c2); c.fillStyle = g; c.fillRect(0, 0, AW, AH);
@@ -2229,6 +2388,29 @@ async function build() {
   });
   ropeLine(-11.3, [[-12.4, -7.6], [7.6, 12.4]]);
   ropeLine(-14.2, [[-12.4, -9.0], [-6.8, -1.2], [1.2, 6.8], [9.0, 12.4]]);
+  /* the Cross Hall salon: small gilt frames, each holding a client logo */
+  {
+    const LG = Array.from({ length: 25 }, (_, k) => `img/logo-${String(k + 1).padStart(2, "0")}.png`);
+    const mats = LG.map((src) => {
+      const c = document.createElement("canvas"); c.width = 256; c.height = 320; const g = c.getContext("2d");
+      g.fillStyle = "#f7f3ea"; g.fillRect(0, 0, 256, 320); g.strokeStyle = "rgba(160,130,70,.35)"; g.lineWidth = 3; g.strokeRect(14, 14, 228, 292);
+      const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso;
+      const im = new Image(); im.onload = () => { const mw = 176, mh = 150, sc = Math.min(mw / im.width, mh / im.height), w = im.width * sc, h = im.height * sc; g.drawImage(im, (256 - w) / 2, (320 - h) / 2, w, h); t.needsUpdate = true; }; im.src = src;
+      return std({ map: t, roughness: 0.8 });
+    });
+    const PL = new THREE.PlaneGeometry(0.28, 0.35);
+    let k = 0;
+    const salon = (z, dir, segs) => segs.forEach(([a, b]) => {
+      const n = Math.floor((b - a) / 0.6), x0 = (a + b) / 2 - ((n - 1) * 0.6) / 2;
+      for (let cI = 0; cI < n; cI++) for (let r = 0; r < 3; r++) {
+        const x = x0 + cI * 0.6 + (r % 2 ? 0.08 : -0.08), y = 1.6 + r * 0.62;
+        put(BOX, M.gold, x, y, z + dir * 0.02, { sx: 0.36, sy: 0.43, sz: 0.035, cast: false });
+        put(PL, mats[k++ % mats.length], x, y, z + dir * 0.039, { ry: dir > 0 ? 0 : Math.PI, cast: false });
+      }
+    });
+    salon(-15.5, 1, [[-13.0, -8.95], [-6.4, -1.2], [1.2, 6.4], [8.95, 13.0]]);
+    salon(-10.2, -1, [[-13.0, -6.95], [6.95, 13.0]]);
+  }
   /* fireplaces */
   const mantel = (x, z, ry) => {
     const g = grp(x, 0, z, ry);
@@ -2342,6 +2524,19 @@ async function build() {
     put(new THREE.PlaneGeometry(5.4, 3), M.white, 44.7, 1.5, -32.903, { ry: Math.PI, cast: false }); put(new THREE.PlaneGeometry(5.4, 3), M.white, 44.7, 1.5, -35.097, { cast: false });
     const ol = new THREE.PointLight(0xffe2bf, 0, 14, 1.6); ol.position.set(cx, 4.6, cz); scene.add(ol); lamps.push(ol);
     for (let z = -28; z >= -40; z -= 2.2) bush(39.5, z, 0.8);
+    /* a portrait bust on a marble plinth at the back of the room, slowly turning */
+    {
+      const px = cx + 2.55, pz = cz - 3.3;
+      put(CYL, M.marble, px, 0.55, pz, { sx: 0.32, sy: 1.1, sz: 0.32 }); put(BOX, M.marble, px, 1.13, pz, { sx: 0.75, sy: 0.06, sz: 0.75 }); put(BOX, M.marble, px, 0.04, pz, { sx: 0.8, sy: 0.08, sz: 0.8 });
+      import("three/addons/loaders/GLTFLoader.js").then(({ GLTFLoader }) => new GLTFLoader().load("models/bust.glb", (gl) => {
+        const m = gl.scene; const rm = []; m.traverse((o) => { if (o.isLight) rm.push(o); if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); rm.forEach((o) => o.parent && o.parent.remove(o));
+        const bb = new THREE.Box3().setFromObject(m), sz = bb.getSize(V(0, 0, 0)), k = 0.72 / Math.max(sz.y, 0.001);
+        const pivot = new THREE.Group(); pivot.position.set(px, 1.16, pz); scene.add(pivot);
+        m.scale.setScalar(k); const c2 = bb.getCenter(V(0, 0, 0)); m.position.set(-c2.x * k, -bb.min.y * k, -c2.z * k); pivot.add(m);
+        pivot.rotation.y = -Math.PI / 2; window.__pwBust = pivot;
+        const sl = new THREE.SpotLight(0xfff0dc, 6, 6, 0.42, 0.6, 1.2); sl.position.set(px - 1.4, 3.6, pz + 0.6); sl.target = pivot; scene.add(sl); scene.add(sl.target);
+      }, undefined, () => {})).catch(() => {});
+    }
   }
   /* visitors, for scale */
   const capsule = new THREE.CapsuleGeometry(0.19, 0.95, 4, 10); let pk = 0;
@@ -2353,11 +2548,24 @@ async function build() {
   const plaque = (P) => ctex(384, 110, (c, w, h) => { const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, "#e6c77c"); g.addColorStop(1, "#a9853f"); c.fillStyle = g; c.fillRect(0, 0, w, h); c.fillStyle = "#2a1f0e"; c.textAlign = "center"; c.textBaseline = "middle"; c.font = F(600, 30); c.fillText(P.name.toUpperCase(), w / 2, 40); c.font = F(400, 20); c.fillText(P.sector, w / 2, 78); });
   const EX = [];
   const hang = (i, x, y, z, ry, aw, ah) => {
+    /* SpecialtyRx hangs landscape and plays its website film */
+    const pid = PROJECTS[i] && PROJECTS[i].id;
+    const vid = pid === "specialtyrx" ? "work/specialtyrx/hero.mp4" : null, land = pid === "pyle" ? "work/pyle/frame-land.jpg" : null;
+    if (vid || land) { const a0 = aw * ah; ah = Math.sqrt(a0 / 1.78) * 1.12; aw = ah * 1.78; }
     const g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = ry; scene.add(g);
     const ow = aw + 0.38, oh = ah + 0.38;
     const outer = new THREE.Mesh(BOX, M.gold); outer.scale.set(ow, oh, 0.1); outer.position.z = 0.05; outer.castShadow = true; g.add(outer);
     const lip = new THREE.Mesh(BOX, M.goldDark); lip.scale.set(aw + 0.1, ah + 0.1, 0.13); lip.position.z = 0.065; g.add(lip);
-    const tex = new THREE.CanvasTexture(makeArt(i)); artTexs[i] = tex; tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = aniso;
+    let tex = new THREE.CanvasTexture(makeArt(i)); artTexs[i] = tex; tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = aniso;
+    if (vid) {
+      const v = document.createElement("video"); v.src = vid; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("muted", ""); v.preload = "auto"; v.crossOrigin = "anonymous";
+      const vt = new THREE.VideoTexture(v); vt.colorSpace = THREE.SRGBColorSpace;
+      const go = () => { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); };
+      v.addEventListener("canplay", () => { if (art) { art.material.map = vt; art.material.needsUpdate = true; } go(); }, { once: true });
+      ["pointerdown", "touchstart", "scroll", "wheel", "keydown"].forEach((ev) => addEventListener(ev, go, { once: true, passive: true, capture: true }));
+      go();
+    }
+    if (land) new THREE.TextureLoader().load(land, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso; if (art) { art.material.map = t; art.material.needsUpdate = true; } });
     const art = new THREE.Mesh(new THREE.PlaneGeometry(aw, ah), std({ map: tex, roughness: 0.5 })); art.position.z = 0.132; g.add(art);
     const washMat = new THREE.MeshBasicMaterial({ map: washTex, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false });
     const wash = new THREE.Mesh(new THREE.PlaneGeometry(ow * 1.9, oh * 1.5), washMat); wash.position.set(0, oh * 0.1, 0.012); g.add(wash);
@@ -2373,15 +2581,29 @@ async function build() {
   hang(5, -13.19, 3.2, -20.65, Math.PI / 2, 1.12, 1.4);
   hang(7, 11.1, 2.8, -15.91, Math.PI, 1.36, 1.7);
   hang(8, 24.98, 3.4, -18.2, -Math.PI / 2, 2.0, 2.5);
-  /* object: Sphere on the Blue Room's centre table */
+  /* object: a desk globe on the Blue Room's centre table, turning on its axis */
   {
     makeArt(6);
-    const grad = ctex(512, 256, (g2, w, h) => { const gr = g2.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#ffd9b0"); gr.addColorStop(0.35, "#ff7a59"); gr.addColorStop(0.7, "#7d3cff"); gr.addColorStop(1, "#24134d"); g2.fillStyle = gr; g2.fillRect(0, 0, w, h); g2.globalAlpha = 0.12; g2.fillStyle = "#fff"; for (let y = 0; y < h; y += 16) g2.fillRect(0, y, w, 2); });
-    const sp = new THREE.Mesh(new THREE.SphereGeometry(0.42, 64, 32), new THREE.MeshPhysicalMaterial({ map: grad, emissiveMap: grad, emissive: 0xffffff, emissiveIntensity: 0.3, roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.1 }));
-    sp.position.set(0, 1.22, -20.65); sp.castShadow = true; scene.add(sp);
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.014, 12, 100), M.gold); ring.position.copy(sp.position); ring.rotation.set(1.25, 0.2, 0); scene.add(ring);
+    const TLd = new THREE.TextureLoader(), tx = (f, srgb) => { const t = TLd.load("garden/" + f); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso; return t; };
+    const base = V(0, 0.8, -20.65), R = 0.36;
+    const stand = new THREE.Group(); stand.position.copy(base); scene.add(stand);
+    const ped = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 0.05, 40), M.gold); ped.position.y = 0.025; stand.add(ped);
+    const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.03, 0.16, 16), M.gold); stem.position.y = 0.13; stand.add(stem);
+    const tilt = new THREE.Group(); tilt.position.y = 0.2 + R + 0.05; tilt.rotation.z = -0.409; stand.add(tilt);
+    const earth = new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), new THREE.MeshStandardMaterial({ map: tx("earth_atmos_2048.jpg", true), normalMap: tx("earth_normal_2048.jpg"), normalScale: new THREE.Vector2(0.85, 0.85), roughnessMap: tx("earth_specular_2048.jpg"), roughness: 0.75, metalness: 0.05, emissive: 0x0a1630, emissiveIntensity: 0.25 }));
+    earth.material.onBeforeCompile = (sh) => { sh.fragmentShader = sh.fragmentShader.replace("#include <roughnessmap_fragment>", "float roughnessFactor = roughness;\n#ifdef USE_ROUGHNESSMAP\nvec4 texelRoughness = texture2D( roughnessMap, vRoughnessMapUv );\nroughnessFactor = mix( 0.85, 0.28, texelRoughness.g );\n#endif"); };
+    earth.castShadow = true; tilt.add(earth);
+    const clouds = new THREE.Mesh(new THREE.SphereGeometry(R * 1.012, 96, 64), new THREE.MeshStandardMaterial({ alphaMap: tx("earth_clouds.jpg"), color: 0xffffff, transparent: true, opacity: 0.9, depthWrite: false, roughness: 1 }));
+    tilt.add(clouds);
+    const glow = new THREE.Mesh(new THREE.SphereGeometry(R * 1.09, 64, 32), new THREE.ShaderMaterial({ transparent: true, depthWrite: false, side: THREE.BackSide, blending: THREE.AdditiveBlending, vertexShader: "varying vec3 vN; varying vec3 vV; void main(){ vN = normalize(normalMatrix * normal); vec4 mv = modelViewMatrix * vec4(position,1.0); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }", fragmentShader: "varying vec3 vN; varying vec3 vV; void main(){ float k = pow(1.0 - abs(dot(vN, vV)), 3.0); gl_FragColor = vec4(0.35,0.6,1.0,1.0) * k * 0.9; }" }));
+    tilt.add(glow);
+    /* the brass meridian: a half ring holding the axis, plus pins at the poles */
+    const mer = new THREE.Mesh(new THREE.TorusGeometry(R + 0.045, 0.011, 12, 120, Math.PI * 1.15), M.gold); mer.rotation.z = Math.PI / 2 - Math.PI * 0.075; tilt.add(mer);
+    [1, -1].forEach((sg) => { const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.06, 8), M.gold); pin.position.y = sg * (R + 0.03); tilt.add(pin); });
+    const sp = earth; sp.userData.clouds = clouds;
+    const center = base.clone().add(V(0, tilt.position.y, 0));
     const st = KF[STATION[6]], n = V(st.pos[0], 0, st.pos[2] + 20.65).normalize();
-    EX[6] = { meshes: [sp], center: sp.position.clone(), normal: n, w: 1.35, h: 1.35, ring, spin: sp };
+    EX[6] = { meshes: [earth], center, normal: n, w: 1.2, h: 1.2, ring: mer, spin: earth, clouds };
   }
   /* object: Building Nothing, standing on the East Room's round table */
   {
@@ -2576,7 +2798,7 @@ function jumpToStation(i) {
 }
 function openProject(i, { fly = true } = {}) {
   const LK = PROJECTS[i];
-  if (LK && LK.kind === "link") { openExt(LK.href); return; }
+  if (LK && LK.kind === "link") { if (/buildingnothing\.com|brandorder\.presidents\.work/.test(LK.href)) inBrowser(LK.href); else openExt(LK.href); return; }
   if (LK && LK.kind === "index") { location.hash = "index"; return; }
   if (state.open === i) return;
   const already = state.open >= 0;
@@ -2594,7 +2816,7 @@ function openProject(i, { fly = true } = {}) {
   clearTimeout(pageTO);
   pageTO = setTimeout(() => {
     pj.classList.add("open"); pj.setAttribute("aria-hidden", "false"); pj.scrollTop = 0;
-    setTimeout(() => $("#pjBack").focus({ preventScroll: true }), 500);
+    setTimeout(() => $("#pjBack").focus({ preventScroll: true, focusVisible: false }), 500);
   }, showAfter);
 }
 function closeProject() {
@@ -2734,7 +2956,8 @@ sub((t, dt) => {
   G.renderer.toneMappingExposure = lerp(1.0, 0.92, ins);
   G.lamps.forEach((l) => (l.intensity = lerp(18, 30, ins)));
   if (!reduce) {
-    G.EX.forEach((e) => { if (e.ring) { e.ring.rotation.z += dt * 0.00025; e.spin.rotation.y += dt * 0.00012; } });
+    if (window.__pwBust) window.__pwBust.rotation.y += dt * 0.00018;
+    G.EX.forEach((e) => { if (e.spin) { e.spin.rotation.y += dt * 0.00034; if (e.clouds) e.clouds.rotation.y += dt * 0.00046; } });
     if (p < 0.3) G.jets.forEach((j, k) => {
       j.jet.scale.y = 1 + Math.sin(t * 0.004 + k) * 0.03;
       const a = j.pts.geometry.attributes.position;
@@ -2764,7 +2987,7 @@ const mq = (w, cls = "") => { const one = Array.from({ length: 6 }, (_, i) => `<
 const pb = (t, href, cls = "pb") => `<a class="${cls}" href="${href}"${href.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${t}</a>`;
 const pl = (t, href, light = false) => `<a class="pl fx${light ? " light" : ""}" href="${href}">${t}</a>`;
 const STAR = `<svg class="qstar" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0C53 37 63 47 100 50C63 53 53 63 50 100C47 63 37 53 0 50C37 47 47 37 50 0Z"/></svg>`;
-const quote = (q, name, role, cls = "") => `<section class="q ${cls}"><div class="wrap"><figure class="fx"><blockquote>${cls.includes("sans") ? "" : STAR}<p>${q}</p></blockquote><figcaption>${name} <span>${role}</span></figcaption></figure></div></section>`;
+const quote = (q, name, role, cls = "") => `<section class="q ${cls}${cls.includes("sans") ? "" : " zq"}"><div class="wrap"><figure class="fx"><blockquote>${cls.includes("sans") ? "" : STAR}<p>${q}</p></blockquote><figcaption>${name} <span>${role}</span></figcaption></figure></div></section>`;
 const Q = {
   nathan: ["“I loved working with Presidents. They understand the vision better than I can express myself.”", "Nathan Halberstam", "- Founder &amp; CEO Bound Logistics"],
   pearl: ["Presidents Work thoughtfully aligned with our brand evolution, reinforcing a modern and forward-looking digital presence. Throughout the process, Yanky was collaborative, responsive, and highly professional, and the final result meaningfully elevated our website.", "Pearl Miller", "- Chief Marketing Officer, Specialty Rx"],
@@ -2917,7 +3140,8 @@ ${progRow(6, "Enterprise", "enterprise", "Organization-wide brand transformation
 </div></div></section>
 <section><div class="wrap"><h2 class="disp rv">It starts with a groundbreaking foundation</h2><div class="two"><p class="lbl fx">What we do</p><div><p class="st-l rv">First Impressions matter, so do lasting appearances</p><p class="body fx">We work closely with you to create your story and build your company leading to maximize and cultivate your impact on your audiences.</p><p class="body fx">With a diverse creative background, we work to create brands and experiences, both in the physical and digital world, that transport brands in original &amp; appealing ways, as well as implementation for a vast variety of design categories.</p></div></div></div></section>
 ${quote(...Q.nathan)}
-<section class="band-26"><div class="wrap two"><h2 class="disp rv">Build your brand for scale and impact</h2><div><p class="body fx">Every program at Presidents Work is powered by a multidisciplinary team spanning strategy, branding, design, digital experiences, AI, and business transformation.</p><p class="body fx">Explore the capabilities we bring to every partnership.</p><div class="caps fx">${["Brand Strategy", "Mobile App", "Brand Communication", "Naming", "Brand Positioning", "Packaging Design", "Vision, Purpose, Mission", "Product Design", "Visual Identity", "Signage &amp; Environmental", "Digital Design", "Website Design"].map((c) => `<div>${c}</div>`).join("")}</div></div></div></section>
+<section class="band-26"><div class="wrap two"><h2 class="disp rv">Build your brand for scale and impact</h2><div><p class="body fx">Every program at Presidents Work is powered by a multidisciplinary team spanning strategy, branding, design, digital experiences, AI, and business transformation.</p><p class="body fx">Explore the capabilities we bring to every partnership.</p></div></div></section>
+<section class="capx"><div class="wrap"><p class="capx-k fx">Capabilities</p><h2 class="disp rv capx-h">Everything we build, in one place</h2><p class="body fx capx-s">Seven disciplines, one team. Each program draws on the ones it needs.</p><ol class="capx-l"><li class="capx-r fx"><div class="capx-t"><span class="capx-n">01</span><h3>Strategy</h3><p>Where the brand is going and why it wins.</p></div><ul class="capx-i"><li>Brand strategy</li><li>Business and offer strategy</li><li>Positioning and repositioning</li><li>Audience and market mapping</li><li>Vision, purpose and mission</li><li>Pricing and offer design</li><li>Growth and go-to-market planning</li><li>Brand and market audits</li></ul><p class="capx-p"><span>In</span><a href="#launch">Launch™</a><a href="#formation">Formation™</a><a href="#elevation">Elevation™</a><a href="#boardroom">Boardroom</a><a href="#direction">Direction™</a><a href="#enterprise">Enterprise</a></p></li><li class="capx-r fx"><div class="capx-t"><span class="capx-n">02</span><h3>Naming and messaging</h3><p>What the brand is called and how it speaks.</p></div><ul class="capx-i"><li>Naming and nomenclature</li><li>Brand narrative</li><li>Messaging and tone of voice</li><li>Content architecture</li><li>Website and sales copy direction</li><li>Pitch and investor messaging</li></ul><p class="capx-p"><span>In</span><a href="#launch">Launch™</a><a href="#formation">Formation™</a><a href="#elevation">Elevation™</a><a href="#enterprise">Enterprise</a></p></li><li class="capx-r fx"><div class="capx-t"><span class="capx-n">03</span><h3>Identity</h3><p>How the brand looks, everywhere, every time.</p></div><ul class="capx-i"><li>Logo and wordmark</li><li>Visual identity system</li><li>Color and typography</li><li>Visual language and art direction</li><li>Motion language</li><li>Brand architecture and sub-brands</li><li>Brand guidelines and governance</li></ul><p class="capx-p"><span>In</span><a href="#launch">Launch™</a><a href="#formation">Formation™</a><a href="#elevation">Elevation™</a><a href="#enterprise">Enterprise</a></p></li><li class="capx-r fx"><div class="capx-t"><span class="capx-n">04</span><h3>Digital</h3><p>Where most people meet the brand first.</p></div><ul class="capx-i"><li>Website strategy and information architecture</li><li>Website design and build</li><li>Mobile app and product UI</li><li>E-commerce and Amazon stores</li><li>Interactive tools and visualizers</li><li>Social media systems</li></ul><p class="capx-p"><span>In</span><a href="#launch">Launch™</a><a href="#formation">Formation™</a><a href="#elevation">Elevation™</a><a href="#enterprise">Enterprise</a></p></li><li class="capx-r fx"><div class="capx-t"><span class="capx-n">05</span><h3>Packaging and physical</h3><p>The brand you can hold, wear and walk into.</p></div><ul class="capx-i"><li>Packaging design</li><li>Product design</li><li>Signage and environmental</li><li>Trade show booths</li><li>Vehicle livery and uniforms</li><li>Print collateral and merchandise</li></ul><p class="capx-p"><span>In</span><a href="#formation">Formation™</a><a href="#elevation">Elevation™</a><a href="#enterprise">Enterprise</a></p></li><li class="capx-r fx"><div class="capx-t"><span class="capx-n">06</span><h3>Campaigns and content</h3><p>The brand out in the world, doing its job.</p></div><ul class="capx-i"><li>Advertising campaigns</li><li>Video and motion</li><li>Pitch decks and sales materials</li><li>Launch assets</li><li>Event collateral and invitations</li><li>Billboards and out-of-home</li></ul><p class="capx-p"><span>In</span><a href="#launch">Launch™</a><a href="#elevation">Elevation™</a><a href="#enterprise">Enterprise</a></p></li><li class="capx-r fx"><div class="capx-t"><span class="capx-n">07</span><h3>Leadership and rollout</h3><p>Keeping leaders aligned and the brand on course.</p></div><ul class="capx-i"><li>Executive strategy sessions</li><li>Leadership workshops and alignment</li><li>Decision filters and roadmaps</li><li>Internal brand rollout</li><li>Implementation standards</li><li>Phased rollout across touchpoints</li></ul><p class="capx-p"><span>In</span><a href="#boardroom">Boardroom</a><a href="#direction">Direction™</a><a href="#enterprise">Enterprise</a></p></li></ol></div></section>
 <section><div class="wrap two"><div><h2 class="disp rv">Partnering with Presidents</h2><p class="lbl fx">Your vote of confidence</p></div>${nums([["A holistic approach", "From defining the big idea to going to market, everything is connected to tell your story and resonate with your audience."], ["We work with you", "We immerse ourselves into your business and create experience for how your brand shows up at every touchpoint."], ["We deliver for your brand", "We always strive to exceed your expectations, and get you exceptional creative results."]])}</div></section>
 ${cta("Ready to build your legend?", "Work with us")}`,
   launch: () => program(PROGRAMS.launch),
