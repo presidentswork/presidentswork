@@ -1252,6 +1252,13 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
   .dock-bar .dock-act{flex:none}
   .dock-bar #menuBtn{width:3.6rem !important;height:3.6rem;border-radius:50%;justify-content:center !important}
 }
+
+/* capabilities: round bullets; program links as text with an arrow and a dotted underline */
+.wx .capx-i li::before{width:.3rem !important;height:.3rem !important;border-radius:50%;top:.52em !important;opacity:.55 !important}
+.wx .capx-p{gap:.5rem 1.25rem !important}
+.wx .capx-p a{border:0 !important;border-radius:0 !important;padding:0 0 .15rem !important;background:none !important;color:inherit !important;font-size:.95rem;display:inline-flex;align-items:center;gap:.35rem;background-image:radial-gradient(circle,currentColor 1px,transparent 1.3px) !important;background-size:5px 3px !important;background-repeat:repeat-x !important;background-position:0 100% !important}
+.wx .capx-p a::after{content:"";width:.7em;height:.7em;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M8 7h9v9'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M8 7h9v9'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .3s var(--ease-glide)}
+@media(hover:hover){.wx .capx-p a:hover::after{transform:translate(2px,-2px)}}
 </style>
 </head>
 <body>
