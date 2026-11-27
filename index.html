@@ -1391,6 +1391,35 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 /* nav label: regular case, normal spacing */
 .dock-bar .lbl{text-transform:none !important;letter-spacing:0 !important;font-size:.95rem !important;font-weight:500}
 @media(max-width:767.98px){.dock-bar .lbl{font-size:.9rem !important}}
+
+/* quick finder that opens from the name in the nav */
+.dock-bar .lbl{cursor:pointer;pointer-events:auto;-webkit-tap-highlight-color:transparent;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.dock-bar .lbl:active{transform:scale(.96)}
+.qk{position:absolute;left:50%;bottom:calc(100% + .6rem);width:min(24rem,calc(100vw - 2rem));transform:translateX(-50%) scale(.2);transform-origin:50% calc(100% + 1.6rem);opacity:0;pointer-events:none;z-index:3;border-radius:1.6rem;padding:1rem 1rem .6rem;box-sizing:border-box;background:var(--gl-bg,rgba(250,250,247,.66));color:var(--gl-fg,#121212);border:1px solid var(--gl-bd,rgba(255,255,255,.7));box-shadow:inset 0 1px 0 var(--gl-in,rgba(255,255,255,.85)),0 18px 50px rgba(0,0,0,.2);backdrop-filter:blur(30px) saturate(1.9);-webkit-backdrop-filter:blur(30px) saturate(1.9);transition:transform .3s cubic-bezier(.4,0,.6,1),opacity .2s linear}
+.qk.open{transform:translateX(-50%) scale(1);opacity:1;pointer-events:auto;transition:transform .6s cubic-bezier(.3,1.4,.45,1),opacity .18s linear}
+:root:not([data-mode=dark]) .qk{--gl-bg:rgba(250,250,247,.66);--gl-fg:#121212;--gl-line:rgba(18,18,18,.12)}
+:root[data-mode=dark] .qk{--gl-bg:rgba(22,24,22,.66);--gl-fg:#fff;--gl-bd:rgba(255,255,255,.16);--gl-in:rgba(255,255,255,.12);--gl-line:rgba(255,255,255,.14)}
+.qk-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:0 .25rem .8rem}
+.qk-here{display:flex;flex-direction:column;min-width:0}
+.qk-k{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+.qk-now{font-family:"Instrument Serif",Georgia,serif;font-size:1.6rem;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qk-share{display:inline-flex;align-items:center;gap:.4rem;flex:none;height:2.3rem;padding:0 .95rem;border-radius:999px;border:1px solid var(--gl-line);background:transparent;color:inherit;font:500 .82rem "Instrument Sans",system-ui,sans-serif;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.qk-share svg{width:.95rem;height:.95rem}
+.qk-share.done{background:#e9b94a;border-color:#e9b94a;color:#121212}
+.qk-f{display:flex;align-items:center;gap:.55rem;height:2.8rem;padding:0 .95rem;border-radius:999px;background:var(--gl-line);margin:0 0 .4rem}
+.qk-f svg{width:1rem;height:1rem;opacity:.6;flex:none}
+.qk-f input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:inherit;font:400 1rem "Instrument Sans",system-ui,sans-serif;-webkit-appearance:none;appearance:none}
+.qk-f input::placeholder{color:inherit;opacity:.5}
+.qk-f input::-webkit-search-cancel-button{display:none}
+.qk-r{list-style:none;margin:0;padding:0;max-height:min(46svh,20rem);overflow-y:auto;overscroll-behavior:contain}
+.qk-h{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.55;padding:.6rem .6rem .25rem}
+.qk-none{padding:.9rem .6rem;font-size:.9rem;opacity:.7}
+.qk-r a{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:.75rem;align-items:center;padding:.6rem .65rem;border-radius:.9rem;color:inherit;text-decoration:none;transition:background .2s}
+.qk-r a b{font-weight:500;font-size:.98rem}
+.qk-r a span{grid-column:1;font-size:.78rem;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qk-r a svg{grid-row:1/3;grid-column:2;width:.95rem;height:.95rem;opacity:.5}
+.qk-r a.on,.qk-r a:hover,.qk-r a:focus-visible{background:var(--gl-line);outline:none}
+@media(prefers-reduced-motion:reduce){.qk,.qk.open{transition:opacity .2s !important;transform:translateX(-50%) !important}}
 </style>
 </head>
 <body>
@@ -4499,6 +4528,59 @@ const setPageMeta = (id) => { const m = SEO[id], path = SLUG_OUT[id] || id; if (
 const setProjectMeta = (P) => { if (!P) return; const d = (P.tagline || P.overview || "").replace(/\s+/g, " ").trim(); setMeta(`${P.name} - ${(P.scope || []).slice(0, 2).join(", ") || "Case study"} | President's Work`, (d + " A President's Work case study" + (P.services ? ": " + P.services + "." : ".")).slice(0, 300), P.id); };
 setMeta(SEO.home[0], SEO.home[1]);
 const BASE_TITLE = SEO.home[0];
+
+/* the name in the nav opens a quick finder: search the whole site, and share the page you are on */
+{
+  const lbl = document.getElementById("dockLbl"); const dockEl = document.getElementById("dock");
+  if (lbl && dockEl && typeof SEO !== "undefined") {
+    const box = document.createElement("div"); box.className = "qk"; box.id = "qk"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "Search and share"); box.inert = true;
+    box.innerHTML = `<div class="qk-top"><div class="qk-here"><span class="qk-k">You are on</span><span class="qk-now"></span></div><button class="qk-share" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7.5 7.5L12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Share</span></button></div>
+<label class="qk-f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input type="search" placeholder="Search pages, programs, work…" autocomplete="off" enterkeyhint="go" aria-label="Search the site"></label>
+<ul class="qk-r" role="listbox"></ul>`;
+    dockEl.appendChild(box);
+    const inp = box.querySelector("input"), list = box.querySelector(".qk-r"), now = box.querySelector(".qk-now"), shareBtn = box.querySelector(".qk-share");
+    const IDX = [];
+    const add = (t, sub, href, kw = "") => IDX.push({ t, sub, href, k: (t + " " + sub + " " + kw).toLowerCase() });
+    add("Home", "The house walkthrough", "#top", "start white house");
+    ["programs", "boardroom", "launch", "formation", "elevation", "direction", "enterprise", "method", "about", "contact", "index", "yankyperl"].forEach((id) => { if (PAGES[id]) add(id === "index" ? "Selected work" : (PAGE_TITLES[id] || id), (SEO[id] ? SEO[id][0].split(" - ")[1] || "" : "").replace(/ \| President's Work$/, ""), "#" + id, (SEO[id] ? SEO[id][1] : "") + (id === "programs" ? " pricing price cost packages offers services capabilities" : id === "contact" ? " email phone call book quote inquiry hire" : id === "index" ? " work portfolio projects clients" : id === "yankyperl" ? " founder yanky perl" : "")); });
+    PROJECTS.forEach((P) => { const W = (typeof WORKDATA !== "undefined" && WORKDATA[P.id]) || P; if (P.kind === "link") add(P.name, P.label || P.sector, P.href, (P.scope || []).join(" ") + (/brandorder/i.test(P.href) ? " assessment free diagnose gap" : " book read")); else if (P.kind !== "index") add(P.name, "Work · " + (W.scope || P.scope || []).slice(0, 2).join(", "), "#" + P.id, (W.tagline || "") + " " + (W.services || "") + " case study"); });
+    [["entrance-hall", "Entrance Hall"], ["east-room", "East Room"], ["blue-room", "Blue Room"], ["state-dining", "State Dining Room"], ["oval-office", "The Oval Office"]].forEach(([a, n]) => add(n, "Room in the house", "#" + a, "room tour 3d" + (a === "oval-office" ? " podcast episode bust seal" : "")));
+    const SUGGEST = ["#programs", "#index", "#method", "#contact", "https://brandorder.presidents.work"];
+    const render = () => {
+      const q = inp.value.trim().toLowerCase();
+      let rows = q ? IDX.map((r) => { const words = q.split(/\s+/); if (!words.every((w) => r.k.includes(w))) return null; const sc = (r.t.toLowerCase().startsWith(q) ? 0 : r.t.toLowerCase().includes(q) ? 1 : 2); return [sc, r]; }).filter(Boolean).sort((a, b) => a[0] - b[0]).slice(0, 7).map((x) => x[1]) : SUGGEST.map((h) => IDX.find((r) => r.href === h)).filter(Boolean);
+      list.innerHTML = rows.length ? (q ? "" : '<li class="qk-h">Popular</li>') + rows.map((r, i) => `<li><a href="${r.href}"${/^https?:/.test(r.href) ? ' target="_blank" rel="noopener"' : ""} class="${i === 0 && q ? "on" : ""}"><b>${r.t}</b><span>${r.sub || ""}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></a></li>`).join("") : '<li class="qk-none">Nothing matches that yet. Try “programs”, “pyle” or “contact”.</li>';
+    };
+    const here = () => {
+      const pid = state.open >= 0 && PROJECTS[state.open] ? PROJECTS[state.open].id : "";
+      const id = pid || state.page || "";
+      const name = pid ? PROJECTS[state.open].name : state.page ? (PAGE_TITLES[state.page] || state.page) : "Home";
+      return { name, url: SITE_URL + "/" + (id ? (SLUG_OUT[id] || id) : ""), title: document.title };
+    };
+    let open = false;
+    const setOpen = (v) => {
+      open = v; box.classList.toggle("open", v); box.inert = !v; lbl.setAttribute("aria-expanded", String(v));
+      if (v) { if (typeof setMenu === "function") setMenu(false); now.textContent = here().name; inp.value = ""; render(); setTimeout(() => inp.focus({ preventScroll: true }), 220); }
+      else { inp.blur(); shareBtn.classList.remove("done"); }
+    };
+    lbl.setAttribute("role", "button"); lbl.setAttribute("tabindex", "0"); lbl.setAttribute("aria-controls", "qk"); lbl.setAttribute("aria-expanded", "false"); lbl.setAttribute("aria-label", "Search the site and share this page");
+    lbl.addEventListener("click", (e) => { e.stopPropagation(); setOpen(!open); });
+    lbl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(!open); } });
+    inp.addEventListener("input", render);
+    inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { const a = list.querySelector("a"); if (a) { e.preventDefault(); a.click(); } } if (e.key === "Escape") setOpen(false); });
+    list.addEventListener("click", (e) => { if (e.target.closest("a")) setTimeout(() => setOpen(false), 10); });
+    shareBtn.addEventListener("click", async () => {
+      const h = here();
+      try { if (navigator.share) { await navigator.share({ title: h.title, url: h.url }); return; } } catch (err) { if (err && err.name === "AbortError") return; }
+      try { await navigator.clipboard.writeText(h.url); } catch (err) { const t = document.createElement("textarea"); t.value = h.url; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch (e2) { /* nothing more to try */ } t.remove(); }
+      shareBtn.classList.add("done"); shareBtn.querySelector("span").textContent = "Link copied"; setTimeout(() => { shareBtn.classList.remove("done"); shareBtn.querySelector("span").textContent = "Share"; }, 1800);
+    });
+    document.addEventListener("pointerdown", (e) => { if (open && !box.contains(e.target) && e.target !== lbl && !lbl.contains(e.target)) setOpen(false); }, true);
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && open) setOpen(false); });
+    addEventListener("hashchange", () => open && setOpen(false));
+    const mb = document.getElementById("menuBtn"); if (mb) mb.addEventListener("click", () => open && setOpen(false));
+  }
+}
 function openPage(id) {
   if (state.open >= 0) closeProject();
   setMenu(false); siteMenu.hidden = true; $("#shBurger").setAttribute("aria-expanded", "false");
