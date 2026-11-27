@@ -1096,6 +1096,44 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
   .dock-menu .dm-row .t-light{display:none}
   :root[data-mode=dark] .dock-menu .dm-row .t-light{display:inline}:root[data-mode=dark] .dock-menu .dm-row .t-dark{display:none}
 }
+/* sound toggle */
+.snd-btn{display:flex;width:2.75rem;height:2.75rem;align-items:center;justify-content:center;border-radius:50%;border:0;background:none;color:inherit;cursor:pointer;padding:0}
+.dock-bar .snd-btn{color:#fff}
+.snd-btn svg{width:1.3rem;height:1.3rem;overflow:visible}
+.snd-btn .w1,.snd-btn .w2{display:none}
+html.snd-on .snd-btn .x{display:none}
+html.snd-on .snd-btn .w1,html.snd-on .snd-btn .w2{display:block;animation:sndw 1.6s ease-in-out infinite}
+html.snd-on .snd-btn .w2{animation-delay:.25s}
+@keyframes sndw{0%,100%{opacity:.35}50%{opacity:1}}
+.snd-btn .t-on{display:none}
+html.snd-on .snd-btn .t-on{display:inline}html.snd-on .snd-btn .t-off{display:none}
+.snd-hero{position:absolute;right:var(--m);top:1.4rem;z-index:13;width:auto !important;height:2.6rem !important;border-radius:999px !important;padding:0 1rem 0 .8rem !important;gap:.5rem;background:rgba(10,11,9,.28) !important;color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25) !important;font:500 .7rem/1 "Instrument Sans",system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;transition:opacity .5s,translate .5s}
+.snd-hero svg{width:1.05rem;height:1.05rem}
+.snd-hero.gone{opacity:0;translate:0 -.5rem;pointer-events:none}
+@media(max-width:767.98px){.dock-bar .dock-act .snd-btn{display:none !important}.dock-menu .dm-snd{margin-top:0;padding-top:.2rem;border-top:0}}
+@media(prefers-reduced-motion:reduce){html.snd-on .snd-btn .w1,html.snd-on .snd-btn .w2{animation:none}}
+/* chooser pop-up: a touch smaller so it all fits on a phone */
+@media(max-width:767.98px){
+  .ch-panel{padding:1.6rem 1.25rem 1.5rem;max-height:92svh}
+  .ch-panel h2{font-size:2.3rem;margin-bottom:.5rem}
+  .ch-panel .ch-lede{font-size:.9rem;margin-bottom:1.1rem}
+  .ch-list a{padding:.85rem 0}
+  .ch-list .nm{font-size:1.2rem}
+  .ch-list .d{font-size:.82rem;line-height:1.35}
+  .ch-foot{font-size:.82rem;margin-top:1rem}
+  .ch-x{width:2.4rem;height:2.4rem;top:.8rem;right:.8rem}
+}
+/* footer: the big Presidents Work wordmark on top, links in the middle, Work with us and the two buttons at the bottom */
+footer .wordmark,.site footer.f-page .wordmark{position:absolute !important;left:0;right:0;top:5.5rem;height:auto !important;margin:0 !important;padding:0 !important;align-items:flex-start !important;z-index:14}
+footer .wm{translate:0 0 !important}
+footer .f-grid,.site footer.f-page .f-grid{padding:calc(6.5rem + 12vw) 1.5rem 9.5rem !important;justify-content:space-between !important}
+footer .f-nav{order:1;margin:auto 0 !important}
+footer .f-cta{order:2;margin-top:auto}
+@media(max-width:767.98px){footer .wordmark,.site footer.f-page .wordmark{top:4.75rem}footer .f-grid,.site footer.f-page .f-grid{padding:calc(5.5rem + 15vw) 1.25rem 7.5rem !important}}
+@media(min-width:768px){footer .f-grid,.site footer.f-page .f-grid{padding:calc(7rem + 11vw) 2rem 10rem !important}}
+/* sound: icon-only in the hero on phones, room for it in the desktop bar */
+@media(max-width:767.98px){.snd-hero{width:2.6rem !important;padding:0 !important;justify-content:center;top:1.2rem}.snd-hero span{display:none !important}}
+@media(min-width:640px){.dock-bar{width:27.5rem}}
 </style>
 </head>
 <body>
@@ -1150,6 +1188,7 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
 
     <p class="room caps" id="room"></p>
     <div class="scroll-cue" id="scrollCue" aria-hidden="true"><span>Scroll</span><i></i></div>
+    <button class="snd-btn snd-hero" id="sndHero" type="button" aria-pressed="false" aria-label="Turn sound on"><svg class="snd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg><span class="t-off">Sound</span><span class="t-on">Sound on</span></button>
 
     <div class="caption" id="caption" aria-live="polite">
       <p class="cap-count caps" id="capCount"></p>
@@ -1193,11 +1232,12 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
       <li style="--i:4"><a href="#method">Method</a></li>
       <li style="--i:5"><a href="#contact">Contact</a></li>
       <li class="dm-mode" style="--i:6"><button class="mode-btn dm-row" type="button" aria-pressed="false" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="t-dark">Dark mode</span><span class="t-light">Light mode</span></button></li>
+      <li class="dm-mode dm-snd" style="--i:7"><button class="snd-btn dm-row" type="button" aria-pressed="false" aria-label="Turn sound on"><svg class="snd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg><span class="t-off">Sound on</span><span class="t-on">Sound off</span></button></li>
     </ul>
     <div class="dock-bar">
       <a class="mark" href="#top" aria-label="Presidents Work — back to the start"><svg viewBox="0 0 31.8515 30.1058" aria-hidden="true" focusable="false"><path fill="currentColor" d="M31.8237,15.0926c.0171-.3022.0278-.6061.0278-.9126,0-.2642-.0072-.5267-.0199-.7878l-9.3584-.0158,9.0513-2.421c-.1153-.5609-.2625-1.1099-.4351-1.6476l-9.1085,2.4361,8.1722-4.7183c-.2563-.5087-.5391-1.0015-.8466-1.4771l-8.2429,4.7616.1812-.1682,6.5625-6.5626c-.3786-.424-.778-.8289-1.1994-1.2103l-6.7086,6.7087L24.646.8562c-.4741-.3109-.966-.5963-1.4735-.8562l-4.3397,7.5167-.0669.1196c-1.1545-.8982-.9947-3.5958-1.1571-4.5184-.2284-1.2973-1.8277-1.8194-2.9792-1.5723-.4949.1062-.9583.35-1.3311.6917-.3536.324-.7968.8712-.586,1.3819,0,0,.5036-.4324,1.3982-.1935,1.0583.2828.4839,3.1646-.974,4.2948L8.679,0c-.5075.2599-.9994.5452-1.4735.8562l4.7466,8.2214L5.2436,2.369c-.4215.3815-.821.7865-1.1997,1.2106l6.6992,6.7003L2.5458,5.5473c-.3078.476-.5908.9691-.8473,1.4783l8.1969,4.7324L.7612,9.3105c-.1725.5377-.3196,1.0867-.4348,1.6476l8.8784,2.379-9.1825.0026c-.0145.2783-.0223.5584-.0223.8403,0,.2903.0088.5785.0242.865h9.6646L.3662,17.5742c.1218.5609.274,1.1101.4532,1.6472l8.999-2.4292L1.7561,21.447c.2607.5072.5466.9991.8584,1.4729l8.1329-4.6905-6.6172,6.6506c.3665.4038.7547.7874,1.1605,1.1518.0247.0084.049.0177.0739.0259l6.6862-6.686-4.1856,7.2495c.1856.0237.3739.0384.5616.0551l-.6763,1.1714c.1623.0973.3265.1916.4925.2832l.8162-1.4136c.1817.0078.3627.0187.5464.0187.0549,0,.1089-.0035.1636-.0041l3.7572-6.5078-1.6954,6.3275c.1525-.0251.3041-.0531.4549-.0831l-.8049,3.0039c.2268.0658.4553.1272.6861.183l.9027-3.369c.2173-.0569.4331-.117.646-.1845l1.4567-5.4367v4.8781c.1113-.05.2176-.1086.3272-.1614v4.7131c.142.0037.2831.0108.426.0108s.284-.007.426-.0108v-5.1619c.176-.1008.3539-.1988.5249-.3073v-3.9608l.8961,3.3443c.0709-.0533.1371-.1125.2069-.1672l1.5663,5.8454c.3241-.0754.645-.159.9612-.2538l-1.6897-6.306c.1295-.1195.2622-.2354.3869-.3598l-.6816-2.5439,1.1713,2.029c.0397-.0439.0754-.0913.1145-.1357l3.5494,6.1477c.3356-.1774.6638-.3665.9846-.5667l-3.7723-6.5338c.0863-.1179.1768-.2324.2594-.3531l-.7804-1.3518,1.012.9981c.0082-.0127.0151-.0262.0232-.0389l5.5496,5.5496c.3504-.3185.685-.654,1.0059-1.0022l-5.8358-5.8357c.0368-.0746.0779-.1464.1133-.2218l-.5126-.5056,7.8299,4.5206c.3123-.4745.5988-.967.8599-1.475l-8.0419-4.6488,8.988,2.3964c.1803-.5436.3335-1.0993.4551-1.6671l-9.079-2.4578,9.407.0214ZM15.9258,18.8838c-2.526,0-4.5737-2.0477-4.5737-4.5736s2.0477-4.5737,4.5737-4.5737,4.5736,2.0477,4.5736,4.5737-2.0477,4.5736-4.5736,4.5736Z"/></svg></a>
       <span class="lbl" id="dockLbl">Scroll down</span>
-      <div class="dock-act"><button class="mode-btn" type="button" aria-pressed="false" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button><button type="button" id="menuBtn" aria-expanded="false" aria-controls="dock-menu" aria-label="Open menu">
+      <div class="dock-act"><button class="snd-btn" type="button" aria-pressed="false" aria-label="Turn sound on"><svg class="snd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button><button class="mode-btn" type="button" aria-pressed="false" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button><button type="button" id="menuBtn" aria-expanded="false" aria-controls="dock-menu" aria-label="Open menu">
         <svg id="icMenu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         <svg id="icClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false" style="display:none"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button></div>
@@ -1235,6 +1275,66 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
 
 <script src="js/lottie_svg.min.js" defer></script>
 <script type="module">
+/* ambient sound: a soft harp over a string pad, made live with Web Audio; off until someone turns it on */
+const SND = (() => {
+  let ctx = null, master = null, verb = null, on = false, timer = 0, step = 0, chordAt = 0, padNodes = [];
+  const CH = [[50, 57, 62, 66, 69, 73, 76], [47, 54, 59, 62, 66, 69, 74], [43, 50, 55, 59, 62, 66, 71], [45, 52, 57, 61, 64, 69, 71]];
+  const hz = (m) => 440 * Math.pow(2, (m - 69) / 12);
+  const build = () => {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+    verb = ctx.createConvolver(); const len = ctx.sampleRate * 3.6, ir = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    verb.buffer = ir; const wet = ctx.createGain(); wet.gain.value = 0.55; verb.connect(wet); wet.connect(master);
+  };
+  const out = (node, dry = 0.6) => { const g = ctx.createGain(); g.gain.value = dry; node.connect(g); g.connect(master); node.connect(verb); };
+  const pluck = (m, t, v = 0.22) => {
+    const f = hz(m), g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.setValueAtTime(Math.min(9000, f * 9), t); lp.frequency.exponentialRampToValueAtTime(Math.max(300, f * 1.6), t + 1.8);
+    [[1, "triangle", 1], [2, "sine", 0.35], [3, "sine", 0.12]].forEach(([k, type, a]) => { const o = ctx.createOscillator(); o.type = type; o.frequency.value = f * k; o.detune.value = (Math.random() - 0.5) * 6; const og = ctx.createGain(); og.gain.value = a; o.connect(og); og.connect(lp); o.start(t); o.stop(t + 4.5); });
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0008, t + 4.2);
+    lp.connect(g); out(g);
+  };
+  const pad = (notes, t, dur) => {
+    notes.slice(0, 3).forEach((m) => {
+      const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; const g = ctx.createGain();
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.028, t + dur * 0.4); g.gain.linearRampToValueAtTime(0, t + dur + 1.5);
+      [-7, 7].forEach((dt) => { const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = hz(m); o.detune.value = dt; o.connect(lp); o.start(t); o.stop(t + dur + 1.6); padNodes.push(o); });
+      lp.connect(g); out(g, 0.4);
+    });
+  };
+  const PAT = [0, 2, 4, 6, 5, 3, 4, 1];
+  const tick = () => {
+    if (!on) return;
+    const now = ctx.currentTime, beat = 0.6;
+    while (chordAt < now + 0.4) {
+      const ci = Math.floor(step / 8) % CH.length, n = CH[ci];
+      if (step % 8 === 0) pad(n, chordAt, beat * 8);
+      const k = PAT[step % 8]; pluck(n[k] + (step % 16 >= 8 && k > 3 ? 0 : 0), chordAt, 0.16 + Math.random() * 0.08);
+      if (step % 4 === 0) pluck(n[0] - 12, chordAt, 0.12);
+      step++; chordAt += beat * (Math.random() < 0.12 ? 1.5 : 1);
+    }
+    timer = setTimeout(tick, 120);
+  };
+  const set = (v) => {
+    on = v;
+    try { localStorage.setItem("pw-sound", v ? "1" : "0"); } catch (e) { /* private mode */ }
+    document.querySelectorAll(".snd-btn").forEach((b) => { b.setAttribute("aria-pressed", String(v)); b.setAttribute("aria-label", v ? "Turn sound off" : "Turn sound on"); });
+    document.documentElement.classList.toggle("snd-on", v);
+    if (v) {
+      if (!ctx) build();
+      ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 2.5);
+      chordAt = ctx.currentTime + 0.1; clearTimeout(timer); tick();
+    } else if (ctx) {
+      clearTimeout(timer); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.8);
+    }
+  };
+  document.addEventListener("click", (e) => { if (e.target.closest && e.target.closest(".snd-btn")) set(!on); });
+  document.addEventListener("visibilitychange", () => { if (!ctx) return; if (document.hidden) ctx.suspend(); else if (on) ctx.resume(); });
+  return { set, get on() { return on; } };
+})();
+
+{ const sh = () => { const b = document.getElementById("sndHero"); if (b) b.classList.toggle("gone", scrollY > 60 || !!document.querySelector(".site.open, .site.on")); }; addEventListener("scroll", sh, { passive: true }); setInterval(sh, 800); }
+
 /* Method: R, U and N take turns in one place as the run section scrolls */
 const runTick = () => {
   const sec = document.querySelector(".mr-run3"); if (!sec) return;
