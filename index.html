@@ -1329,6 +1329,18 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 /* Method process list: lowercase deliverables, more room around the headline and the deliverables */
 .wx .mr-steps .n{margin-bottom:.9rem !important}
 .wx .mr-steps .key{text-transform:lowercase !important;letter-spacing:.02em !important;font-size:.92rem !important;margin-top:1.4rem !important}
+
+/* phone menu: springs out of the menu button like an iOS popover, with a little overshoot */
+@media(max-width:767.98px){
+  .dock-menu{transform-origin:calc(100% - 1.5rem) calc(100% + 1.75rem) !important;transform:scale(.18) !important;clip-path:none !important;opacity:0;border-radius:1.75rem !important;transition:transform .32s cubic-bezier(.4,0,.6,1),opacity .22s linear,border-radius .3s !important}
+  .dock-menu.open{transform:scale(1) !important;opacity:1 !important;transition:transform .62s cubic-bezier(.3,1.45,.45,1),opacity .18s linear,border-radius .5s !important}
+  .dock-menu li{transform:scale(.92);transform-origin:left center;transition:opacity .3s,translate .45s cubic-bezier(.3,1.4,.5,1),transform .45s cubic-bezier(.3,1.4,.5,1),filter .3s !important}
+  .dock-menu.open li{transform:none;transition-delay:calc(60ms + var(--i,0) * 40ms) !important}
+  #menuBtn{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+  #menuBtn:active{transform:scale(.88)}
+  #menuBtn.x{transform:scale(1.04)}
+}
+@media(max-width:767.98px) and (prefers-reduced-motion:reduce){.dock-menu,.dock-menu.open{transition:opacity .2s !important;transform:none !important}}
 </style>
 </head>
 <body>
