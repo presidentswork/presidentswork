@@ -1370,12 +1370,15 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 }
 
 /* podcast frames in the Oval Office: title and play button over the scene */
-.podcap{position:fixed;left:50%;top:6.5rem;z-index:60;transform:translate(-50%,-8px);width:min(30rem,calc(100vw - 2.5rem));text-align:center;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .45s,transform .45s}
+.podcap{position:fixed;left:50%;top:auto;bottom:calc(7rem + env(safe-area-inset-bottom,0px));z-index:60;transform:translate(-50%,-8px);width:min(30rem,calc(100vw - 2.5rem));text-align:center;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .45s,transform .45s}
 .podcap.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 .podcap .pc-k{margin:0 0 .5rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
 .podcap h2{margin:0 0 1rem;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.4rem,1.8rem + 2.6vw,3.8rem);line-height:.95;letter-spacing:-.02em}
-.podcap .al{color:#fff;display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;border-bottom:1px solid rgba(255,255,255,.7);padding-bottom:.3rem;background:none;cursor:pointer}
-.podcap .al svg{width:1rem;height:1rem}
+.podcap .al{color:#fff;display:inline-flex;align-items:center;gap:.45rem;font-size:.9rem;letter-spacing:.02em;text-transform:none;border-bottom:1px solid rgba(255,255,255,.7);padding-bottom:.3rem;background:none;cursor:pointer}
+.podcap .al svg{width:.8rem;height:.8rem}
+
+/* capabilities: no one-line description under each category */
+.wx .capx-t p{display:none !important}
 </style>
 </head>
 <body>
@@ -2276,7 +2279,7 @@ async function build() {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0xbfd0e2, 420, 2600);
-  const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 3200);
+  const camera = new THREE.PerspectiveCamera(48, 1, 0.25, 3200);
   const pmrem = new THREE.PMREMGenerator(renderer);
   const roomEnv = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environment = roomEnv;
@@ -3010,7 +3013,7 @@ async function build() {
 
         /* two podcast episodes framed on the wall, either side of the clock */
         [[0.66, "work/podcast/latest.jpg", "LATEST EPISODE"], [-0.66, "work/podcast/previous.jpg", "PREVIOUS EPISODE"]].forEach(([a, src, tag]) => {
-          const [fx, fz, fry] = wallAt(a, 0.16), fg = grp(fx, 0, fz, fry);
+          const [fx, fz, fry] = wallAt(a, 0.42), fg = grp(fx, 0, fz, fry);
           lbox(fg, -1.27, 1.27, 1.8, 3.38, 0, 0.06, M.gold);
           const pc = document.createElement("canvas"); pc.width = 1280; pc.height = 720; const ptx = new THREE.CanvasTexture(pc); ptx.colorSpace = THREE.SRGBColorSpace; ptx.anisotropy = aniso;
           const pim = new Image(); pim.onload = () => { const c = pc.getContext("2d"); c.drawImage(pim, 0, 0, 1280, 720); c.fillStyle = "rgba(0,0,0,.28)"; c.beginPath(); c.arc(640, 360, 78, 0, Math.PI * 2); c.fill(); c.strokeStyle = "rgba(255,255,255,.9)"; c.lineWidth = 5; c.stroke(); c.fillStyle = "#fff"; c.beginPath(); c.moveTo(618, 322); c.lineTo(618, 398); c.lineTo(684, 360); c.closePath(); c.fill(); c.fillStyle = "rgba(10,12,10,.62)"; c.fillRect(0, 0, 1280, 64); c.fillStyle = "#f4ce78"; c.font = "600 30px 'Instrument Sans', system-ui, sans-serif"; c.fillText(tag, 34, 43); ptx.needsUpdate = true; }; pim.src = src;
@@ -3054,8 +3057,18 @@ async function build() {
     {
       const px = cx + 3.25, pz = cz; /* straight ahead as you come through the door */
       put(CYL, M.marble, px, 0.55, pz, { sx: 0.32, sy: 1.1, sz: 0.32 }); put(BOX, M.marble, px, 1.13, pz, { sx: 0.75, sy: 0.06, sz: 0.75 }); put(BOX, M.marble, px, 0.04, pz, { sx: 0.8, sy: 0.08, sz: 0.8 });
-      import("three/addons/loaders/GLTFLoader.js").then(({ GLTFLoader }) => new GLTFLoader().load("models/bust.glb", (gl) => {
-        const m = gl.scene; const rm = []; m.traverse((o) => { if (o.isLight) rm.push(o); if (o.isMesh) { o.castShadow = false; o.receiveShadow = false; if (o.material) { o.material.shadowSide = THREE.FrontSide; } } }); rm.forEach((o) => o.parent && o.parent.remove(o));
+      /* a gilt-framed portrait stands on the plinth (the 3D bust model has broken geometry, so it is not shown) */
+      {
+        const g = new THREE.Group(); g.position.set(px, 1.16, pz); g.rotation.y = -Math.PI / 2; scene.add(g);
+        const W = 0.62, H = 0.73;
+        const fr = new THREE.Mesh(BOX, M.gold); fr.scale.set(W + 0.1, H + 0.1, 0.05); fr.position.set(0, H / 2 + 0.05, 0); g.add(fr);
+        const pt = new THREE.TextureLoader().load("img/founder-portrait.jpg"); pt.colorSpace = THREE.SRGBColorSpace; pt.anisotropy = aniso;
+        const pm = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshStandardMaterial({ map: pt, roughness: 0.6 })); pm.position.set(0, H / 2 + 0.05, 0.027); g.add(pm);
+        const leg = new THREE.Mesh(BOX, M.gold); leg.scale.set(0.04, 0.5, 0.04); leg.position.set(0, 0.25, -0.16); leg.rotation.x = -0.32; g.add(leg);
+        const sl = new THREE.SpotLight(0xfff0dc, 2.6, 6, 0.5, 0.8, 1.2); sl.position.set(px - 2.4, 3.2, pz + 0.8); sl.target = g; scene.add(sl);
+      }
+      if (false) import("three/addons/loaders/GLTFLoader.js").then(({ GLTFLoader }) => new GLTFLoader().load("models/bust.glb", (gl) => {
+        const m = gl.scene; const rm = []; m.traverse((o) => { if (o.isLight) rm.push(o); if (o.isMesh) { o.castShadow = false; o.receiveShadow = false; const nm = o.name || ""; if (/^Lens|flyaways/i.test(nm) || /^Lens|flyaways/i.test((o.parent && o.parent.name) || "")) rm.push(o); else if (o.material && /Head|Neck|Jacket|ear/i.test(o.material.name || "")) { o.material.polygonOffset = true; o.material.polygonOffsetFactor = 2; o.material.polygonOffsetUnits = 2; } } }); rm.forEach((o) => o.parent && o.parent.remove(o));
         const bb = new THREE.Box3().setFromObject(m), sz = bb.getSize(V(0, 0, 0)), k = 0.9 / Math.max(sz.y, 0.001);
         const pivot = new THREE.Group(); pivot.position.set(px, 1.16, pz); scene.add(pivot);
         m.scale.setScalar(k); const c2 = bb.getCenter(V(0, 0, 0)); m.position.set(-c2.x * k, -bb.min.y * k, -c2.z * k); pivot.add(m);
@@ -3414,13 +3427,13 @@ addEventListener("popstate", () => routeAll());
 /* station caption */
 const caption = $("#caption"), capTitle = $("#capTitle");
 let capJ = -1, capTO = 0;
-const POD = { 1: ["The latest episode", "aRQXtUITtBc"], 2: ["The previous episode", "o6xShvRWhTg"] };
+const POD = { 1: ["Watch the latest episode", "aRQXtUITtBc"], 2: ["Watch the previous episode", "o6xShvRWhTg"] };
 let podEl = null, podOn = 0;
 function podCap(v) {
   if (v === podOn) return; podOn = v;
   if (!podEl) { podEl = document.createElement("div"); podEl.className = "podcap"; document.body.appendChild(podEl); podEl.addEventListener("click", (e) => { const b = e.target.closest("[data-yt]"); if (b) inBrowser("https://www.youtube.com/embed/" + b.dataset.yt + "?autoplay=1&rel=0&playsinline=1"); }); }
   if (!v) { podEl.classList.remove("show"); return; }
-  podEl.innerHTML = `<p class="pc-k">The Presidents Work podcast</p><h2>${POD[v][0]}</h2><button class="al plain" type="button" data-yt="${POD[v][1]}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Watch the episode</span></button>`;
+  podEl.innerHTML = `<button class="al plain" type="button" data-yt="${POD[v][1]}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>${POD[v][0]}</span></button>`;
   requestAnimationFrame(() => podEl.classList.add("show"));
 }
 function setCaption(j) {
