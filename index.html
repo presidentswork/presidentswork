@@ -898,6 +898,63 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 @media(prefers-reduced-motion:reduce){.wx .mr-run li,.wx .mr-run b::after{animation:none;opacity:1;transform:none}.wx .mr-sec .mr-card{opacity:1;transform:none;transition:none}}
 .wx .mr-open::before{background:linear-gradient(to top,rgba(6,10,6,.72),rgba(6,10,6,.42) 60%,rgba(6,10,6,.3)) !important}
 .wx .mr-open.r::before{background:linear-gradient(to top,rgba(6,10,6,.7),rgba(6,10,6,.35)) !important}
+.dock-bar{overflow:hidden}
+
+/* v15: next project — a full, quiet screen with the title and the link in the middle */
+.pj-next{min-height:100vh;min-height:100svh;margin-top:4rem !important;padding:4rem var(--m) 7rem !important;display:flex !important;flex-direction:column;align-items:center;justify-content:center;text-align:center !important;gap:1.75rem;border-top:1px solid var(--pline);background:none;color:inherit;cursor:pointer;box-sizing:border-box}
+.pj-next .nx{flex-direction:column;align-items:center !important;justify-content:center !important;gap:1.5rem !important;margin:0 !important}
+.pj-next .nx .display{font-family:"Instrument Serif",Georgia,serif !important;font-size:clamp(3.4rem, 2rem + 7vw, 9rem);line-height:.9;letter-spacing:-.02em}
+.pj-next .nx svg{display:none}
+.pj-next .nx::after{content:"View project";font-family:"Instrument Sans",system-ui,sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding-bottom:.35rem;border-bottom:1px solid currentColor;transition:opacity .3s}
+@media(hover:hover){.pj-next:hover .nx::after{opacity:.6}}
+
+/* v15: the Method opening, one idea per screen */
+.wx .mr-c{min-height:100vh;min-height:100svh;justify-content:center !important;align-items:center !important;text-align:center;flex-direction:column;padding-bottom:5rem}
+.wx .mr-sec.mr-c{display:flex !important;padding-left:1.5rem;padding-right:1.5rem}
+.wx .mr-c .mr-open-in{max-width:56rem;width:100%;margin:0 auto;text-align:center !important}
+.wx .mr-first.mr-c{min-height:100svh;padding-bottom:5rem}
+.wx .mr-c .mr-title{margin:0}
+.wx .mr-sub2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem, 1.8rem + 4.5vw, 6.4rem);line-height:.98;letter-spacing:-.02em;margin:0;color:#fff}
+.wx .mr-letter b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(12rem, 8rem + 22vw, 26rem);line-height:.8;color:#fff;opacity:0;transform:translateY(4rem) scale(.96);filter:blur(10px);transition:opacity 1.2s var(--ease-settle),transform 1.4s var(--ease-settle),filter 1.2s var(--ease-settle)}
+.wx .mr-letter span{display:block;margin-top:1.75rem;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0;transform:translateY(1rem);transition:opacity 1s var(--ease-settle) .35s,transform 1s var(--ease-settle) .35s}
+.wx .mr-letter.in b{opacity:1;transform:none;filter:none}
+.wx .mr-letter.in span{opacity:1;transform:none}
+.wx .mr-c .mr-go{position:absolute;left:50%;bottom:7.5rem;transform:translateX(-50%);margin:0;flex-direction:column;gap:.6rem;font-size:.68rem;letter-spacing:.3em}
+@media(prefers-reduced-motion:reduce){.wx .mr-letter b,.wx .mr-letter span{opacity:1;transform:none;filter:none;transition:none}}
+.wx .mr-c .split{justify-content:center}
+.wx .ab-mission{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding-top:6rem;padding-bottom:8rem}
+.wx .ab-mission .wrap{width:100%}
+.wx .ab-mission .disp{font-size:clamp(6rem, 3.6rem + 9vw, 12rem) !important;line-height:.86 !important}
+@media(min-width:768px){.slot.br{bottom:14rem !important}}
+@media(max-width:767px){.slot.br{bottom:17.5rem !important}.scroll-cue{bottom:9.5rem}}
+.caption.cta-end{top:7.5rem !important;bottom:auto !important;left:50% !important;right:auto !important;transform:translateX(-50%) !important;width:min(46rem, calc(100vw - 2.5rem)) !important;text-align:center;display:block !important}
+.caption.cta-end h2{font-size:clamp(2.6rem, 1.8rem + 3.4vw, 4.6rem) !important;margin:0 !important}
+.caption.cta-end h2 .split{justify-content:center}
+.caption.cta-end #capEnter,.caption.cta-end .cap-meta,.caption.cta-end .cap-count{display:none !important}
+@media(max-width:767.98px){.caption.cta-end{top:6rem !important}}
+.wx .cform .hp{position:absolute !important;left:-9999px !important;width:1px;height:1px;overflow:hidden}
+.wx .csent.ok .cs-h{font-family:"Instrument Serif",Georgia,serif;font-size:2.4rem;line-height:1;margin:0 0 .75rem}
+/* v15: animated program marks */
+.wx .pi{color:var(--pfg);overflow:visible}
+.wx .pi .pi-grid{stroke:currentColor;stroke-width:1;opacity:.12;fill:none}
+.wx .pi .pi-dots circle{fill:currentColor;opacity:.16;animation:pidot 3.2s ease-in-out var(--d) infinite}
+.wx .pi .pi-art{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.wx .pi .pk{fill:currentColor;stroke:none}
+.wx .pi .pi-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:pidraw 4.8s cubic-bezier(.65,0,.35,1) infinite}
+.wx .pi .pi-head{animation:pihead 4.8s cubic-bezier(.65,0,.35,1) infinite}
+.wx .pi .pi-elev{animation:pielev 4.8s cubic-bezier(.65,0,.35,1) infinite}
+.wx .pi .pf{animation:pif 4.8s ease-in-out var(--d,0s) infinite}
+.wx .pi .pulse{transform-box:fill-box;transform-origin:center;animation:pipulse 2.4s ease-in-out infinite}
+.wx .pi .pi-arm{transform-origin:150px 150px;animation:piarm 3.6s cubic-bezier(.65,0,.35,1) calc(var(--i) * .12s) infinite}
+@keyframes pidot{0%,100%{opacity:.06}50%{opacity:.3}}
+@keyframes pidraw{0%{stroke-dashoffset:1}45%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
+@keyframes pihead{0%{transform:translateY(200px);opacity:0}8%{opacity:1}45%,80%{transform:none;opacity:1}100%{transform:translateY(-30px);opacity:0}}
+@keyframes pielev{0%{transform:translate(-200px,200px);opacity:0}8%{opacity:1}45%,80%{transform:none;opacity:1}100%{transform:translate(24px,-24px);opacity:0}}
+@keyframes pif{0%,8%{opacity:0;transform:scale(.4)}30%,82%{opacity:1;transform:none}100%{opacity:0}}
+.wx .pi .pf{transform-box:fill-box;transform-origin:center}
+@keyframes pipulse{0%,100%{transform:scale(1)}50%{transform:scale(1.6)}}
+@keyframes piarm{0%,100%{transform:scale(.55)}50%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.wx .pi *{animation:none !important;stroke-dashoffset:0 !important;opacity:inherit}.wx .pi .pi-dots circle{opacity:.16}}
 </style>
 </head>
 <body>
@@ -1036,6 +1093,21 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 
 <script src="js/lottie_svg.min.js" defer></script>
 <script type="module">
+/* the program marks, drawn as live SVG: the arrows move and the grid of dots breathes */
+const progIcon = (id, cls = "icon") => {
+  const grid = [25, 75, 125, 175, 225, 275].map((v) => `<path d="M${v} 0V300M0 ${v}H300"/>`).join("");
+  let dots = ""; for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) dots += `<circle cx="${50 + c * 50}" cy="${50 + r * 50}" r="5" style="--d:${((r * 7 + c * 3) % 10) * 0.32}s"/>`;
+  const head = (x, y, a) => `<path d="M${x - 18} ${y + 18}L${x} ${y}L${x + 18} ${y + 18}" transform="rotate(${a} ${x} ${y})"/>`;
+  const dot = (x, y, k = "") => `<circle class="pk ${k}" cx="${x}" cy="${y}" r="6"/>`;
+  let art = "";
+  if (id === "launch") art = `<g class="pi-launch"><path class="pi-draw" pathLength="1" d="M150 250V50"/><g class="pi-head">${head(150, 50, 0)}</g></g>${dot(150, 250)}`;
+  else if (id === "formation") { let f = ""; for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) { if (r >= 3 && c >= 3) continue; if (r === 4 && c === 2) { f += dot(150, 250, "pf"); continue; } f += `<circle class="pk pf" cx="${50 + c * 50}" cy="${50 + r * 50}" r="6" style="--d:${(r + c) * 0.12}s"/>`; } art = f + `<circle class="pi-draw pi-ring" pathLength="1" cx="222" cy="228" r="44"/>`; }
+  else if (id === "elevation") art = `<path class="pi-draw" pathLength="1" d="M50 250L250 50"/>${dot(50, 250)}${dot(150, 150, "pulse")}<g class="pi-elev"><path d="M236 40H260V64"/>${dot(250, 50)}</g>`;
+  else if (id === "direction") art = `<g class="pi-dir">${[[0, 150, 50], [90, 250, 150], [180, 150, 250], [270, 50, 150]].map(([a, x, y], i) => `<g class="pi-arm" style="--a:${a}deg;--i:${i}"><path d="M150 150L${x} ${y}"/>${head(x, y, a)}</g>`).join("")}</g>${dot(150, 150)}`;
+  else if (id === "boardroom") art = `<path class="pi-draw" pathLength="1" d="M100 100H200V200H100Z"/>${dot(100, 100)}${dot(200, 100)}${dot(200, 200)}${dot(100, 200)}${dot(150, 150, "pulse")}`;
+  return `<svg class="${cls} pi" viewBox="0 0 300 300" role="img" aria-label="${id} mark"><g class="pi-grid">${grid}</g><g class="pi-dots">${dots}</g><g class="pi-art">${art}</g></svg>`;
+};
+
 {
 /* ───────────────────────── basics ───────────────────────── */
 const $ = (s, r = document) => r.querySelector(s);
@@ -1295,12 +1367,14 @@ const ART = {
 };
 
 const artTexs = [];
+const FRAME_PIC = { specialtyrx: "work/specialtyrx/03.jpg", pyle: "work/pyle/37.jpg", hireends: "work/hireends/11.jpg", spritzonme: "work/spritzonme/07.jpg", pedal: "work/pedal/18.jpg" };
+const openExt = (href) => { let w = null; try { w = window.open(href, "_blank"); } catch (e) { w = null; } if (w) { try { w.opener = null; } catch (e) { /* cross-origin */ } } else { location.href = href; } };
 ART.photo = (c, P, i) => {
   const g = c.createLinearGradient(0, 0, 0, AH); g.addColorStop(0, P.c1); g.addColorStop(1, P.c2); c.fillStyle = g; c.fillRect(0, 0, AW, AH);
   if (!P.card) return;
   const im = new Image();
   im.onload = () => { const sc = Math.max(AW / im.width, AH / im.height), w = im.width * sc, h = im.height * sc; c.drawImage(im, (AW - w) / 2, (AH - h) / 2, w, h); plateCacheReset(i); if (artTexs[i]) artTexs[i].needsUpdate = true; };
-  im.src = P.card;
+  im.src = FRAME_PIC[P.id] || P.card;
 };
 ART.wordmark = (c, P) => {
   const g = c.createLinearGradient(0, 0, AW, AH); g.addColorStop(0, P.c1); g.addColorStop(1, P.c2); c.fillStyle = g; c.fillRect(0, 0, AW, AH);
@@ -2457,7 +2531,7 @@ function jumpToStation(i) {
 }
 function openProject(i, { fly = true } = {}) {
   const LK = PROJECTS[i];
-  if (LK && LK.kind === "link") { window.open(LK.href, "_blank", "noopener"); return; }
+  if (LK && LK.kind === "link") { openExt(LK.href); return; }
   if (LK && LK.kind === "index") { location.hash = "index"; return; }
   if (state.open === i) return;
   const already = state.open >= 0;
@@ -2516,7 +2590,7 @@ function setCaption(j) {
     if (j === -2) {
       $("#capCount").textContent = "The Oval Office · West Wing";
       caption.classList.add("cta-end");
-      splitInto(capTitle, "Ready to put your brand on the wall?", { stagger: 22, dur: 1100 });
+      splitInto(capTitle, "Ready to put your brand to work?", { stagger: 22, dur: 1100 });
       $("#capMeta").textContent = "In brand we trust. Ready to put yours on the floor?";
       btn.querySelectorAll(".lbl2").forEach((n) => n.remove()); btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = "none"));
       btn.insertAdjacentHTML("beforeend", '<span class="lbl2">Work with us</span>');
@@ -2657,7 +2731,7 @@ const ul = (items, cls = "bul") => `<ul class="${cls} fx">${items.map((x) => `<l
 /* the five programs share one page shape */
 const program = (o) => `
 ${mq(o.word)}
-<section class="p-hero"><div class="wrap"><div><h1 class="st-xl rv">${o.hero}</h1><p class="lede fx">${o.lede}</p>${pb(o.heroCta, "#contact")}</div>${o.noIcon ? "" : `<img class="icon fx" src="img/icon-${o.id}.png" alt="${o.name}™ mark">`}</div></section>
+<section class="p-hero"><div class="wrap"><div><h1 class="st-xl rv">${o.hero}</h1><p class="lede fx">${o.lede}</p>${pb(o.heroCta, "#contact")}</div>${o.noIcon ? "" : progIcon(o.id, "icon fx")}</div></section>
 <figure class="paint fx"><img src="img/${o.paint || "paint-" + o.id}.jpg" alt="${o.paintAlt}" loading="lazy"></figure>
 <section class="p-about"><div class="wrap two"><p class="lbl fx">About</p><div>
   <h2 class="st-l rv">${o.about}</h2>${o.aboutBody.map((p) => `<p class="body fx">${p}</p>`).join("")}
@@ -2781,7 +2855,7 @@ const PROGRAMS = {
 };
 const LOGOS = Array.from({ length: 25 }, (_, i) => `img/logo-${String(i + 1).padStart(2, "0")}.png`);
 const logoBand = () => `<div class="mq logos" aria-label="Past clients"><div class="mq-t">${(() => { const l = LOGOS.map((s) => `<figure><img src="${s}" alt="Client logo" loading="lazy"></figure>`).join(""); return l + l; })()}</div></div>`;
-const progRow = (n, name, id, title, desc, kw) => `<article class="fx"><p class="pn">0${n}<b>(${name}${id === "enterprise" ? "" : "™"})</b></p>${id === "enterprise" ? '<span class="icon"></span>' : `<img class="icon" src="img/icon-${id}.png" alt="">`}<div class="pc"><h3>${title}</h3>${kw ? `<ul class="kw">${kw.map((k) => `<li>${k}</li>`).join("")}</ul>` : ""}<p class="body">${desc}</p>${pl("Learn about " + name, "#" + id)}</div></article>`;
+const progRow = (n, name, id, title, desc, kw) => `<article class="fx"><p class="pn">0${n}<b>(${name}${id === "enterprise" ? "" : "™"})</b></p>${id === "enterprise" ? '<span class="icon"></span>' : progIcon(id)}<div class="pc"><h3>${title}</h3>${kw ? `<ul class="kw">${kw.map((k) => `<li>${k}</li>`).join("")}</ul>` : ""}<p class="body">${desc}</p>${pl("Learn about " + name, "#" + id)}</div></article>`;
 
 const PAGES = {
   programs: () => `
@@ -2830,7 +2904,7 @@ ${mq("About us")}
 <section class="p-hero"><div class="wrap"><div><h1 class="st-l rv">President's Work is a strategic brand consultancy and creative studio.</h1><p class="lede fx">From startup founders to c-suite executives, we collaborate closely with you to lead your brand and achieve lasting impact. We design to achieve greatness.</p></div></div></section>
 <figure class="paint fx"><img src="img/paint-about.jpg" alt="Founding fathers at a writing desk in a green valley, a city in the distance" loading="lazy"></figure>
 <section><div class="wrap two"><h2 class="disp rv">Born from the heart</h2><div><p class="lbl fx">Our Story</p><p class="body fx">After a decade of collaborating with founders, clients and agencies, we’ve learned that true impact emerges when we immerse ourselves closely within the core of your business.</p><p class="st-m rv">The greatest brand transformations are made from the inside out.</p><p class="body fx">This led to the birth of Presidents Work – a place where brands aren't just created, they are nurtured, understood, and deeply connected with.</p></div></div></section>
-<section class="band-28"><div class="wrap two"><div><p class="lbl fx">Our Mission</p><h2 class="disp rv">Leading brands into power©</h2></div><div><p class="st-l rv">At every step, we live and breathe the brand with you.</p><p class="body fx">Our mission is to create work that resonate on a deeper level – work that tell stories, evoke emotions, and lead brands into power©.</p></div></div></section>
+<section class="band-28 ab-mission"><div class="wrap two"><div><p class="lbl fx">Our Mission</p><h2 class="disp rv">Leading brands into power©</h2></div><div><p class="st-l rv">At every step, we live and breathe the brand with you.</p><p class="body fx">Our mission is to create work that resonate on a deeper level – work that tell stories, evoke emotions, and lead brands into power©.</p></div></div></section>
 <section class="band-26"><div class="wrap two"><h2 class="disp rv">The pulse of Presidents Work</h2><div><p class="st-l rv">Our mission drives us to immerse ourselves in your world, ensuring every strategy, every design, and every touchpoint reflects the vision and values of our partners.</p><p class="body fx">This immersive approach allows us to not just understand but to truly inhabit the essence of your brand. It’s in these depths that we find the threads of excellence and scale.</p><p class="body fx">Our creative team works hand-in-hand with our partners, creating a environment that drives solutions and exceptional results.</p></div></div></section>
 <section><div class="wrap two"><h2 class="st-l rv">Meet the founder</h2><div class="founder fx"><a href="#yankyperl" class="yp-link" aria-label="Meet Yanky Perl"><img src="img/founder.jpg" alt="Yanky Perl, founder of Presidents Work" loading="lazy"></a><p class="body" style="margin:0"><b style="font-weight:500">Yanky Perl</b><br>Founder &amp; Creative Director, Presidents Work</p>${pl("Meet Yanky Perl", "#yankyperl")}</div></div></section>
 ${mq("How we work")}
@@ -2848,6 +2922,7 @@ ${mq("Contact us")}
   <div><label for="cf-co">Company Name *</label><input id="cf-co" name="company" type="text" autocomplete="organization" required></div>
   <fieldset class="stage-opts"><legend>What stage is your business in? *</legend>${["Thinking", "Launching", "Building", "Growing", "Leading"].map((s) => `<label><input type="checkbox" name="stage" value="${s}">${s}</label>`).join("")}</fieldset>
   <div><label for="cf-msg">Tell us more about what you are looking for? *</label><textarea id="cf-msg" name="message" placeholder="Launch a new business, build your brand, grow faster, or anything else." required></textarea></div>
+  <div class="hp" aria-hidden="true"><label for="cf-web">Website</label><input id="cf-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
   <p class="cerr" id="cerr" aria-live="polite"></p>
   <button class="pb" type="submit">Submit</button>
   <div id="csent" hidden></div>
@@ -2955,16 +3030,22 @@ const hmTick = (now) => {
   const left = !preEl || !document.body.contains(preEl) || preEl.classList.contains("exit") || state.introReady;
   if (left && hmStart === null) hmStart = now;
   const ti = hmStart === null ? 0 : Math.min(1, (now - hmStart) / 1400);
-  const tsT = Math.min(1, Math.max(0, scrollY / (vh * 1.25)));
-  hmS += (tsT - hmS) * (reduce ? 1 : 0.075); if (Math.abs(tsT - hmS) < 0.0005) hmS = tsT;
+  const tsT = Math.min(1, Math.max(0, scrollY / (vh * 0.45)));
+  hmS += (tsT - hmS) * (reduce ? 1 : 0.12); if (Math.abs(tsT - hmS) < 0.0005) hmS = tsT;
   const ts = hmS, sm = (t) => t * t * t * (t * (t * 6 - 15) + 10);
-  const a = eIO(ti), b = sm(ts);
+  const a = eIO(ti);
   const P0 = { x: A.x + (B.x - A.x) * a, y: A.y + (B.y - A.y) * a, s: A.s + (B.s - A.s) * a };
-  const P = { x: P0.x + (C.x - P0.x) * b, y: P0.y + (C.y - P0.y) * b, s: P0.s + (C.s - P0.s) * b };
+  /* the top logo lifts up and fades out; the dock logo rises in from below; nothing crosses the screen */
+  const out = ti < 1 ? 0 : sm(Math.min(1, ts / 0.6));
+  const inn = ti < 1 ? 0 : sm(Math.min(1, Math.max(0, (ts - 0.45) / 0.55)));
+  const P = { x: P0.x + (P0.s - P0.s * (1 - 0.12 * out)) / 2, y: P0.y - out * 56, s: P0.s * (1 - 0.12 * out) };
   const hide = !!state.page || state.open >= 0;
-  const fade = ti < 1 ? 0 : Math.min(1, Math.max(0, (ts - 0.86) / 0.14));
-  hm.style.opacity = hide ? "0" : String(1 - fade);
-  dockMarkA.classList.remove("hold"); dockMarkA.style.opacity = hide ? "1" : String(fade);
+  hm.style.opacity = hide ? "0" : String(1 - out);
+  hm.style.filter = out > 0.01 && !hide ? `blur(${(out * 6).toFixed(2)}px)` : "";
+  dockMarkA.classList.remove("hold");
+  dockMarkA.style.opacity = hide ? "1" : String(inn);
+  dockMarkA.style.transform = hide ? "" : `translateY(${((1 - inn) * 22).toFixed(2)}px)`;
+  dockMarkA.style.filter = hide || inn > 0.99 ? "" : `blur(${((1 - inn) * 4).toFixed(2)}px)`;
   hm.style.transform = `translate3d(${P.x.toFixed(2)}px,${P.y.toFixed(2)}px,0) scale(${(P.s / 100).toFixed(4)})`;
   requestAnimationFrame(hmTick);
 };
@@ -3049,12 +3130,9 @@ const FIG = {
 PAGES.method = () => `
 <canvas class="mr3d" id="mr3d" aria-hidden="true"></canvas>
 <div class="mr-imm">
-<section class="mr-sec mr-open mr-first" data-key="hero"><div class="mr-open-in">
-<p class="mr-kick">Our method</p>
-<h1 class="mr-title rv">The Presidential Run©</h1>
-<p class="mr-sub fx">How Presidents campaign for greatness</p>
-<ol class="mr-run" aria-label="R.U.N: Realize, Unite, Nurture"><li><b>R</b><span>Realize</span></li><li><b>U</b><span>Unite</span></li><li><b>N</b><span>Nurture</span></li></ol>
-<p class="mr-go">Scroll to start the run <i></i></p></div></section>
+<section class="mr-sec mr-open mr-first mr-c" data-key="hero"><div class="mr-open-in"><p class="mr-kick fx">Our method</p><h1 class="mr-title rv">The Presidential Run©</h1></div><p class="mr-go">Scroll <i></i></p></section>
+<section class="mr-sec mr-open mr-c"><div class="mr-open-in"><p class="mr-sub2 rv">How Presidents campaign for greatness</p></div></section>
+${[["R", "Realize"], ["U", "Unite"], ["N", "Nurture"]].map(([l, w]) => `<section class="mr-sec mr-open mr-c mr-letter"><div class="mr-open-in"><b>${l}</b><span>${w}</span></div></section>`).join("")}
 <section class="mr-sec mr-open r" data-key="start"><div class="mr-open-in mr-open-sm"><h2 class="mr-title2 rv">The run</h2><p class="fx">Our method turns vision into action and aligns strategy with design, so your brand leads with purpose and power. Every engagement runs the same course, from the Oval Office into the Rose Garden, with three stops where strategy and design come together.</p></div></section>
 ${STOPS.map(([k, n, h, b], i) => `<section class="mr-sec mr-stop${i % 2 ? "" : " r"}" data-k="${k}" data-key="${k}"><div class="mr-card"><div class="mr-fig">${FIG[k]}</div><p class="mr-n">${n}</p><h3>${h}</h3><p class="body">${b}</p></div></section>`).join("")}
 <section class="mr-sec r" data-key="process"><div class="mr-card"><h2 class="disp rv">The Presidents Process</h2><p class="body fx">Five steps carry your brand from first conversation to launch.</p><p class="st-m rv">How we lead your brand into power©</p>
@@ -3069,126 +3147,344 @@ ${cta("Are you ready to realize your vision?", "Work with us")}
 /* the Rose Garden, built in 3D and run through as the page scrolls */
 function startGarden(canvas, keysFn) {
   if (!THREE) return null;
+  const T = THREE;
   const small = innerWidth < 768, dark = root.dataset.mode === "dark";
   let R;
-  try { R = new THREE.WebGLRenderer({ canvas, antialias: !small, powerPreference: "high-performance" }); } catch (e) { return null; }
-  R.setPixelRatio(Math.min(devicePixelRatio, small ? 1.5 : 1.75)); R.setSize(innerWidth, innerHeight, false);
-  R.outputColorSpace = THREE.SRGBColorSpace; R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = dark ? 0.85 : 1.0;
-  R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
-  const S = new THREE.Scene();
+  try { R = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" }); } catch (e) { return null; }
+  const PR = Math.min(devicePixelRatio, 1.5);
+  R.setPixelRatio(PR); R.setSize(innerWidth, innerHeight, false);
+  R.outputColorSpace = T.SRGBColorSpace; R.toneMapping = T.ACESFilmicToneMapping; R.toneMappingExposure = dark ? 0.95 : 0.92;
+  R.shadowMap.enabled = true; R.shadowMap.type = T.PCFSoftShadowMap; R.shadowMap.autoUpdate = false;
+  const S = new T.Scene();
   const rnd = (() => { let seed = 11; return () => ((seed = (seed * 16807) % 2147483647) / 2147483647); })();
-  const ctex = (w, h, fn, rep) => { const c = document.createElement("canvas"); c.width = w; c.height = h; fn(c.getContext("2d"), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; if (rep) t.repeat.set(rep[0], rep[1]); t.anisotropy = 8; return t; };
-  S.background = ctex(4, 256, (c, w, h) => { const g = c.createLinearGradient(0, 0, 0, h); if (dark) { g.addColorStop(0, "#0c1230"); g.addColorStop(0.55, "#3a3960"); g.addColorStop(1, "#d39274"); } else { g.addColorStop(0, "#6fa6de"); g.addColorStop(0.55, "#b9d5ee"); g.addColorStop(1, "#eef2ea"); } c.fillStyle = g; c.fillRect(0, 0, w, h); });
-  S.fog = new THREE.Fog(dark ? 0x3a3458 : 0xdde8ee, 45, 160);
-  const cam = new THREE.PerspectiveCamera(small ? 64 : 54, innerWidth / innerHeight, 0.1, 500);
-  S.add(new THREE.HemisphereLight(dark ? 0x8a92c8 : 0xdce9ff, dark ? 0x1d2716 : 0x4b6a3a, dark ? 0.6 : 1.0));
-  const sun = new THREE.DirectionalLight(dark ? 0xffae7a : 0xfff0da, dark ? 1.2 : 2.5);
-  sun.position.set(-26, dark ? 12 : 36, 16); sun.castShadow = true; sun.shadow.mapSize.set(small ? 1024 : 2048, small ? 1024 : 2048);
-  Object.assign(sun.shadow.camera, { left: -36, right: 36, top: 44, bottom: -44, near: 1, far: 140 }); sun.shadow.bias = -0.0005; S.add(sun);
-  const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9, ...o });
-  const add = (geo, mat, x, y, z, cast = true) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = cast; m.receiveShadow = true; S.add(m); return m; };
-  const flat = (w, d, mat, x, y, z) => { const m = add(new THREE.PlaneGeometry(w, d), mat, x, y, z, false); m.rotation.x = -Math.PI / 2; return m; };
-  /* ground: South Lawn, limestone walk, lawn, beds */
-  flat(420, 420, M(dark ? 0x2b3a24 : 0x6b8a55), 0, -0.04, 0);
-  const stone = ctex(256, 256, (c, w, h) => { c.fillStyle = "#e6decd"; c.fillRect(0, 0, w, h); c.strokeStyle = "rgba(110,95,70,.28)"; c.lineWidth = 2; for (let y = 0; y < h; y += 64) { c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); for (let x = ((y / 64) % 2) * 48; x < w; x += 96) { c.beginPath(); c.moveTo(x, y); c.lineTo(x, y + 64); c.stroke(); } } for (let k = 0; k < 2500; k++) { c.fillStyle = `rgba(0,0,0,${rnd() * 0.05})`; c.fillRect(rnd() * w, rnd() * h, 2, 2); } }, [15, 24]);
-  flat(33, 50, M(0xffffff, { map: stone, roughness: 0.95 }), 0, -0.01, 0);
-  const lawnT = ctex(256, 512, (c, w, h) => { for (let i = 0; i < 9; i++) { c.fillStyle = i % 2 ? "#6f9356" : "#7c9f62"; c.fillRect(0, (i * h) / 9, w, h / 9 + 1); } for (let k = 0; k < 7000; k++) { c.fillStyle = `rgba(${(30 + rnd() * 40) | 0},${(70 + rnd() * 60) | 0},${(20 + rnd() * 30) | 0},.22)`; c.fillRect(rnd() * w, rnd() * h, 1, 2); } });
-  flat(16, 36, M(0xffffff, { map: lawnT }), 0, 0.02, 0);
-  [-9.5, 9.5].forEach((x) => flat(3, 34.5, M(0x4a3426), x, 0.03, 0));
-  /* boxwood balls along the beds */
-  const ballGeo = new THREE.SphereGeometry(0.38, small ? 10 : 14, small ? 8 : 10);
-  const ballPos = [];
-  [-10.85, -8.15, 8.15, 10.85].forEach((x) => { for (let z = -17; z <= 17; z += 0.72) ballPos.push([x, z]); });
-  const balls = new THREE.InstancedMesh(ballGeo, M(dark ? 0x1f3a1c : 0x335f2b, { roughness: 1 }), ballPos.length);
-  const o3 = new THREE.Object3D();
-  ballPos.forEach(([x, z], i) => { o3.position.set(x, 0.3, z); const k = 0.85 + rnd() * 0.3; o3.scale.set(k, k * 0.85, k); o3.updateMatrix(); balls.setMatrixAt(i, o3.matrix); });
-  balls.castShadow = balls.receiveShadow = true; S.add(balls);
-  /* tulips: stems and heads */
-  const per = small ? 320 : 900, cols = [0xd63b2a, 0xe8b923, 0xef7d2a, 0xf6f1e6, 0xc4283a, 0xe8b923, 0xd63b2a];
-  const heads = new THREE.InstancedMesh(new THREE.SphereGeometry(0.085, 8, 6), M(0xffffff, { roughness: 0.6 }), per * 2);
-  const stems = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.014, 0.014, 0.44, 4), M(0x3f7a33), per * 2);
-  const col = new THREE.Color();
-  for (let i = 0; i < per * 2; i++) {
-    const side = i < per ? -1 : 1, x = side * (8.6 + rnd() * 1.8), z = -16.6 + rnd() * 33.2, hgt = 0.36 + rnd() * 0.2;
-    o3.position.set(x, hgt / 2 + 0.03, z); o3.scale.set(1, hgt / 0.44, 1); o3.rotation.set(0, 0, (rnd() - 0.5) * 0.15); o3.updateMatrix(); stems.setMatrixAt(i, o3.matrix);
-    o3.position.set(x, hgt + 0.08, z); o3.scale.set(1, 1.45, 1); o3.rotation.set(0, 0, 0); o3.updateMatrix(); heads.setMatrixAt(i, o3.matrix);
-    heads.setColorAt(i, col.setHex(cols[(rnd() * cols.length) | 0]));
+  const G = "garden/", TL = new T.TextureLoader(), aniso = Math.min(8, R.capabilities.getMaxAnisotropy());
+  let shadowDirty = 2;
+  const tex = (f, srgb, rep) => { const t = TL.load(G + f); t.wrapS = t.wrapT = T.RepeatWrapping; if (srgb) t.colorSpace = T.SRGBColorSpace; if (rep) t.repeat.set(rep[0], rep[1]); t.anisotropy = aniso; return t; };
+  const pbr = (name, rep, o = {}) => new T.MeshStandardMaterial({ map: tex(name + "_diff.jpg", true, rep), normalMap: tex(name + "_nor.jpg", false, rep), roughnessMap: tex(name + "_rough.jpg", false, rep), ...o });
+  const ctex = (w, h, fn, srgb = true) => { const c = document.createElement("canvas"); c.width = w; c.height = h; fn(c.getContext("2d"), w, h); const t = new T.CanvasTexture(c); if (srgb) t.colorSpace = T.SRGBColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.anisotropy = aniso; return t; };
+  /* a normal map from a height function drawn on a canvas */
+  const nmap = (w, h, hf, k) => ctex(w, h, (c) => { const d = c.createImageData(w, h); for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const dx = (hf((x + 1) % w, y) - hf((x + w - 1) % w, y)) * k, dy = (hf(x, (y + 1) % h) - hf(x, (y + h - 1) % h)) * k, l = Math.hypot(dx, dy, 1), i = (y * w + x) * 4; d.data[i] = (-dx / l * 0.5 + 0.5) * 255; d.data[i + 1] = (dy / l * 0.5 + 0.5) * 255; d.data[i + 2] = (1 / l * 0.5 + 0.5) * 255; d.data[i + 3] = 255; } c.putImageData(d, 0, 0); }, false);
+
+  /* sky: a real HDRI for the light and a matching photo sky behind it */
+  const SKY = dark ? { f: "qwantani_dusk_2_puresky", u: 0.6052, e: 11.3, fog: 0x8f8296, env: 0.75, A: -2.2, sun: 0xffb37c, si: 2.4 }
+    : { f: "kloofendal_48d_partly_cloudy_puresky", u: 0.595, e: 47.9, fog: 0xbcc3cf, env: 1.0, A: 2.55, sun: 0xfff0dc, si: 3.1 };
+  const rot = (SKY.u - 0.5) * Math.PI * 2 - SKY.A;
+  S.backgroundRotation.set(0, rot, 0); S.environmentRotation.set(0, rot, 0);
+  S.background = new T.Color(SKY.fog);
+  TL.load(G + SKY.f + (small ? "_bg_s.jpg" : "_bg.jpg"), (t) => { t.mapping = T.EquirectangularReflectionMapping; t.colorSpace = T.SRGBColorSpace; S.background = t; });
+  S.environmentIntensity = SKY.env;
+  /* the HDR light ships as a lossless PNG: mantissa on top, exponent below */
+  fetch(G + SKY.f + "_env.png").then((r) => r.blob()).then((b) => createImageBitmap(b, { colorSpaceConversion: "none", premultiplyAlpha: "none" })).then((img) => {
+    if (!alive) return;
+    const w = img.width, h = img.height / 2, c = document.createElement("canvas"); c.width = w; c.height = h * 2;
+    const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(img, 0, 0); const px = x.getImageData(0, 0, w, h * 2).data;
+    const f = new Float32Array(w * h * 4);
+    for (let i = 0; i < w * h; i++) { const k = Math.pow(2, px[(i + w * h) * 4] - 128) / 255; f[i * 4] = px[i * 4] * k; f[i * 4 + 1] = px[i * 4 + 1] * k; f[i * 4 + 2] = px[i * 4 + 2] * k; f[i * 4 + 3] = 1; }
+    const hf = new Uint16Array(f.length); for (let i = 0; i < f.length; i++) hf[i] = T.DataUtils.toHalfFloat(Math.min(f[i], 65000));
+    const dt = new T.DataTexture(hf, w, h, T.RGBAFormat, T.HalfFloatType); dt.flipY = true; dt.mapping = T.EquirectangularReflectionMapping; dt.colorSpace = T.LinearSRGBColorSpace; dt.magFilter = dt.minFilter = T.LinearFilter; dt.needsUpdate = true;
+    const pm = new T.PMREMGenerator(R); S.environment = pm.fromEquirectangular(dt).texture; dt.dispose(); pm.dispose();
+  }).catch(() => {});
+  S.fog = new T.FogExp2(SKY.fog, small ? 0.0042 : 0.0038);
+  const cam = new T.PerspectiveCamera(small ? 62 : 50, innerWidth / innerHeight, 0.08, 600);
+  S.add(new T.HemisphereLight(dark ? 0x9a9ac8 : 0xdce9ff, 0x3b4a2a, dark ? 0.25 : 0.3));
+  const E = (SKY.e * Math.PI) / 180, sunDir = new T.Vector3(Math.cos(E) * Math.cos(SKY.A), Math.sin(E), Math.cos(E) * Math.sin(SKY.A));
+  const sun = new T.DirectionalLight(SKY.sun, SKY.si);
+  sun.position.copy(sunDir).multiplyScalar(90); sun.castShadow = true; sun.shadow.mapSize.set(small ? 2048 : 4096, small ? 2048 : 4096);
+  Object.assign(sun.shadow.camera, { left: -48, right: 48, top: 48, bottom: -48, near: 1, far: 220 }); sun.shadow.bias = -0.00025; sun.shadow.normalBias = 0.02; sun.shadow.radius = 3; S.add(sun); S.add(sun.target);
+
+  /* wind: one shader hook for grass, flowers and leaves */
+  const U = { time: { value: 0 } };
+  const WIND = `vec4 mvPosition = vec4( transformed, 1.0 );
+#ifdef USE_INSTANCING
+mvPosition = instanceMatrix * mvPosition;
+#endif
+float hh = max( mvPosition.y, 0.0 );
+float ww = sin( uTime * 1.3 + mvPosition.x * 0.31 + mvPosition.z * 0.19 ) * 0.6 + sin( uTime * 2.9 + mvPosition.x * 1.7 + mvPosition.z * 1.1 ) * 0.3;
+mvPosition.xz += vec2( 1.0, 0.45 ) * ww * uAmp * hh * hh;
+mvPosition = modelViewMatrix * mvPosition;
+gl_Position = projectionMatrix * mvPosition;`;
+  const NOFLIP = T.ShaderChunk.normal_fragment_begin.replace("normal *= faceDirection;", "");
+  const windy = (m, amp, cards) => {
+    m.onBeforeCompile = (sh) => {
+      sh.uniforms.uTime = U.time; sh.uniforms.uAmp = { value: amp };
+      let v = "uniform float uTime;\nuniform float uAmp;\n" + (cards ? "attribute vec3 aCenter;\n" : "") + sh.vertexShader.replace("#include <project_vertex>", WIND);
+      if (cards) v = v.replace("#include <defaultnormal_vertex>", "vec3 ipn = ( instanceMatrix * vec4( 0.0, 0.0, 0.0, 1.0 ) ).xyz;\nvec3 transformedNormal = normalMatrix * normalize( ipn - aCenter + vec3( 0.0, 0.3, 0.0 ) );");
+      sh.vertexShader = v;
+      sh.fragmentShader = sh.fragmentShader.replace("#include <normal_fragment_begin>", NOFLIP);
+    };
+    m.customProgramCacheKey = () => "wind" + (cards ? "c" : "") + amp;
+    return m;
+  };
+  const M = (c, o = {}) => new T.MeshStandardMaterial({ color: c, roughness: 0.9, ...o });
+  const add = (geo, mat, x, y, z, cast = true) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = cast; m.receiveShadow = true; S.add(m); return m; };
+  const flat = (w, d, mat, x, y, z) => { const m = add(new T.PlaneGeometry(w, d), mat, x, y, z, false); m.rotation.x = -Math.PI / 2; return m; };
+  const o3 = new T.Object3D(), col = new T.Color();
+  const merge = (geos) => { if (mergeGeometries) { const g = mergeGeometries(geos.map((x) => (x.index ? x.toNonIndexed() : x))); if (g) return g; } return geos[0]; };
+  const at = (geo, x, y, z, ry = 0) => { const g = geo.clone(); if (ry) g.rotateY(ry); g.translate(x, y, z); return g; };
+
+  /* ground: lawn, limestone walk, beds and curbs */
+  const lawnTint = 0x557d3a;
+  flat(600, 600, pbr("grass_ground", [110, 110], { color: lawnTint, roughness: 1 }), 0, -0.04, 0);
+  const walk = flat(33, 50, pbr("stone_pavers", [8.25, 12.5], { color: 0xffffff }), 0, -0.01, 0);
+  flat(16, 36, pbr("grass_ground", [4, 9], { color: lawnTint, roughness: 1 }), 0, 0.0, 0);
+  [-9.5, 9.5].forEach((x) => flat(3, 34.5, pbr("farm_soil", [1, 11.5], { color: 0x9a8f86 }), x, 0.005, 0));
+  const curbMat = pbr("stone_pavers", [0.2, 8], { color: 0xf3efe6 });
+  [[-8, 0.12, 36], [8, 0.12, 36]].forEach(([x, w, d]) => add(new T.BoxGeometry(w, 0.06, d), curbMat, x, 0.02, 0, false));
+  [[-11, 0.12, 34.6], [11, 0.12, 34.6]].forEach(([x, w, d]) => add(new T.BoxGeometry(w, 0.06, d), curbMat, x, 0.02, 0, false));
+
+  /* grass blades */
+  const blade = (() => {
+    const seg = 4, pos = [], cl = [], nr = [], idx = [];
+    for (let i = 0; i <= seg; i++) { const t = i / seg, w = 0.011 * (1 - t * 0.85), z = t * t * 0.3; pos.push(-w, t, z, w, t, z); const c = 0.3 + 0.7 * t; cl.push(c, c, c, c, c, c); nr.push(0, 1, 0.15, 0, 1, 0.15); }
+    for (let i = 0; i < seg; i++) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+    const g = new T.BufferGeometry(); g.setAttribute("position", new T.Float32BufferAttribute(pos, 3)); g.setAttribute("color", new T.Float32BufferAttribute(cl, 3)); g.setAttribute("normal", new T.Float32BufferAttribute(nr, 3)); g.setIndex(idx); return g;
+  })();
+  const NG = small ? 60000 : 220000;
+  const grass = new T.InstancedMesh(blade, windy(new T.MeshStandardMaterial({ vertexColors: true, side: T.DoubleSide, roughness: 0.92 }), 2.6, false), NG);
+  const inWalk = (x, z) => Math.abs(x) < 16.6 && Math.abs(z) < 25.1 && !(Math.abs(x) < 7.95 && Math.abs(z) < 17.95);
+  const inBuild = (x, z) => z < -20.2 && x > -16 && x < 23;
+  for (let i = 0; i < NG; i++) {
+    let x, z;
+    if (i < NG * 0.5) { x = (rnd() - 0.5) * 15.9; z = (rnd() - 0.5) * 35.9; }
+    else { do { x = (rnd() - 0.5) * 70; z = -24 + rnd() * 66; } while (inWalk(x, z) || inBuild(x, z) || (Math.abs(x) < 16.6 && Math.abs(z) < 25.1 && Math.abs(x) >= 7.95)); }
+    const h = 0.09 + rnd() * 0.12;
+    o3.position.set(x, 0, z); o3.rotation.set((rnd() - 0.5) * 0.3, rnd() * Math.PI * 2, (rnd() - 0.5) * 0.3); o3.scale.set(0.8 + rnd() * 0.8, h, 1); o3.updateMatrix(); grass.setMatrixAt(i, o3.matrix);
+    const y = rnd(), stripe = Math.abs(x) < 8 ? (Math.floor((z + 18) / 2.25) % 2 ? 1.12 : 0.9) : 1; grass.setColorAt(i, y < 0.03 ? col.setHSL(0.15, 0.4, 0.3) : col.setHSL(0.23 + rnd() * 0.05, 0.55 + rnd() * 0.2, (0.11 + rnd() * 0.1) * stripe));
   }
-  S.add(stems); S.add(heads);
-  /* crabapples and magnolias */
-  const treeAt = [[-9.5, -17, 0], [9.5, -17, 0], [-9.5, 17, 0], [9.5, 17, 0], [-9.5, -5.5, 1], [9.5, 5.5, 1], [-9.5, 6, 0], [9.5, -6, 0], [-16, 24, 0], [16, 24, 1], [-17, -14, 1], [17, 10, 0]];
-  const leafN = small ? 16 : 26;
-  const crowns = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 1), M(0xffffff, { roughness: 0.85 }), treeAt.length * leafN);
-  const trunks = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.1, 0.18, 2.6, 6), M(0x5a4433), treeAt.length);
-  const bloom = dark ? [0xd9c6cc, 0xc9b0b8, 0xe6dada] : [0xf6eeee, 0xf1d6dc, 0xfbf6f4], mag = dark ? [0xa7b86a, 0x93a85c] : [0xcfe07c, 0xbad06a];
-  treeAt.forEach(([x, z, kind], t) => {
-    o3.position.set(x, 1.3, z); o3.scale.set(1, 1, 1); o3.rotation.set(0, 0, 0); o3.updateMatrix(); trunks.setMatrixAt(t, o3.matrix);
-    for (let k = 0; k < leafN; k++) {
-      const a = rnd() * Math.PI * 2, rr = Math.sqrt(rnd()) * 1.15, yy = 3 + rnd() * 1.4;
-      o3.position.set(x + Math.cos(a) * rr, yy, z + Math.sin(a) * rr); const sc = 0.55 + rnd() * 0.45; o3.scale.set(sc, sc * 0.9, sc); o3.updateMatrix();
-      crowns.setMatrixAt(t * leafN + k, o3.matrix); const pal = kind ? mag : bloom; crowns.setColorAt(t * leafN + k, col.setHex(pal[(rnd() * pal.length) | 0]));
+  grass.receiveShadow = true; grass.frustumCulled = false; S.add(grass);
+
+  /* foliage cards: leaves and blossoms drawn once */
+  const leafTex = ctex(512, 512, (c, w, h) => {
+    for (let k = 0; k < 340; k++) {
+      const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.7) * 215, x = w / 2 + Math.cos(a) * r, y = h / 2 + Math.sin(a) * r, L = 22 + rnd() * 20, Wd = 9 + rnd() * 7, v = 150 + rnd() * 105;
+      c.save(); c.translate(x, y); c.rotate(rnd() * Math.PI * 2);
+      const g = c.createLinearGradient(0, -Wd, 0, Wd); g.addColorStop(0, `rgb(${v},${v},${v})`); g.addColorStop(1, `rgb(${v * 0.62},${v * 0.62},${v * 0.62})`);
+      c.fillStyle = g; c.beginPath(); c.ellipse(0, 0, L, Wd, 0, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = `rgba(40,40,40,.35)`; c.lineWidth = 1.2; c.beginPath(); c.moveTo(-L * 0.9, 0); c.lineTo(L * 0.9, 0); c.stroke(); c.restore();
     }
   });
-  crowns.castShadow = trunks.castShadow = true; S.add(trunks); S.add(crowns);
-  /* the West Colonnade, the Oval Office and the buildings beyond */
-  const white = M(0xf6f3ec, { roughness: 0.75 });
-  add(new THREE.BoxGeometry(27, 0.35, 3.6), M(0xe9e2d2), -1, 0.17, -22.6);
-  for (let x = -13; x <= 11.1; x += 2) { add(new THREE.CylinderGeometry(0.2, 0.24, 3.2, 14), white, x, 1.95, -21.2); add(new THREE.BoxGeometry(0.62, 0.18, 0.62), white, x, 3.62, -21.2); }
-  add(new THREE.BoxGeometry(27.4, 0.6, 4), white, -1, 4.0, -22.6);
-  add(new THREE.BoxGeometry(27.8, 0.22, 4.4), M(0xdcd6c8), -1, 4.4, -22.6);
-  const wallT = ctex(1024, 160, (c, w, h) => { c.fillStyle = "#f4f1e9"; c.fillRect(0, 0, w, h); for (let x = 40; x < w; x += 80) { c.fillStyle = "#263646"; c.fillRect(x, 50, 34, 110); c.beginPath(); c.arc(x + 17, 50, 17, Math.PI, 0); c.fill(); c.strokeStyle = "#f4f1e9"; c.lineWidth = 2; c.beginPath(); c.moveTo(x + 17, 34); c.lineTo(x + 17, 160); c.moveTo(x, 90); c.lineTo(x + 34, 90); c.moveTo(x, 125); c.lineTo(x + 34, 125); c.stroke(); } });
-  const backWall = add(new THREE.BoxGeometry(27, 4.2, 0.3), [white, white, white, white, M(0xffffff, { map: wallT, roughness: 0.8 }), white], -1, 2.3, -24.4);
-  add(new THREE.BoxGeometry(32, 6.5, 10), M(0xf2efe7), -1, 3.25, -30);
-  add(new THREE.BoxGeometry(30, 1.6, 8.6), M(0x6f7276), -1, 7.2, -30);
-  const oval = add(new THREE.CylinderGeometry(4.6, 4.6, 5.2, 40), white, 16.5, 2.6, -24); oval.scale.z = 0.8;
-  add(new THREE.CylinderGeometry(4.75, 4.75, 0.35, 40), M(0xe3ddd0), 16.5, 5.3, -24).scale.z = 0.8;
-  const eeobT = ctex(512, 256, (c, w, h) => { c.fillStyle = "#c2beb4"; c.fillRect(0, 0, w, h); c.fillStyle = "#4b5560"; for (let y = 30; y < h - 20; y += 44) for (let x = 14; x < w; x += 26) c.fillRect(x, y, 11, 26); }, [3, 1]);
-  add(new THREE.BoxGeometry(70, 18, 22), M(0xffffff, { map: eeobT, roughness: 0.9 }), -14, 9, -78);
-  add(new THREE.BoxGeometry(66, 5, 18), M(0x5e6266), -14, 20.5, -78);
-  /* a ring of trees on the horizon */
-  const ringN = small ? 70 : 140, ring = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 0), M(dark ? 0x1d2e1a : 0x3f6b33), ringN);
-  for (let i = 0; i < ringN; i++) { const a = (i / ringN) * Math.PI * 2, rr = 70 + rnd() * 30; if (Math.sin(a) < -0.55 && Math.abs(Math.cos(a)) < 0.45) { o3.scale.set(0.001, 0.001, 0.001); } else { const sc = 4 + rnd() * 5; o3.scale.set(sc, sc * 1.3, sc); } o3.position.set(Math.cos(a) * rr, 3 + rnd() * 3, Math.sin(a) * rr); o3.updateMatrix(); ring.setMatrixAt(i, o3.matrix); }
-  S.add(ring);
+  const blossomTex = ctex(512, 512, (c, w, h) => {
+    for (let k = 0; k < 70; k++) { const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.7) * 215, v = 90 + rnd() * 60; c.save(); c.translate(w / 2 + Math.cos(a) * r, h / 2 + Math.sin(a) * r); c.rotate(rnd() * 6.3); c.fillStyle = `rgb(${v * 0.55},${v},${v * 0.45})`; c.beginPath(); c.ellipse(0, 0, 20, 8, 0, 0, 6.3); c.fill(); c.restore(); }
+    const pet = ["#ffffff", "#fdf1f4", "#f9dde6", "#f3c4d2", "#fff8f3"];
+    for (let k = 0; k < 210; k++) {
+      const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.65) * 218, x = w / 2 + Math.cos(a) * r, y = h / 2 + Math.sin(a) * r, s = 7 + rnd() * 5, rr = rnd() * 6.3;
+      c.fillStyle = pet[(rnd() * pet.length) | 0];
+      for (let p = 0; p < 5; p++) { const pa = rr + (p * Math.PI * 2) / 5; c.beginPath(); c.arc(x + Math.cos(pa) * s * 0.85, y + Math.sin(pa) * s * 0.85, s * 0.72, 0, 6.3); c.fill(); }
+      c.fillStyle = "rgba(160,110,120,.35)"; c.beginPath(); c.arc(x + 1, y + 1.5, s * 0.5, 0, 6.3); c.fill();
+      c.fillStyle = "#e8c35a"; c.beginPath(); c.arc(x, y, s * 0.28, 0, 6.3); c.fill();
+    }
+  });
+  const cardGeo = new T.PlaneGeometry(1, 1);
+  const cardSet = (map, n, amp, cast) => {
+    const m = new T.InstancedMesh(cardGeo, windy(new T.MeshStandardMaterial({ map, alphaTest: 0.5, side: T.DoubleSide, roughness: 0.78 }), amp, true), n);
+    const C = new Float32Array(n * 3); m.geometry = cardGeo.clone(); m.geometry.setAttribute("aCenter", new T.InstancedBufferAttribute(C, 3));
+    m.castShadow = cast; m.receiveShadow = true; m.frustumCulled = false; m.count = 0; S.add(m);
+    return { m, C, put(x, y, z, s, cx, cy, cz, c) { const i = m.count; if (i >= n) return; o3.position.set(x, y, z); o3.rotation.set(rnd() * 6.3, rnd() * 6.3, rnd() * 6.3); o3.scale.set(s, s, s); o3.updateMatrix(); m.setMatrixAt(i, o3.matrix); m.setColorAt(i, c); C[i * 3] = cx; C[i * 3 + 1] = cy; C[i * 3 + 2] = cz; m.count = i + 1; } };
+  };
+  const q = small ? 0.45 : 1;
+  const leaves = cardSet(leafTex, Math.round(42000 * q), 0.0016, true), blossoms = cardSet(blossomTex, Math.round(9000 * q), 0.0016, true), hedgeC = cardSet(leafTex, Math.round(32000 * q), 0.02, false);
+
+  /* boxwood hedges, clipped flat */
+  const hedgeTex = ctex(512, 512, (c, w, h) => { c.fillStyle = "#1f3518"; c.fillRect(0, 0, w, h); for (let k = 0; k < 2600; k++) { const v = rnd(); c.fillStyle = `hsl(${88 + rnd() * 18},${35 + rnd() * 20}%,${10 + v * 22}%)`; c.save(); c.translate(rnd() * w, rnd() * h); c.rotate(rnd() * 6.3); c.beginPath(); c.ellipse(0, 0, 6 + rnd() * 4, 3 + rnd() * 2, 0, 0, 6.3); c.fill(); c.restore(); } });
+  const hedgeN = nmap(256, 256, (x, y) => { const s = Math.sin(x * 0.9) * Math.cos(y * 0.83) + Math.sin(x * 0.31 + y * 0.47) * 0.6; return s; }, 0.9);
+  hedgeTex.repeat.set(2, 2); hedgeN.repeat.set(2, 2);
+  const hedgeMat = new T.MeshStandardMaterial({ map: hedgeTex, normalMap: hedgeN, roughness: 1 });
+  const hShape = new T.Shape(); { const w = 0.29, hgt = 0.5, r = 0.14; hShape.moveTo(-w, 0); hShape.lineTo(w, 0); hShape.lineTo(w, hgt - r); hShape.quadraticCurveTo(w, hgt, w - r, hgt); hShape.lineTo(-w + r, hgt); hShape.quadraticCurveTo(-w, hgt, -w, hgt - r); hShape.closePath(); }
+  const hedgeGeo = new T.ExtrudeGeometry(hShape, { depth: 34.5, bevelEnabled: false, curveSegments: 5 }); hedgeGeo.translate(0, 0, -17.25);
+  const hedgeCol = () => col.setHSL(0.25 + rnd() * 0.05, 0.42 + rnd() * 0.15, 0.14 + rnd() * 0.12);
+  [-10.85, -8.15, 8.15, 10.85].forEach((hx) => {
+    add(hedgeGeo, hedgeMat, hx, 0, 0);
+    const n = Math.round(7600 * q);
+    for (let k = 0; k < n; k++) {
+      const z = -17.2 + rnd() * 34.4, side = rnd(); let x, y;
+      if (side < 0.4) { x = hx + (rnd() - 0.5) * 0.56; y = 0.5 + rnd() * 0.03; } else { const sg = side < 0.7 ? -1 : 1; x = hx + sg * (0.29 + rnd() * 0.03); y = 0.05 + rnd() * 0.42; }
+      hedgeC.put(x, y, z, 0.15 + rnd() * 0.1, hx, 0.22, z, hedgeCol());
+    }
+  });
+
+  /* tulips in drifts of one colour */
+  const per = small ? 520 : 1500;
+  const DR = [0xc8202a, 0xe3b51f, 0xf3efe6, 0xe86a8f, 0xc8202a, 0xf08a24, 0xf3efe6, 0xe3b51f];
+  const cup = new T.LatheGeometry([[0, 0], [0.016, 0.003], [0.028, 0.016], [0.033, 0.04], [0.031, 0.064], [0.026, 0.078]].map(([a, b]) => new T.Vector2(a, b)), 6);
+  const heads = new T.InstancedMesh(cup, windy(new T.MeshStandardMaterial({ roughness: 0.45, side: T.DoubleSide }), 0.28, false), per * 2);
+  const stemG = new T.CylinderGeometry(0.005, 0.007, 1, 5); stemG.translate(0, 0.5, 0);
+  const stems = new T.InstancedMesh(stemG, windy(M(0x4f7d3a, { roughness: 0.6 }), 0.28, false), per * 2);
+  const leafG = (() => { const g = blade.clone(); g.deleteAttribute("color"); return g; })();
+  const tleaves = new T.InstancedMesh(leafG, windy(new T.MeshStandardMaterial({ color: 0x5f8c58, side: T.DoubleSide, roughness: 0.55 }), 0.22, false), per * 4);
+  for (let i = 0; i < per * 2; i++) {
+    const sd = i < per ? -1 : 1, x = sd * (8.55 + rnd() * 1.9), z = -16.9 + rnd() * 33.8, hgt = 0.34 + rnd() * 0.16;
+    o3.rotation.set((rnd() - 0.5) * 0.12, rnd() * 6.3, (rnd() - 0.5) * 0.12);
+    o3.position.set(x, 0, z); o3.scale.set(1, hgt, 1); o3.updateMatrix(); stems.setMatrixAt(i, o3.matrix);
+    o3.position.set(x + Math.sin(o3.rotation.z) * -hgt, hgt - 0.005, z + Math.sin(o3.rotation.x) * hgt); const s = 1 + rnd() * 0.35; o3.scale.set(s, s * 1.08, s); o3.updateMatrix(); heads.setMatrixAt(i, o3.matrix);
+    const d = DR[Math.floor((z + 17) / 4.3 + (sd > 0 ? 3 : 0)) % DR.length]; heads.setColorAt(i, col.setHex(rnd() < 0.06 ? DR[(rnd() * DR.length) | 0] : d));
+    for (let k = 0; k < 2; k++) { o3.position.set(x, 0, z); o3.rotation.set(0, rnd() * 6.3, 0); o3.scale.set(2.6 + rnd() * 1.5, 0.16 + rnd() * 0.08, 1); o3.updateMatrix(); tleaves.setMatrixAt(i * 2 + k, o3.matrix); }
+  }
+  heads.receiveShadow = stems.receiveShadow = tleaves.receiveShadow = true;
+  heads.castShadow = true; [heads, stems, tleaves].forEach((m) => { m.frustumCulled = false; S.add(m); });
+
+  /* trees with real branching and leaf cards */
+  const barkMat = pbr("bark_platanus", [1, 3], { color: 0x9a8f86 });
+  const branchGeos = [];
+  const grow = (base, dir, len, rad, depth, tips) => {
+    const end = base.clone().addScaledVector(dir, len);
+    const mid = base.clone().lerp(end, 0.5).add(new T.Vector3((rnd() - 0.5) * len * 0.12, 0, (rnd() - 0.5) * len * 0.12));
+    const curve = new T.CatmullRomCurve3([base, mid, end]), ts = 3, rs = 6;
+    const g = new T.TubeGeometry(curve, ts, rad, rs, false), p = g.attributes.position, c = new T.Vector3(), v = new T.Vector3();
+    for (let i = 0; i <= ts; i++) { curve.getPointAt(i / ts, c); const tp = 1 - (i / ts) * 0.38; for (let j = 0; j <= rs; j++) { const k = i * (rs + 1) + j; v.fromBufferAttribute(p, k).sub(c).multiplyScalar(tp).add(c); p.setXYZ(k, v.x, v.y, v.z); } }
+    branchGeos.push(g);
+    if (depth === 0) { tips.push(end); return; }
+    if (depth <= 2) tips.push(mid);
+    const n = 3 + (rnd() < 0.35 ? 1 : 0);
+    for (let k = 0; k < n; k++) {
+      const ax = new T.Vector3(rnd() - 0.5, 0, rnd() - 0.5).cross(dir).normalize(), nd = dir.clone().applyAxisAngle(ax.lengthSq() ? ax : new T.Vector3(1, 0, 0), 0.4 + rnd() * 0.5);
+      nd.y = Math.max(nd.y, 0.15); nd.normalize();
+      grow(end, nd, len * (0.66 + rnd() * 0.14), rad * 0.6, depth - 1, tips);
+    }
+  };
+  const tree = (x, z, o) => {
+    const tips = [];
+    grow(new T.Vector3(x, -0.1, z), new T.Vector3((rnd() - 0.5) * 0.12, 1, (rnd() - 0.5) * 0.12).normalize(), o.len, o.rad, o.depth, tips);
+    const c = tips.reduce((a, b) => a.add(b), new T.Vector3()).multiplyScalar(1 / tips.length);
+    tips.forEach((t) => { for (let k = 0; k < o.per; k++) {
+      const bl = o.bloom && rnd() < o.bloom, set = bl ? blossoms : leaves;
+      set.put(t.x + (rnd() - 0.5) * o.spread, t.y + (rnd() - 0.4) * o.spread, t.z + (rnd() - 0.5) * o.spread, o.size * (0.75 + rnd() * 0.5), c.x, c.y - 0.4, c.z, bl ? col.setHSL(0.95, 0.2 + rnd() * 0.3, 0.86 + rnd() * 0.1) : col.setHSL(o.h + rnd() * 0.05, o.s + rnd() * 0.12, o.l + rnd() * 0.12));
+    } });
+  };
+  const treeAt = [[-9.5, -17, 0], [9.5, -17, 0], [-9.5, 17, 0], [9.5, 17, 0], [-9.5, -5.5, 1], [9.5, 5.5, 1], [-9.5, 6, 0], [9.5, -6, 0], [-17.5, 24, 1], [17.5, 24, 0], [-18, -14, 1], [18, 10, 0]];
+  treeAt.forEach(([x, z, kind]) => tree(x, z, kind ? { len: 1.5, rad: 0.13, depth: small ? 3 : 4, per: small ? 3 : 4, spread: 0.7, size: 0.62, h: 0.22, s: 0.45, l: 0.26 }
+    : { len: 1.25, rad: 0.12, depth: small ? 3 : 4, per: small ? 3 : 5, spread: 0.65, size: 0.55, bloom: 0.78, h: 0.23, s: 0.4, l: 0.3 }));
+  /* tall shade trees around the garden */
+  const big = [];
+  for (let z = -14; z <= 34; z += 9.5) { big.push([-26 - rnd() * 3, z]); big.push([26 + rnd() * 3, z]); }
+  for (let x = -18; x <= 18; x += 9) big.push([x + (rnd() - 0.5) * 3, 36 + rnd() * 4]);
+  big.forEach(([x, z]) => tree(x, z, { len: 3.4, rad: 0.36, depth: small ? 3 : 4, per: small ? 6 : 9, spread: 1.5, size: 0.85, h: 0.22, s: 0.42, l: 0.17 }));
+  const trunks = new T.Mesh(merge(branchGeos), barkMat); trunks.castShadow = trunks.receiveShadow = true; S.add(trunks);
+  /* woodland on the horizon */
+  const ringN = small ? 60 : 110;
+  for (let i = 0; i < ringN; i++) {
+    const a = (i / ringN) * Math.PI * 2 + rnd() * 0.05, rr = 62 + rnd() * 55;
+    if (Math.sin(a) < -0.5 && Math.abs(Math.cos(a)) < 0.5) continue;
+    const cx = Math.cos(a) * rr, cz = Math.sin(a) * rr, H = 9 + rnd() * 9, Rr = 5 + rnd() * 4, n = small ? 22 : 40;
+    add(new T.CylinderGeometry(0.3, 0.5, H * 0.6, 5), barkMat, cx, H * 0.3, cz, false);
+    for (let k = 0; k < n; k++) { const u = rnd() * 6.3, v = Math.acos(2 * rnd() - 1), r = Rr * Math.cbrt(rnd()); leaves.put(cx + Math.sin(v) * Math.cos(u) * r, H * 0.75 + Math.cos(v) * r * 0.8, cz + Math.sin(v) * Math.sin(u) * r, 3.4 + rnd() * 2, cx, H * 0.6, cz, col.setHSL(0.24 + rnd() * 0.05, 0.35 + rnd() * 0.1, 0.14 + rnd() * 0.08)); }
+  }
+  [leaves, blossoms, hedgeC].forEach((s) => { s.m.instanceMatrix.needsUpdate = true; if (s.m.instanceColor) s.m.instanceColor.needsUpdate = true; });
+
+  /* the West Colonnade, the Oval Office and the West Wing */
+  const stucco = pbr("white_stucco", [3, 1], { color: 0xfbf8f2, roughness: 0.92 });
+  const stoneM = pbr("stone_pavers", [3, 0.4], { color: 0xf4efe5 });
+  const flute = nmap(256, 16, (x) => -Math.abs(Math.cos((x / 256) * Math.PI * 20)) * 3, 1.2);
+  const colM = new T.MeshStandardMaterial({ color: 0xf8f5ee, roughness: 0.7, normalMap: flute });
+  const glass = new T.MeshStandardMaterial({ color: 0x1c2733, roughness: 0.06, metalness: 0.65, envMapIntensity: 1.4 });
+  const trimM = M(0xfbfaf6, { roughness: 0.55 });
+  add(new T.BoxGeometry(27, 0.35, 3.8), stoneM, -1, 0.175, -22.5);
+  add(new T.BoxGeometry(27.4, 0.17, 0.5), stoneM, -1, 0.085, -20.45);
+  const colX = []; for (let x = -13; x <= 11.1; x += 2) colX.push(x);
+  const baseG = new T.LatheGeometry([[0, 0], [0.29, 0], [0.29, 0.05], [0.26, 0.08], [0.27, 0.1], [0.23, 0.13], [0.22, 0.16]].map(([a, b]) => new T.Vector2(a, b)), 24);
+  const capG = new T.LatheGeometry([[0.19, 0], [0.21, 0.03], [0.2, 0.05], [0.26, 0.13], [0.0, 0.13]].map(([a, b]) => new T.Vector2(a, b)), 24);
+  const shaft = new T.CylinderGeometry(0.19, 0.225, 2.86, 32, 1, true);
+  add(merge(colX.map((x) => at(shaft, x, 0.35 + 0.16 + 0.18 + 1.43, -21.2))), colM, 0, 0, 0);
+  add(merge(colX.flatMap((x) => [at(new T.BoxGeometry(0.6, 0.18, 0.6), x, 0.44, -21.2), at(baseG, x, 0.53, -21.2), at(capG, x, 3.55, -21.2), at(new T.BoxGeometry(0.62, 0.12, 0.62), x, 3.74, -21.2)])), trimM, 0, 0, 0);
+  add(new T.BoxGeometry(27.4, 0.56, 4.1), stucco, -1, 4.08, -22.6);
+  add(new T.BoxGeometry(27.9, 0.08, 4.5), trimM, -1, 4.4, -22.6);
+  add(new T.BoxGeometry(27.7, 0.14, 4.35), trimM, -1, 4.32, -22.6);
+  /* balustrade on the colonnade roof */
+  const balG = new T.LatheGeometry([[0, 0], [0.07, 0], [0.07, 0.05], [0.04, 0.09], [0.075, 0.22], [0.035, 0.38], [0.06, 0.42], [0.06, 0.46], [0, 0.46]].map(([a, b]) => new T.Vector2(a, b)), 10);
+  const bals = []; for (let x = -14.4; x <= 12.4; x += 0.26) bals.push(at(balG, x, 4.48, -20.6));
+  bals.push(at(new T.BoxGeometry(27.6, 0.08, 0.22), -1, 4.98, -20.6)); bals.push(at(new T.BoxGeometry(27.6, 0.06, 0.2), -1, 4.47, -20.6));
+  add(merge(bals), trimM, 0, 0, 0);
+  /* back wall with French doors and fanlights */
+  add(new T.BoxGeometry(27, 3.55, 0.3), stucco, -1, 2.12, -24.4);
+  const fr = [], gl = [];
+  for (let x = -12; x <= 10.1; x += 2) {
+    gl.push(at(new T.PlaneGeometry(1.04, 2.3), x, 1.62, -24.235)); const fan = new T.CircleGeometry(0.52, 20, 0, Math.PI); gl.push(at(fan, x, 2.77, -24.235));
+    [[-0.56, 0.08], [0.56, 0.08]].forEach(([dx, w]) => fr.push(at(new T.BoxGeometry(w, 2.95, 0.08), x + dx, 1.94, -24.22)));
+    fr.push(at(new T.BoxGeometry(0.035, 2.3, 0.04), x, 1.62, -24.21)); [0.95, 1.5, 2.05, 2.77].forEach((y) => fr.push(at(new T.BoxGeometry(1.06, 0.035, 0.04), x, y, -24.21)));
+    fr.push(at(new T.BoxGeometry(1.2, 0.1, 0.12), x, 0.43, -24.2));
+    const arch = new T.TorusGeometry(0.55, 0.04, 6, 18, Math.PI); fr.push(at(arch, x, 2.77, -24.22));
+  }
+  add(merge(gl), glass, 0, 0, 0, false); add(merge(fr), trimM, 0, 0, 0);
+  /* West Wing block, windows and roof */
+  add(new T.BoxGeometry(32, 6.6, 10), stucco, -1, 3.3, -30.2);
+  const ww = [], wf = [];
+  for (let x = -15; x <= 13.1; x += 2.35) { ww.push(at(new T.PlaneGeometry(1.0, 1.75), x, 5.0, -25.19)); wf.push(at(new T.BoxGeometry(1.2, 0.1, 0.12), x, 4.08, -25.16), at(new T.BoxGeometry(1.25, 0.12, 0.14), x, 5.95, -25.16), at(new T.BoxGeometry(0.03, 1.75, 0.03), x, 5.0, -25.17), at(new T.BoxGeometry(1.0, 0.03, 0.03), x, 5.3, -25.17)); }
+  add(merge(ww), glass, 0, 0, 0, false); add(merge(wf), trimM, 0, 0, 0);
+  add(new T.BoxGeometry(32.6, 0.3, 10.6), trimM, -1, 6.75, -30.2);
+  const roofS = new T.Shape(); roofS.moveTo(-5.1, 0); roofS.lineTo(5.1, 0); roofS.lineTo(3.2, 2.0); roofS.lineTo(-3.2, 2.0); roofS.closePath();
+  const roofG = new T.ExtrudeGeometry(roofS, { depth: 31, bevelEnabled: false }); roofG.rotateY(Math.PI / 2); roofG.translate(-16.5, 6.9, -30.2);
+  add(roofG, M(0x6a6e74, { roughness: 0.5, metalness: 0.45 }), 0, 0, 0);
+  const rb = []; for (let x = -16.6; x <= 14.6; x += 0.27) rb.push(at(balG, x, 6.9, -25.05)); rb.push(at(new T.BoxGeometry(32, 0.08, 0.22), -1, 7.4, -25.05));
+  add(merge(rb), trimM, 0, 0, 0);
+  [-10, -3, 4, 11].forEach((x) => add(new T.BoxGeometry(0.7, 1.4, 0.9), stucco, x, 9.2, -30.5));
+  /* the Oval Office */
+  const oval = add(new T.CylinderGeometry(4.6, 4.6, 5.4, 64), stucco, 16.5, 2.7, -24); oval.scale.z = 0.8;
+  add(new T.CylinderGeometry(4.8, 4.8, 0.35, 64), trimM, 16.5, 5.45, -24).scale.z = 0.8;
+  for (let k = -1; k <= 1; k++) { const a = Math.PI / 2 + k * 0.42, wx = 16.5 + Math.cos(a) * 4.62 * 1, wz = -24 + Math.sin(a) * 4.62 * 0.8; const w = add(new T.PlaneGeometry(1.1, 2.6), glass, wx, 2.2, wz + 0.02, false); w.rotation.y = -k * 0.5; const f = add(new T.BoxGeometry(1.3, 0.12, 0.12), trimM, wx, 3.6, wz + 0.05); f.rotation.y = -k * 0.5; }
+  /* buildings beyond */
+  const eeobT = ctex(1024, 512, (c, w, h) => { c.fillStyle = "#b9b4aa"; c.fillRect(0, 0, w, h); for (let y = 40; y < h - 30; y += 92) { c.fillStyle = "#a9a398"; c.fillRect(0, y + 60, w, 8); for (let x = 18; x < w; x += 40) { c.fillStyle = "#e6e1d6"; c.fillRect(x - 4, y - 4, 26, 58); c.fillStyle = "#3a434d"; c.fillRect(x, y, 18, 50); } } }, true);
+  eeobT.repeat.set(3, 1);
+  add(new T.BoxGeometry(70, 18, 22), M(0xffffff, { map: eeobT, roughness: 0.9 }), -14, 9, -80, false);
+  add(new T.BoxGeometry(66, 5, 18), M(0x5e6266, { roughness: 0.6, metalness: 0.3 }), -14, 20.5, -80, false);
+
   /* the route and the three stops */
-  const curve = new THREE.CatmullRomCurve3([[2, -22.4], [9, -22.2], [13, -19.9], [13.3, -11], [13.3, 0], [13.3, 11], [13, 20.3], [6, 20.7], [0, 20.7], [-6, 20.7], [-13, 20.3], [-13.3, 11], [-13.3, 0], [-13.3, -11], [-13, -19.7], [-7, -20], [-1.5, -19.8]].map(([x, z]) => new THREE.Vector3(x, 0, z)), false, "centripetal");
+  const curve = new T.CatmullRomCurve3([[2, -22.4], [9, -22.2], [13, -19.9], [13.3, -11], [13.3, 0], [13.3, 11], [13, 20.3], [6, 20.7], [0, 20.7], [-6, 20.7], [-13, 20.3], [-13.3, 11], [-13.3, 0], [-13.3, -11], [-13, -19.7], [-7, -20], [-1.5, -19.8]].map(([x, z]) => new T.Vector3(x, 0, z)), false, "centripetal");
   const STOPU = [0.27, 0.5, 0.73];
   STOPU.forEach((u, i) => {
-    const pt = curve.getPointAt(u), dir = new THREE.Vector3(-pt.x, 0, -pt.z).normalize().multiplyScalar(1.15), at = pt.clone().add(dir);
-    add(new THREE.BoxGeometry(0.9, 1.2, 0.9), M(0xe8e0cf), at.x, 0.6, at.z); add(new THREE.BoxGeometry(1.1, 0.14, 1.1), M(0xdcd3bf), at.x, 1.25, at.z);
+    const pt = curve.getPointAt(u), dir = new T.Vector3(-pt.x, 0, -pt.z).normalize().multiplyScalar(1.15), p = pt.clone().add(dir);
+    add(new T.BoxGeometry(0.9, 1.15, 0.9), stoneM, p.x, 0.575, p.z); add(new T.BoxGeometry(1.1, 0.12, 1.1), trimM, p.x, 1.2, p.z); add(new T.BoxGeometry(1.06, 0.1, 1.06), trimM, p.x, 0.05, p.z);
     const letter = ctex(256, 256, (c, w, h) => { c.fillStyle = "#b8892a"; c.beginPath(); c.arc(w / 2, h / 2, 120, 0, Math.PI * 2); c.fill(); c.strokeStyle = "#f3dfa6"; c.lineWidth = 6; c.beginPath(); c.arc(w / 2, h / 2, 104, 0, Math.PI * 2); c.stroke(); c.fillStyle = "#fff"; c.textAlign = "center"; c.textBaseline = "middle"; c.font = '400 150px "Instrument Serif", Georgia, serif'; c.fillText("RUN"[i], w / 2, h / 2 + 8); });
-    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: letter, fog: false })); sp.position.set(at.x, 2.15, at.z); sp.scale.set(1.15, 1.15, 1); S.add(sp);
-    const rg = add(new THREE.RingGeometry(0.75, 0.9, 40), new THREE.MeshBasicMaterial({ color: 0xb8892a, transparent: true, opacity: 0.75 }), pt.x, 0.02, pt.z, false); rg.rotation.x = -Math.PI / 2;
+    const sp = new T.Sprite(new T.SpriteMaterial({ map: letter, fog: false, toneMapped: false })); sp.position.set(p.x, 2.1, p.z); sp.scale.set(1.0, 1.0, 1); S.add(sp);
+    const rg = add(new T.RingGeometry(0.75, 0.86, 48), new T.MeshBasicMaterial({ color: 0xb8892a, transparent: true, opacity: 0.7 }), pt.x, 0.015, pt.z, false); rg.rotation.x = -Math.PI / 2;
   });
+
+  /* a photographic finish on larger screens: soft bloom, vignette and grain */
+  let composer = null, grainPass = null;
+  if (!small) Promise.all([import("three/addons/postprocessing/EffectComposer.js"), import("three/addons/postprocessing/RenderPass.js"), import("three/addons/postprocessing/UnrealBloomPass.js"), import("three/addons/postprocessing/OutputPass.js"), import("three/addons/postprocessing/ShaderPass.js")])
+    .then(([{ EffectComposer: EC }, { RenderPass: RP }, { UnrealBloomPass: UB }, { OutputPass: OP }, { ShaderPass: SP }]) => {
+      if (!alive) return;
+      const rt = new T.WebGLRenderTarget(innerWidth * PR, innerHeight * PR, { type: T.HalfFloatType, samples: 4 });
+      const c = new EC(R, rt); c.setPixelRatio(PR); c.setSize(innerWidth, innerHeight);
+      c.addPass(new RP(S, cam)); c.addPass(new UB(new T.Vector2(innerWidth, innerHeight), 0.16, 0.55, 0.9)); c.addPass(new OP());
+      grainPass = new SP({ uniforms: { tDiffuse: { value: null }, uT: { value: 0 } }, vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }",
+        fragmentShader: "uniform sampler2D tDiffuse; uniform float uT; varying vec2 vUv; float h(vec2 p){ return fract( sin( dot( p, vec2( 12.9898, 78.233 ) ) ) * 43758.5453 ); } void main(){ vec4 c = texture2D( tDiffuse, vUv ); float d = distance( vUv, vec2( 0.5 ) ); c.rgb *= mix( 1.0, 0.8, smoothstep( 0.4, 0.9, d ) ); c.rgb += ( h( vUv * vec2( 1733.0, 977.0 ) + uT ) - 0.5 ) * 0.022; gl_FragColor = c; }" });
+      c.addPass(grainPass); composer = c;
+    }).catch(() => {});
+
   /* camera: an aerial view first, then down onto the walk and around */
-  const aerial = new THREE.Vector3(small ? 0 : 6, small ? 30 : 24, small ? 40 : 36), aerialLook = new THREE.Vector3(0, 0, -3);
-  const look = new THREE.Vector3(), pos = new THREE.Vector3(), tmp = new THREE.Vector3(), center = new THREE.Vector3(0, 0.8, 0);
+  const aerial = new T.Vector3(small ? 0 : 6, small ? 30 : 24, small ? 40 : 36), aerialLook = new T.Vector3(0, 0, -3);
+  const look = new T.Vector3(), pos = new T.Vector3(), tmp = new T.Vector3(), center = new T.Vector3(0, 0.8, 0);
   const ease = (t) => t * t * (3 - 2 * t);
-  let keys = keysFn(), cur = 0, last = -1, alive = true;
+  let keys = keysFn(), cur = 0, alive = true;
   const remap = (p) => { const K = keys; for (let i = 1; i < K.length; i++) if (p <= K[i][0]) { const [p0, u0] = K[i - 1], [p1, u1] = K[i]; return u0 + ((p - p0) / Math.max(1e-6, p1 - p0)) * (u1 - u0); } return K[K.length - 1][1]; };
   const place = (pp) => {
     const u = remap(pp);
     if (u < 0) { const t = ease(Math.min(1, u + 1)); const p0 = curve.getPointAt(0); pos.set(p0.x, 1.65, p0.z).lerp(aerial, 1 - t); tmp.copy(curve.getPointAt(0.03)).setY(1.4).lerp(center, 0.3); look.copy(aerialLook).lerp(tmp, t); }
-    else { const uu = Math.min(1, u); const p0 = curve.getPointAt(uu); pos.set(p0.x, 1.65 + Math.sin(uu * 160) * 0.025, p0.z); tmp.copy(curve.getPointAt(Math.min(1, uu + 0.035))).setY(1.35); if (uu > 0.965) tmp.lerp(new THREE.Vector3(0, 2.2, -23), (uu - 0.965) / 0.035); look.copy(tmp).lerp(center, 0.32); }
+    else { const uu = Math.min(1, u); const p0 = curve.getPointAt(uu); pos.set(p0.x, 1.65 + Math.sin(uu * 160) * 0.025, p0.z); tmp.copy(curve.getPointAt(Math.min(1, uu + 0.035))).setY(1.35); if (uu > 0.965) tmp.lerp(new T.Vector3(0, 2.2, -23), (uu - 0.965) / 0.035); look.copy(tmp).lerp(center, 0.32); }
     cam.position.copy(pos); cam.lookAt(look);
   };
-  const resize = () => { R.setSize(innerWidth, innerHeight, false); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); keys = keysFn(); last = -1; };
+  const resize = () => { R.setSize(innerWidth, innerHeight, false); if (composer) composer.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); keys = keysFn(); };
   addEventListener("resize", resize);
   const progress = () => { const mx = siteEl.scrollHeight - siteEl.clientHeight; return mx > 0 ? Math.min(1, Math.max(0, siteEl.scrollTop / mx)) : 0; };
   cur = progress();
   const dispose = () => {
     alive = false; removeEventListener("resize", resize);
-    S.traverse((o) => { if (o.geometry) o.geometry.dispose(); const m = o.material; (Array.isArray(m) ? m : m ? [m] : []).forEach((x) => { if (x.map) x.map.dispose(); x.dispose(); }); });
-    R.dispose(); siteEl.classList.remove("mr-immersive");
+    S.traverse((o) => { if (o.geometry) o.geometry.dispose(); const m = o.material; (Array.isArray(m) ? m : m ? [m] : []).forEach((x) => { ["map", "normalMap", "roughnessMap"].forEach((k) => x[k] && x[k].dispose()); x.dispose(); }); });
+    if (S.background && S.background.dispose) S.background.dispose(); if (S.environment) S.environment.dispose();
+    if (composer) composer.dispose(); R.dispose(); siteEl.classList.remove("mr-immersive");
   };
+  const t0 = performance.now();
   const loop = () => {
     if (!alive) return;
     if (state.page !== "method" || !document.body.contains(canvas)) { dispose(); return; }
     const tgt = progress(); cur += (tgt - cur) * (reduce ? 1 : 0.085);
-    if (Math.abs(cur - last) > 0.00005) { place(cur); R.render(S, cam); last = cur; }
+    const t = (performance.now() - t0) / 1000; U.time.value = reduce ? 0 : t;
+    if (shadowDirty > 0) { R.shadowMap.needsUpdate = true; shadowDirty--; }
+    place(cur);
+    if (composer) { if (grainPass) grainPass.uniforms.uT.value = t % 10; composer.render(); } else R.render(S, cam);
     requestAnimationFrame(loop);
   };
-  place(cur); R.render(S, cam); requestAnimationFrame(loop);
-  return { refresh: () => { keys = keysFn(); last = -1; } };
+  place(cur); R.shadowMap.needsUpdate = true; R.render(S, cam); requestAnimationFrame(loop);
+  return { refresh: () => { keys = keysFn(); } };
 }
 
 function wireMethod() {
@@ -3295,20 +3591,33 @@ const setMode = (m) => {
 setMode(root.dataset.mode === "dark" ? "dark" : "light");
 document.addEventListener("click", (e) => { if (e.target.closest(".mode-btn")) setMode(root.dataset.mode === "dark" ? "light" : "dark"); });
 
-/* the contact form: no server behind this page yet, so it hands the message to email */
+/* the contact form: files each message in Airtable through /api/contact, with email as the fallback */
 function wireContact() {
   const f = $("#cform"); if (!f) return;
-  f.addEventListener("submit", (e) => {
+  const fallback = (d, stages, why) => {
+    const body = `Name: ${d.get("first")} ${d.get("last")}\nEmail: ${d.get("email")}\nCompany: ${d.get("company")}\nStage: ${stages.join(", ")}\n\n${d.get("message")}`;
+    const box = $("#csent"); box.hidden = false; box.className = "csent";
+    box.innerHTML = `<p><b style="font-weight:500">Your message isn't sent yet.</b> ${why} Send it by email to hello@presidentswork.com instead.</p><div class="row-btns"><a class="pb" href="mailto:hello@presidentswork.com?subject=${encodeURIComponent("New project inquiry: " + d.get("company"))}&body=${encodeURIComponent(body)}">Open email draft</a><button class="pb ghost" type="button" id="ccopy">Copy message</button></div>`;
+    $("#ccopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(body); $("#ccopy").textContent = "Copied"; } catch (x) { $("#ccopy").textContent = "Copy failed: select the form text instead"; } });
+  };
+  f.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const err = $("#cerr"), d = new FormData(f), stages = d.getAll("stage");
+    const err = $("#cerr"), d = new FormData(f), stages = d.getAll("stage"), btn = f.querySelector('button[type="submit"]');
     const missing = ["first", "last", "email", "company", "message"].filter((k) => !String(d.get(k) || "").trim());
     if (missing.length || !stages.length) { err.textContent = "Please fill in every field marked * and choose at least one stage."; return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(d.get("email")))) { err.textContent = "Please enter a valid email address."; return; }
-    err.textContent = "";
-    const body = `Name: ${d.get("first")} ${d.get("last")}\nEmail: ${d.get("email")}\nCompany: ${d.get("company")}\nStage: ${stages.join(", ")}\n\n${d.get("message")}`;
-    const box = $("#csent"); box.hidden = false; box.className = "csent";
-    box.innerHTML = `<p><b style="font-weight:500">Your message isn't sent yet.</b> This page has no form service connected, so send it by email to hello@presidentswork.com.</p><div class="row-btns"><a class="pb" href="mailto:hello@presidentswork.com?subject=${encodeURIComponent("New project inquiry: " + d.get("company"))}&body=${encodeURIComponent(body)}">Open email draft</a><button class="pb ghost" type="button" id="ccopy">Copy message</button></div>`;
-    $("#ccopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(body); $("#ccopy").textContent = "Copied"; } catch (x) { $("#ccopy").textContent = "Copy failed: select the form text instead"; } });
+    err.textContent = ""; $("#csent").hidden = true;
+    const payload = { first: d.get("first"), last: d.get("last"), email: d.get("email"), company: d.get("company"), stage: stages, message: d.get("message"), website: d.get("website") || "", source: location.href };
+    btn.disabled = true; const label = btn.textContent; btn.textContent = "Sending…";
+    try {
+      const r = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) { if (r.status === 400 && j.error) { err.textContent = j.error; } else fallback(d, stages, j.error || "The form service didn't answer."); return; }
+      [...f.children].forEach((n) => { if (n.id !== "csent") n.hidden = true; });
+      const box = $("#csent"); box.hidden = false; box.className = "csent ok";
+      box.innerHTML = `<p class="cs-h">Thank you, ${String(d.get("first")).replace(/[<>&]/g, "")}.</p><p>We have your message and will reply to ${String(d.get("email")).replace(/[<>&]/g, "")} within one business day.</p>`;
+    } catch (x) { fallback(d, stages, "The form service couldn't be reached from this page."); }
+    finally { btn.disabled = false; btn.textContent = label; }
   });
 }
 
