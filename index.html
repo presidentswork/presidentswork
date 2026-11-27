@@ -960,7 +960,11 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 #heroA .display,#heroC .display{font-size:min(15.5vw, 25vh);line-height:.86}
 #heroA .slot.br,#heroC .slot.br{text-align:right}
 #heroA .slot.br .split,#heroC .slot.br .split{justify-content:flex-end}
-@media(max-width:639.98px){#heroA .display,#heroC .display{font-size:min(27vw, 15vh);line-height:.84}#heroA .slot.br,#heroC .slot.br{bottom:14rem !important}.scroll-cue{bottom:8.5rem !important}}
+@media(max-width:639.98px){#heroA,#heroC{--hf:min(26vw, 12.5svh)}#heroA .display,#heroC .display{font-size:var(--hf);line-height:.86}
+#heroA .slot.tl,#heroC .slot.tl{top:calc(6.5rem + 3vh) !important}
+#heroA .slot.br,#heroC .slot.br{top:calc(6.5rem + 3vh + 1.72 * var(--hf) + 1.25rem) !important;bottom:auto !important}
+.scroll-cue{bottom:6.75rem !important}.scroll-cue i{height:1.75rem}}
+.scroll-cue.timed{opacity:0 !important;translate:-50% .75rem !important;pointer-events:none}
 footer .f-acts .f-main{border-bottom:0 !important;padding-bottom:0 !important;text-decoration:none !important}
 </style>
 </head>
@@ -1472,7 +1476,7 @@ const offPre = sub((t, dt) => {
   strips.forEach((s) => (s.style.transform = `translateY(-${count * 0.9}em)`));
   ruleFill.style.transform = `scaleX(${v})`;
   if (clock >= 1 && pre.share >= 1 && !pre.exiting) {
-    pre.exiting = true; offPre();
+    pre.exiting = true; offPre(); setTimeout(() => { const c = document.getElementById("scrollCue"); if (c) c.classList.add("timed"); }, 4500);
     $("#pre").classList.add("exit");
     root.classList.remove("locked");
     lenis && lenis.start();
@@ -3056,7 +3060,7 @@ document.addEventListener("pointerdown", (e) => { const m = e.target.closest && 
 dockMarkA.innerHTML = PW_MARK;
 const hm = document.createElement("div"); hm.className = "hero-mark"; hm.setAttribute("aria-hidden", "true"); hm.innerHTML = PW_MARK;
 document.body.appendChild(hm);
-playMark(hm, 1400);
+let hmPlayed = false;
 const preEl = $("#pre");
 const eIO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 let hmStart = null, hmS = 0;
@@ -3070,7 +3074,10 @@ const hmTick = (now) => {
   const left = !preEl || !document.body.contains(preEl) || preEl.classList.contains("exit") || state.introReady;
   if (left && hmStart === null) hmStart = now;
   const ti = hmStart === null ? 0 : Math.min(1, (now - hmStart) / 1400);
-  const tsT = Math.min(1, Math.max(0, scrollY / (vh * 0.45)));
+  if (ti >= 1 && !hmPlayed) { hmPlayed = true; playMark(hm, 1400); }
+  /* the top logo stays through "Leading brands into power" and "Step inside", and hands over just before the building */
+  const trk = document.getElementById("top"), y0 = trk ? trk.offsetTop + 0.228 * Math.max(0, trk.offsetHeight - vh) : 0;
+  const tsT = Math.min(1, Math.max(0, (scrollY - y0) / (vh * 0.45)));
   hmS += (tsT - hmS) * (reduce ? 1 : 0.12); if (Math.abs(tsT - hmS) < 0.0005) hmS = tsT;
   const ts = hmS, sm = (t) => t * t * t * (t * (t * 6 - 15) + 10);
   const a = eIO(ti);
