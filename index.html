@@ -3044,11 +3044,12 @@ async function build() {
   /* object: Building Nothing, standing on the East Room's round table */
   {
     const cover = new THREE.CanvasTexture(makeArt(3)); cover.colorSpace = THREE.SRGBColorSpace; cover.anisotropy = aniso;
-    const spine = ctex(128, 640, (c, w, h) => { c.fillStyle = "#0e0e0e"; c.fillRect(0, 0, w, h); c.save(); c.translate(w / 2 + 12, h - 40); c.rotate(-Math.PI / 2); c.fillStyle = "#fff"; c.font = F(600, 36); c.fillText("BUILDING NOTHING", 0, 0); c.restore(); });
+    new THREE.TextureLoader().load("work/book/cover.jpg", (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso; bk.material[4].map = t; bk.material[4].needsUpdate = true; });
+    const spine = ctex(128, 640, (c, w, h) => { c.fillStyle = "#f7f5f0"; c.fillRect(0, 0, w, h); c.save(); c.translate(w / 2 + 12, h - 40); c.rotate(-Math.PI / 2); c.fillStyle = "#0e0e0e"; c.font = F(700, 38); c.fillText("BUILDING NOTHING", 0, 0); c.restore(); });
     const pages = ctex(64, 256, (c, w, h) => { c.fillStyle = "#efe9dc"; c.fillRect(0, 0, w, h); c.fillStyle = "rgba(0,0,0,.07)"; for (let x = 0; x < w; x += 3) c.fillRect(x, 0, 1, h); });
-    const bk = new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.12, 0.2), [std({ map: pages }), std({ map: spine, roughness: 0.6 }), std({ map: pages }), std({ map: pages }), std({ map: cover, roughness: 0.55 }), std({ color: 0x0e0e0e, roughness: 0.6 })]);
+    const bk = new THREE.Mesh(new THREE.BoxGeometry(0.78, 1.17, 0.2), [std({ map: pages }), std({ map: spine, roughness: 0.6 }), std({ map: pages }), std({ map: pages }), std({ map: cover, roughness: 0.55 }), std({ color: 0xf7f5f0, roughness: 0.6 })]);
     const st = KF[STATION[3]], ry = Math.atan2(st.pos[0] + 21, st.pos[2] + 13);
-    bk.position.set(-21, 0.78 + 0.56, -13); bk.rotation.y = ry; bk.castShadow = true; scene.add(bk);
+    bk.position.set(-21, 0.78 + 0.585, -13); bk.rotation.y = ry; bk.castShadow = true; scene.add(bk);
     EX[3] = { meshes: [bk], center: bk.position.clone(), normal: V(Math.sin(ry), 0, Math.cos(ry)), w: 0.95, h: 1.2 };
   }
   await step(0.9);
