@@ -1345,6 +1345,11 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 /* capabilities: no 'in these programs' links */
 .wx .capx-p{display:none !important}
 @media(min-width:900px){.wx .capx-r{grid-template-columns:minmax(0,5fr) minmax(0,8fr) !important}}
+
+/* Enterprise mark: buildings rise one after another while the arrow climbs */
+.wx .pi .pi-bld{transform-box:fill-box;transform-origin:50% 100%;animation:pibld 4.8s cubic-bezier(.65,0,.35,1) calc(var(--i) * .14s) infinite}
+@keyframes pibld{0%{transform:scaleY(0)}40%,82%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+@media(prefers-reduced-motion:reduce){.wx .pi .pi-bld{animation:none}}
 </style>
 </head>
 <body>
@@ -1728,6 +1733,7 @@ const progIcon = (id, cls = "icon") => {
   else if (id === "formation") { let f = ""; for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) { if (r >= 3 && c >= 3) continue; if (r === 4 && c === 2) { f += dot(150, 250, "pf"); continue; } f += `<circle class="pk pf" cx="${50 + c * 50}" cy="${50 + r * 50}" r="6" style="--d:${(r + c) * 0.12}s"/>`; } art = f + `<circle class="pi-draw pi-ring" pathLength="1" cx="222" cy="228" r="44"/>`; }
   else if (id === "elevation") art = `<path class="pi-draw" pathLength="1" d="M50 250L250 50"/>${dot(50, 250)}${dot(150, 150, "pulse")}<g class="pi-elev"><path d="M236 40H260V64"/>${dot(250, 50)}</g>`;
   else if (id === "direction") art = `<g class="pi-dir">${[[0, 150, 50], [90, 250, 150], [180, 150, 250], [270, 50, 150]].map(([a, x, y], i) => `<g class="pi-arm" style="--a:${a}deg;--i:${i}"><path d="M150 150L${x} ${y}"/>${head(x, y, a)}</g>`).join("")}</g>${dot(150, 150)}`;
+  else if (id === "enterprise") art = `<g class="pi-city">${[[50, 100, 120, 0], [100, 150, 70, 1], [150, 200, 140, 2], [200, 250, 95, 3]].map(([x0, x1, y, i]) => `<path class="pi-bld" style="--i:${i}" d="M${x0} 250V${y}H${x1}V250"/>`).join("")}</g><path d="M40 250H260"/><g class="pi-launch"><path class="pi-draw" pathLength="1" d="M175 250V50"/><g class="pi-head">${head(175, 50, 0)}</g></g>${dot(175, 250)}`;
   else if (id === "boardroom") art = `<path class="pi-draw" pathLength="1" d="M100 100H200V200H100Z"/>${dot(100, 100)}${dot(200, 100)}${dot(200, 200)}${dot(100, 200)}${dot(150, 150, "pulse")}`;
   return `<svg class="${cls} pi" viewBox="0 0 300 300" role="img" aria-label="${id} mark"><g class="pi-grid">${grid}</g><g class="pi-dots">${dots}</g><g class="pi-art">${art}</g></svg>`;
 };
@@ -3653,7 +3659,7 @@ const PROGRAMS = {
 };
 const LOGOS = Array.from({ length: 25 }, (_, i) => `img/logo-${String(i + 1).padStart(2, "0")}.png`);
 const logoBand = () => `<div class="mq logos" aria-label="Past clients"><div class="mq-t">${(() => { const l = LOGOS.map((s) => `<figure><img src="${s}" alt="Client logo" loading="lazy"></figure>`).join(""); return l + l; })()}</div></div>`;
-const progRow = (n, name, id, title, desc, kw) => `<article class="fx"><p class="pn">0${n}<b>(${name}${id === "enterprise" ? "" : "™"})</b></p>${id === "enterprise" ? '<span class="icon"></span>' : progIcon(id)}<div class="pc"><h3>${title}</h3>${kw ? `<ul class="kw">${kw.map((k) => `<li>${k}</li>`).join("")}</ul>` : ""}<p class="body">${desc}</p>${pl("Learn about " + name, "#" + id)}</div></article>`;
+const progRow = (n, name, id, title, desc, kw) => `<article class="fx"><p class="pn">0${n}<b>(${name}${id === "enterprise" ? "" : "™"})</b></p>${progIcon(id)}<div class="pc"><h3>${title}</h3>${kw ? `<ul class="kw">${kw.map((k) => `<li>${k}</li>`).join("")}</ul>` : ""}<p class="body">${desc}</p>${pl("Learn about " + name, "#" + id)}</div></article>`;
 
 const PAGES = {
   programs: () => `
@@ -3890,7 +3896,7 @@ ${cta("Are you ready to design your brand?", "Work with us")}`;
 PAGE_TITLES.yankyperl = "Yanky Perl"; NAV_OF.yankyperl = "about";
 /* v8: Enterprise as a full program page, built like Elevation */
 PROGRAMS.enterprise = {
-  id: "enterprise", name: "Enterprise", word: "Enterprise", noIcon: true, paint: "paint-boardroom",
+  id: "enterprise", name: "Enterprise", word: "Enterprise", paint: "paint-boardroom",
   hero: "Transform your brand across the whole organization", heroCta: "Inquire about Enterprise",
   lede: "For organizations with multiple brands, divisions, locations or complex growth ahead, Enterprise brings every part of the company under one brand system.",
   paintAlt: "Founders at a writing desk in a green valley, a modern city behind them",
