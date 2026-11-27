@@ -1295,6 +1295,12 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 .wx .cinfo h3{border-bottom:0 !important;padding-bottom:.35rem !important}
 .wx .cinfo>div{padding-bottom:1.75rem;margin-bottom:1.75rem;border-bottom:2px dashed var(--pline)}
 .wx .cinfo>div:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+
+/* BrandOrder: line right under the name; the button just under the globe */
+.caption.cap-top.cap-bo h2{margin-bottom:0 !important}
+.caption.cap-top.cap-bo #capMeta{margin-bottom:auto !important}
+.caption.cap-top.cap-bo{bottom:31svh !important}
+@media(min-width:768px){.caption.cap-top.cap-bo{bottom:24vh !important}}
 </style>
 </head>
 <body>
@@ -3341,13 +3347,13 @@ function setCaption(j) {
       requestAnimationFrame(() => requestAnimationFrame(() => capTitle.classList.add("in")));
       return;
     }
-    caption.classList.remove("cta-end"); caption.classList.remove("cap-top");
+    caption.classList.remove("cta-end"); caption.classList.remove("cap-top"); caption.classList.remove("cap-bo");
     btn.querySelectorAll(".lbl2").forEach((n) => n.remove()); btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = ""));
     const Pr = PROJECTS[j];
     if (Pr.kind) { btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = "none")); btn.insertAdjacentHTML("beforeend", `<span class="lbl2">${Pr.label}</span>`); }
     $("#capCount").textContent = `${pad(j + 1)} / ${pad(N)} · ${Pr.room}`;
     splitInto(capTitle, Pr.name, { stagger: 28, dur: 1100 });
-    const TOPLINE = { "x-brandorder": "See what is holding back your brand", "x-book": "How the 10 stages of creation turn an idea into a living brand" }, top = !!TOPLINE[Pr.id]; caption.classList.toggle("cap-top", top);
+    const TOPLINE = { "x-brandorder": "See what is holding back your brand", "x-book": "How the 10 stages of creation turn an idea into a living brand" }, top = !!TOPLINE[Pr.id]; caption.classList.toggle("cap-top", top); caption.classList.toggle("cap-bo", Pr.id === "x-brandorder");
     $("#capMeta").textContent = top ? TOPLINE[Pr.id] : `${Pr.sector} · ${Pr.scope.join(", ")}`;
     caption.classList.add("show");
     requestAnimationFrame(() => requestAnimationFrame(() => capTitle.classList.add("in")));
