@@ -14,47 +14,83 @@
   "rewrites": [
     {
       "source": "/programs",
-      "destination": "/"
+      "destination": "/p/programs.html"
     },
     {
       "source": "/boardroom",
-      "destination": "/"
-    },
-    {
-      "source": "/formation",
-      "destination": "/"
-    },
-    {
-      "source": "/elevation",
-      "destination": "/"
-    },
-    {
-      "source": "/direction",
-      "destination": "/"
+      "destination": "/p/boardroom.html"
     },
     {
       "source": "/launch",
-      "destination": "/"
+      "destination": "/p/launch.html"
+    },
+    {
+      "source": "/formation",
+      "destination": "/p/formation.html"
+    },
+    {
+      "source": "/elevation",
+      "destination": "/p/elevation.html"
+    },
+    {
+      "source": "/direction",
+      "destination": "/p/direction.html"
     },
     {
       "source": "/enterprise",
-      "destination": "/"
+      "destination": "/p/enterprise.html"
     },
     {
       "source": "/method",
-      "destination": "/"
+      "destination": "/p/method.html"
     },
     {
       "source": "/about",
-      "destination": "/"
+      "destination": "/p/about.html"
     },
     {
       "source": "/contact",
-      "destination": "/"
+      "destination": "/p/contact.html"
     },
     {
       "source": "/work",
-      "destination": "/"
+      "destination": "/p/work.html"
+    },
+    {
+      "source": "/yankyperl",
+      "destination": "/p/yankyperl.html"
+    },
+    {
+      "source": "/strategicbank",
+      "destination": "/p/strategicbank.html"
+    },
+    {
+      "source": "/specialtyrx",
+      "destination": "/p/specialtyrx.html"
+    },
+    {
+      "source": "/pyle",
+      "destination": "/p/pyle.html"
+    },
+    {
+      "source": "/hireends",
+      "destination": "/p/hireends.html"
+    },
+    {
+      "source": "/spritzonme",
+      "destination": "/p/spritzonme.html"
+    },
+    {
+      "source": "/pedal",
+      "destination": "/p/pedal.html"
+    },
+    {
+      "source": "/moonwalk-orthotics",
+      "destination": "/p/moonwalk-orthotics.html"
+    },
+    {
+      "source": "/index",
+      "destination": "/p/work.html"
     },
     {
       "source": "/founders",
@@ -62,42 +98,6 @@
     },
     {
       "source": "/leadership",
-      "destination": "/"
-    },
-    {
-      "source": "/yankyperl",
-      "destination": "/"
-    },
-    {
-      "source": "/index",
-      "destination": "/"
-    },
-    {
-      "source": "/strategicbank",
-      "destination": "/"
-    },
-    {
-      "source": "/specialtyrx",
-      "destination": "/"
-    },
-    {
-      "source": "/pyle",
-      "destination": "/"
-    },
-    {
-      "source": "/hireends",
-      "destination": "/"
-    },
-    {
-      "source": "/spritzonme",
-      "destination": "/"
-    },
-    {
-      "source": "/pedal",
-      "destination": "/"
-    },
-    {
-      "source": "/moonwalk-orthotics",
       "destination": "/"
     }
   ],
