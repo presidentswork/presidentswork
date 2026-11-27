@@ -966,6 +966,10 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 .scroll-cue{bottom:6.75rem !important}.scroll-cue i{height:1.75rem}}
 .scroll-cue.timed{opacity:0 !important;translate:-50% .75rem !important;pointer-events:none}
 footer .f-acts .f-main{border-bottom:0 !important;padding-bottom:0 !important;text-decoration:none !important}
+#capEnter,.caption #capEnter,.caption:not(.cta-end) #capEnter{text-transform:none !important;letter-spacing:.01em !important;font-size:.95rem !important}
+/* v16: stop title and Enter centred under the frame */
+.caption:not(.cta-end){left:0 !important;right:0 !important;margin:0 auto !important;bottom:7rem !important;width:max-content !important;max-width:calc(100vw - 2.5rem) !important;align-items:center !important;text-align:center}
+@media(max-width:767.98px){.caption:not(.cta-end){bottom:6.75rem !important}}
 </style>
 </head>
 <body>
@@ -1408,7 +1412,7 @@ const ART = {
 };
 
 const artTexs = [];
-const FRAME_PIC = { specialtyrx: "work/specialtyrx/03.jpg", pyle: "work/pyle/37.jpg", hireends: "work/hireends/11.jpg", spritzonme: "work/spritzonme/07.jpg", pedal: "work/pedal/18.jpg" };
+const FRAME_PIC = { specialtyrx: "work/specialtyrx/frame.jpg", pyle: "work/pyle/frame.jpg", hireends: "work/hireends/frame.jpg", spritzonme: "work/spritzonme/frame.jpg", pedal: "work/pedal/frame.jpg" };
 const openExt = (href) => { let w = null; try { w = window.open(href, "_blank"); } catch (e) { w = null; } if (w) { try { w.opener = null; } catch (e) { /* cross-origin */ } } else { location.href = href; } };
 ART.photo = (c, P, i) => {
   const g = c.createLinearGradient(0, 0, 0, AH); g.addColorStop(0, P.c1); g.addColorStop(1, P.c2); c.fillStyle = g; c.fillRect(0, 0, AW, AH);
