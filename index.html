@@ -1382,6 +1382,10 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 
 /* Method too: the page holds still while the footer slides over it */
 .site.mr-immersive #siteMain.ftuck{position:sticky}
+
+/* nav label: regular case, normal spacing */
+.dock-bar .lbl{text-transform:none !important;letter-spacing:0 !important;font-size:.95rem !important;font-weight:500}
+@media(max-width:767.98px){.dock-bar .lbl{font-size:.9rem !important}}
 </style>
 </head>
 <body>
@@ -2368,10 +2372,10 @@ async function build() {
     flame: new THREE.MeshBasicMaterial({ color: 0xffd58f }),
     crystal: std({ color: 0xffffff, metalness: 0.15, roughness: 0.03, emissive: 0x3a3226, envMapIntensity: 3.2 }),
     firebox: std({ color: 0x141210, roughness: 0.9 }),
-    redSeat: std({ color: 0x9b1b24, roughness: 0.75 }),
-    greenSeat: std({ color: 0x5f7b4c, roughness: 0.75 }),
-    blueSeat: std({ color: 0x2c4a86, roughness: 0.75 }),
-    goldSeat: std({ color: 0xc9a04a, roughness: 0.7 }),
+    redSeat: new THREE.MeshPhysicalMaterial({ color: 0x9b1b24, roughness: 0.82, sheen: 1, sheenRoughness: 0.45, sheenColor: new THREE.Color(0xff8a8a) }),
+    greenSeat: new THREE.MeshPhysicalMaterial({ color: 0x5f7b4c, roughness: 0.82, sheen: 1, sheenRoughness: 0.45, sheenColor: new THREE.Color(0xc9e6a8) }),
+    blueSeat: new THREE.MeshPhysicalMaterial({ color: 0x2c4a86, roughness: 0.82, sheen: 1, sheenRoughness: 0.45, sheenColor: new THREE.Color(0x9fb8ff) }),
+    goldSeat: new THREE.MeshPhysicalMaterial({ color: 0xc9a04a, roughness: 0.82, sheen: 1, sheenRoughness: 0.45, sheenColor: new THREE.Color(0xffe2a0) }),
     people: [0x2b2b2b, 0x3d4a5c, 0x6b3b2e, 0xc9c2b6, 0x1f2a24, 0x8c6f52].map((c) => std({ color: c, roughness: 0.85 })),
     skin: std({ color: 0x8a6a55, roughness: 0.8 }),
   };
@@ -2901,15 +2905,49 @@ async function build() {
   mantel(-13.19, -20.65, Math.PI / 2);
   mantel(24.99, -18.2, -Math.PI / 2);
   /* furniture */
+  /* upholstered furniture: rounded cushions, turned gilt legs, tufted backs and scroll arms */
+  const RB = {};
+  const rbox = (w, h, d, r) => {
+    const k = [w, h, d, r].map((v) => v.toFixed(3)).join(); if (RB[k]) return RB[k];
+    const g = new THREE.BoxGeometry(w, h, d, 6, 4, 6), p = g.attributes.position, v = new THREE.Vector3(), c = new THREE.Vector3(w / 2 - r, h / 2 - r, d / 2 - r);
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i);
+      const q = new THREE.Vector3(Math.max(-c.x, Math.min(c.x, v.x)), Math.max(-c.y, Math.min(c.y, v.y)), Math.max(-c.z, Math.min(c.z, v.z)));
+      const dlt = v.clone().sub(q); if (dlt.lengthSq() > 1e-9) { dlt.setLength(r); v.copy(q).add(dlt); }
+      p.setXYZ(i, v.x, v.y, v.z);
+    }
+    g.computeVertexNormals(); return (RB[k] = g);
+  };
+  const LEG = new THREE.CylinderGeometry(0.03, 0.016, 1, 12), BEAD = new THREE.SphereGeometry(1, 12, 8), ARMROLL = new THREE.CylinderGeometry(1, 1, 1, 16);
+  const tleg = (g, x, z, h, mat) => { put(LEG, mat, x, h / 2, z, { parent: g, sy: h }); put(BEAD, mat, x, h - 0.01, z, { parent: g, sx: 0.036, sy: 0.03, sz: 0.036 }); put(BEAD, mat, x, 0.02, z, { parent: g, sx: 0.02, sy: 0.02, sz: 0.02, cast: false }); };
+  const tufts = (g, x0, x1, y0, y1, z, mat, nx, ny) => { for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++) put(BEAD, mat, x0 + ((x1 - x0) * (i + 0.5)) / nx + (j % 2 ? ((x1 - x0) / nx) * 0.5 : 0) * (i < nx - 1 ? 1 : 0), y0 + ((y1 - y0) * (j + 0.5)) / ny, z, { parent: g, sx: 0.012, sy: 0.012, sz: 0.008, cast: false }); };
   const chair = (x, z, ry, seat, gilt = true) => {
     const g = grp(x, 0, z, ry), leg = gilt ? M.gold : M.wood;
-    [[-0.22, -0.2], [0.22, -0.2], [-0.22, 0.2], [0.22, 0.2]].forEach(([a, b]) => lbox(g, a - 0.025, a + 0.025, 0, 0.45, b - 0.025, b + 0.025, leg));
-    lbox(g, -0.26, 0.26, 0.42, 0.52, -0.24, 0.24, seat); lbox(g, -0.25, 0.25, 0.52, 1.05, -0.26, -0.2, seat); lbox(g, -0.27, 0.27, 1.02, 1.08, -0.27, -0.19, leg);
+    [[-0.2, -0.18], [0.2, -0.18], [-0.21, 0.19], [0.21, 0.19]].forEach(([a, b]) => tleg(g, a, b, 0.42, leg));
+    put(rbox(0.5, 0.06, 0.46, 0.02), leg, 0, 0.43, 0, { parent: g });
+    put(rbox(0.46, 0.1, 0.43, 0.045), seat, 0, 0.5, 0.01, { parent: g });
+    [-0.2, 0.2].forEach((a) => put(LEG, leg, a, 0.78, -0.2, { parent: g, sy: 0.62, sx: 0.8, sz: 0.8 }));
+    put(rbox(0.46, 0.5, 0.05, 0.02), leg, 0, 0.8, -0.21, { parent: g });
+    put(rbox(0.4, 0.44, 0.07, 0.03), seat, 0, 0.8, -0.19, { parent: g });
+    put(rbox(0.5, 0.05, 0.07, 0.022), leg, 0, 1.07, -0.21, { parent: g });
+    put(BEAD, leg, 0, 1.11, -0.21, { parent: g, sx: 0.035, sy: 0.03, sz: 0.03 });
   };
   const settee = (x, z, ry, mat) => {
     const g = grp(x, 0, z, ry);
-    lbox(g, -1.1, 1.1, 0.2, 0.5, -0.4, 0.4, mat); lbox(g, -1.1, 1.1, 0.5, 1.0, -0.42, -0.26, mat); lbox(g, -1.15, -0.95, 0.2, 0.75, -0.42, 0.4, mat); lbox(g, 0.95, 1.15, 0.2, 0.75, -0.42, 0.4, mat);
-    [-1, 1].forEach((s) => [-0.3, 0.3].forEach((b) => lbox(g, s * 1.02 - 0.03, s * 1.02 + 0.03, 0, 0.2, b - 0.03, b + 0.03, M.wood)));
+    [[-1.0, -0.33], [1.0, -0.33], [-1.02, 0.33], [1.02, 0.33], [0, 0.34], [0, -0.33]].forEach(([a, b]) => tleg(g, a, b, 0.22, M.gold));
+    put(rbox(2.16, 0.12, 0.8, 0.03), M.gold, 0, 0.25, 0, { parent: g });
+    put(rbox(2.04, 0.16, 0.74, 0.06), mat, 0, 0.36, 0.01, { parent: g });
+    [-0.67, 0, 0.67].forEach((cx) => put(rbox(0.66, 0.11, 0.68, 0.05), mat, cx, 0.49, 0.04, { parent: g }));
+    put(rbox(2.1, 0.62, 0.16, 0.07), mat, 0, 0.72, -0.33, { parent: g });
+    put(new THREE.CylinderGeometry(0.06, 0.06, 2.08, 20), M.gold, 0, 1.04, -0.36, { parent: g, rz: Math.PI / 2 });
+    [-0.67, 0, 0.67].forEach((cx) => put(rbox(0.62, 0.42, 0.1, 0.05), mat, cx, 0.72, -0.24, { parent: g }));
+    tufts(g, -0.98, 0.98, 0.56, 0.9, -0.185, M.gold, 9, 2);
+    [-1, 1].forEach((sd) => {
+      put(rbox(0.14, 0.42, 0.74, 0.05), mat, sd * 1.03, 0.56, 0.01, { parent: g });
+      put(ARMROLL, mat, sd * 1.05, 0.79, 0.02, { parent: g, rx: Math.PI / 2, sx: 0.1, sy: 0.76, sz: 0.1 });
+      put(new THREE.TorusGeometry(0.1, 0.012, 8, 24), M.gold, sd * 1.05, 0.79, 0.4, { parent: g, cast: false });
+      put(new THREE.CylinderGeometry(0.11, 0.11, 0.5, 16), mat, sd * 0.84, 0.62, 0.0, { parent: g, rx: Math.PI / 2, ry: 0, rz: 0, sx: 1, sy: 1, sz: 1 });
+    });
   };
   const roundTable = (x, z, r, top = 0.78) => { put(CYL, M.wood, x, top - 0.02, z, { sx: r, sy: 0.05, sz: r }); put(CYL8, M.gold, x, top / 2, z, { sx: 0.07, sy: top, sz: 0.07 }); put(CYL, M.gold, x, 0.05, z, { sx: r * 0.55, sy: 0.08, sz: r * 0.55 }); };
   settee(-11.6, -16.5, Math.PI, M.greenSeat); chair(-11.8, -23.4, 0.4, M.greenSeat); chair(-11.8, -18, 2.7, M.greenSeat);
