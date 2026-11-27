@@ -3538,7 +3538,7 @@ function setCaption(j) {
     if (Pr.kind) { btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = "none")); btn.insertAdjacentHTML("beforeend", `<span class="lbl2">${Pr.label}</span>`); }
     $("#capCount").textContent = `${pad(j + 1)} / ${pad(N)} · ${Pr.room}`;
     splitInto(capTitle, Pr.name, { stagger: 28, dur: 1100 });
-    const TOPLINE = { "x-brandorder": "See what is holding back your brand", "x-book": "How the 10 stages of creation turn an idea into a living brand" }, top = !!TOPLINE[Pr.id]; caption.classList.toggle("cap-top", top); caption.classList.toggle("cap-bo", Pr.id === "x-brandorder");
+    const TOPLINE = { "x-brandorder": "See what is holding back your brand", "x-book": "How the 10 stages of creation turn an idea into a living brand" }, top = !!TOPLINE[Pr.id]; caption.classList.toggle("cap-top", top); caption.classList.toggle("cap-bo", Pr.id === "x-brandorder" || Pr.id === "x-book");
     $("#capMeta").textContent = top ? TOPLINE[Pr.id] : `${Pr.sector} · ${Pr.scope.join(", ")}`;
     caption.classList.add("show");
     requestAnimationFrame(() => requestAnimationFrame(() => capTitle.classList.add("in")));
