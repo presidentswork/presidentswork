@@ -1957,7 +1957,7 @@ ART.photo = (c, P, i) => {
   const g = c.createLinearGradient(0, 0, 0, AH); g.addColorStop(0, P.c1); g.addColorStop(1, P.c2); c.fillStyle = g; c.fillRect(0, 0, AW, AH);
   if (!P.card) return;
   const im = new Image();
-  im.onload = () => { const sc = Math.max(AW / im.width, AH / im.height), w = im.width * sc, h = im.height * sc; c.drawImage(im, (AW - w) / 2, (AH - h) / 2, w, h); plateCacheReset(i); if (artTexs[i]) artTexs[i].needsUpdate = true; };
+  im.onload = () => { const sc = Math.max(AW / im.width, AH / im.height) * 1.03, w = im.width * sc, h = im.height * sc; c.drawImage(im, (AW - w) / 2, (AH - h) / 2, w, h); plateCacheReset(i); if (artTexs[i]) artTexs[i].needsUpdate = true; };
   im.src = FRAME_PIC[P.id] || P.card;
 };
 ART.wordmark = (c, P) => {
@@ -3001,7 +3001,7 @@ async function build() {
       ["pointerdown", "touchstart", "scroll", "wheel", "keydown"].forEach((ev) => addEventListener(ev, go, { once: true, passive: true, capture: true }));
       go();
     }
-    if (land) new THREE.TextureLoader().load(land, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso; if (art) { art.material.map = t; art.material.needsUpdate = true; } });
+    if (land) new THREE.TextureLoader().load(land, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.repeat.set(0.97, 0.97); t.offset.set(0.015, 0.015); t.anisotropy = aniso; if (art) { art.material.map = t; art.material.needsUpdate = true; } });
     const art = new THREE.Mesh(new THREE.PlaneGeometry(aw, ah), std({ map: tex, roughness: 0.5 })); art.position.z = 0.132; g.add(art);
     const washMat = new THREE.MeshBasicMaterial({ map: washTex, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false });
     const wash = new THREE.Mesh(new THREE.PlaneGeometry(ow * 1.9, oh * 1.5), washMat); wash.position.set(0, oh * 0.1, 0.012); g.add(wash);
