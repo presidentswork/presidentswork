@@ -3590,7 +3590,7 @@ sub((t, dt) => {
 
   /* station caption */
   let act = -1;
-  if (inTrack && state.open < 0 && view.k === 0) { PROJECTS.forEach((_, j) => { const k = KF[STATION[j]]; if (p >= k.t - 0.01 && p <= k.t + k.d + 0.003) act = j; }); const ks = KF[KF.length - 1]; if (p >= ks.t - 0.004) act = -2; }
+  if (inTrack && state.open < 0 && view.k === 0) { PROJECTS.forEach((_, j) => { const k = KF[STATION[j]]; if (p >= k.t - 0.022 && p <= k.t + k.d + 0.003) act = j; }); const ks = KF[KF.length - 1]; if (p >= ks.t - 0.004) act = -2; }
   setCaption(act);
   { const pk = KF.findIndex((k) => k.pod === 1), qk = KF.findIndex((k) => k.pod === 2); let pv = 0; if (inTrack && state.open < 0 && view.k === 0) { if (pk >= 0 && p >= KF[pk].t - 0.006 && p <= KF[pk].t + KF[pk].d + 0.003) pv = 1; else if (qk >= 0 && p >= KF[qk].t - 0.006 && p <= KF[qk].t + KF[qk].d + 0.003) pv = 2; } podCap(pv); }
 
