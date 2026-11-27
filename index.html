@@ -955,6 +955,13 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 @keyframes pipulse{0%,100%{transform:scale(1)}50%{transform:scale(1.6)}}
 @keyframes piarm{0%,100%{transform:scale(.55)}50%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.wx .pi *{animation:none !important;stroke-dashoffset:0 !important;opacity:inherit}.wx .pi .pi-dots circle{opacity:.16}}
+/* v16: hero headline twice the size, fitted to the screen */
+#heroA .slot,#heroC .slot{max-width:calc(100vw - 2 * var(--m))}
+#heroA .display,#heroC .display{font-size:min(15.5vw, 25vh);line-height:.86}
+#heroA .slot.br,#heroC .slot.br{text-align:right}
+#heroA .slot.br .split,#heroC .slot.br .split{justify-content:flex-end}
+@media(max-width:639.98px){#heroA .display,#heroC .display{font-size:min(27vw, 15vh);line-height:.84}#heroA .slot.br,#heroC .slot.br{bottom:14rem !important}.scroll-cue{bottom:8.5rem !important}}
+footer .f-acts .f-main{border-bottom:0 !important;padding-bottom:0 !important;text-decoration:none !important}
 </style>
 </head>
 <body>
@@ -1093,6 +1100,36 @@ footer .f-nav{margin:auto 0 !important;width:100%}
 
 <script src="js/lottie_svg.min.js" defer></script>
 <script type="module">
+/* the logo animation: the eagle rises, then the rays sweep round from the top and the bottom and settle */
+const PW_D = "M31.8237,15.0926c.0171-.3022.0278-.6061.0278-.9126,0-.2642-.0072-.5267-.0199-.7878l-9.3584-.0158,9.0513-2.421c-.1153-.5609-.2625-1.1099-.4351-1.6476l-9.1085,2.4361,8.1722-4.7183c-.2563-.5087-.5391-1.0015-.8466-1.4771l-8.2429,4.7616.1812-.1682,6.5625-6.5626c-.3786-.424-.778-.8289-1.1994-1.2103l-6.7086,6.7087L24.646.8562c-.4741-.3109-.966-.5963-1.4735-.8562l-4.3397,7.5167-.0669.1196c-1.1545-.8982-.9947-3.5958-1.1571-4.5184-.2284-1.2973-1.8277-1.8194-2.9792-1.5723-.4949.1062-.9583.35-1.3311.6917-.3536.324-.7968.8712-.586,1.3819,0,0,.5036-.4324,1.3982-.1935,1.0583.2828.4839,3.1646-.974,4.2948L8.679,0c-.5075.2599-.9994.5452-1.4735.8562l4.7466,8.2214L5.2436,2.369c-.4215.3815-.821.7865-1.1997,1.2106l6.6992,6.7003L2.5458,5.5473c-.3078.476-.5908.9691-.8473,1.4783l8.1969,4.7324L.7612,9.3105c-.1725.5377-.3196,1.0867-.4348,1.6476l8.8784,2.379-9.1825.0026c-.0145.2783-.0223.5584-.0223.8403,0,.2903.0088.5785.0242.865h9.6646L.3662,17.5742c.1218.5609.274,1.1101.4532,1.6472l8.999-2.4292L1.7561,21.447c.2607.5072.5466.9991.8584,1.4729l8.1329-4.6905-6.6172,6.6506c.3665.4038.7547.7874,1.1605,1.1518.0247.0084.049.0177.0739.0259l6.6862-6.686-4.1856,7.2495c.1856.0237.3739.0384.5616.0551l-.6763,1.1714c.1623.0973.3265.1916.4925.2832l.8162-1.4136c.1817.0078.3627.0187.5464.0187.0549,0,.1089-.0035.1636-.0041l3.7572-6.5078-1.6954,6.3275c.1525-.0251.3041-.0531.4549-.0831l-.8049,3.0039c.2268.0658.4553.1272.6861.183l.9027-3.369c.2173-.0569.4331-.117.646-.1845l1.4567-5.4367v4.8781c.1113-.05.2176-.1086.3272-.1614v4.7131c.142.0037.2831.0108.426.0108s.284-.007.426-.0108v-5.1619c.176-.1008.3539-.1988.5249-.3073v-3.9608l.8961,3.3443c.0709-.0533.1371-.1125.2069-.1672l1.5663,5.8454c.3241-.0754.645-.159.9612-.2538l-1.6897-6.306c.1295-.1195.2622-.2354.3869-.3598l-.6816-2.5439,1.1713,2.029c.0397-.0439.0754-.0913.1145-.1357l3.5494,6.1477c.3356-.1774.6638-.3665.9846-.5667l-3.7723-6.5338c.0863-.1179.1768-.2324.2594-.3531l-.7804-1.3518,1.012.9981c.0082-.0127.0151-.0262.0232-.0389l5.5496,5.5496c.3504-.3185.685-.654,1.0059-1.0022l-5.8358-5.8357c.0368-.0746.0779-.1464.1133-.2218l-.5126-.5056,7.8299,4.5206c.3123-.4745.5988-.967.8599-1.475l-8.0419-4.6488,8.988,2.3964c.1803-.5436.3335-1.0993.4551-1.6671l-9.079-2.4578,9.407.0214ZM15.9258,18.8838c-2.526,0-4.5737-2.0477-4.5737-4.5736s2.0477-4.5737,4.5737-4.5737,4.5736,2.0477,4.5736,4.5737-2.0477,4.5736-4.5736,4.5736Z";
+let pwAnimN = 0;
+const playMark = (box, dur = 1150) => {
+  if (!box) return;
+  const id = "pwm" + ++pwAnimN, cx = 15.9258, cy = 14.3102, R = 19, G = 5;
+  const ghosts = Array.from({ length: G }, (_, k) => `<path class="g" fill="currentColor" d="${PW_D}" opacity="${(0.42 * (1 - k / G)).toFixed(2)}"/>`).join("");
+  box.innerHTML = `<svg viewBox="0 0 31.8515 30.1058" aria-hidden="true" focusable="false" style="overflow:visible"><defs><mask id="${id}h" maskUnits="userSpaceOnUse" x="-6" y="-6" width="44" height="42"><rect class="hr" x="12.4" width="7.2" y="11.2" height="0" fill="#fff"/></mask><mask id="${id}s" maskUnits="userSpaceOnUse" x="-6" y="-6" width="44" height="42"><path class="sa" fill="#fff"/><path class="sb" fill="#fff"/></mask></defs><g class="rot"><g mask="url(#${id}h)"><g class="hd"><path fill="currentColor" d="${PW_D}"/></g></g><g mask="url(#${id}s)"><path fill="currentColor" d="${PW_D}"/>${ghosts}</g></g></svg>`;
+  const svg = box.firstChild, hr = svg.querySelector(".hr"), hd = svg.querySelector(".hd"), sa = svg.querySelector(".sa"), sb = svg.querySelector(".sb"), rot = svg.querySelector(".rot"), gs = [...svg.querySelectorAll(".g")];
+  const done = () => { box.innerHTML = `<svg viewBox="0 0 31.8515 30.1058" aria-hidden="true" focusable="false"><path fill="currentColor" d="${PW_D}"/></svg>`; };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { done(); return; }
+  const cl = (v) => Math.min(1, Math.max(0, v)), io = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2), out = (t) => 1 - Math.pow(1 - t, 3);
+  const sector = (a0, span) => { if (span <= 0.001) return ""; const a1 = a0 + span, r = (a) => (a * Math.PI) / 180; return `M${cx} ${cy}L${(cx + R * Math.cos(r(a0))).toFixed(3)} ${(cy + R * Math.sin(r(a0))).toFixed(3)}A${R} ${R} 0 ${span > 180 ? 1 : 0} 1 ${(cx + R * Math.cos(r(a1))).toFixed(3)} ${(cy + R * Math.sin(r(a1))).toFixed(3)}Z`; };
+  let el = 0, last = null;
+  const step = (now) => {
+    if (!box.contains(svg)) return;
+    el += last === null ? 0 : Math.min(now - last, 34); last = now;
+    const t = el / dur;
+    const h = out(cl(t / 0.22)); hr.setAttribute("y", (11.2 - 11.7 * h).toFixed(3)); hr.setAttribute("height", (11.7 * h).toFixed(3)); hd.setAttribute("transform", `translate(0 ${((1 - h) * 2.4).toFixed(3)})`);
+    const p = cl((t - 0.16) / 0.46), e = io(p), span = 180 * e;
+    sa.setAttribute("d", sector(-90, span)); sb.setAttribute("d", sector(90, span));
+    const v = p > 0 && p < 1 ? Math.sin(Math.PI * p) : 0;
+    gs.forEach((g, k) => { g.setAttribute("transform", `rotate(${(-(k + 1) * 5.5 * v).toFixed(2)} ${cx} ${cy})`); g.style.opacity = v > 0.02 ? "" : "0"; });
+    const st = cl((t - 0.6) / 0.4), wob = st > 0 ? Math.exp(-5 * st) * Math.sin(st * Math.PI * 2.6) * 5 : 0;
+    rot.setAttribute("transform", `rotate(${wob.toFixed(2)} ${cx} ${cy})`);
+    if (t < 1) requestAnimationFrame(step); else done();
+  };
+  requestAnimationFrame(step);
+};
+
 /* the program marks, drawn as live SVG: the arrows move and the grid of dots breathes */
 const progIcon = (id, cls = "icon") => {
   const grid = [25, 75, 125, 175, 225, 275].map((v) => `<path d="M${v} 0V300M0 ${v}H300"/>`).join("");
@@ -1505,7 +1542,7 @@ dockMenu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(f
 
 /* heroes */
 const heroes = [
-  { el: $("#heroA"), inAt: -1, out: [0.03, 0.06] },
+  { el: $("#heroA"), inAt: -1, out: [0.135, 0.165] },
   { el: $("#heroB"), inAt: 0.068, out: [0.13, 0.16] },
   { el: $("#heroC"), inAt: 0.172, out: [0.232, 0.255] },
 ].map((h) => ({ ...h, exit: h.el.querySelector(".exit"), desc: h.el.querySelector(".desc"), on: false }));
@@ -3014,9 +3051,12 @@ addEventListener("keydown", (e) => { if (e.key === "Escape" && chooserOpen) clos
 
 /* the logo: preloader centrepiece, then top centre, then it lands in the dock as you scroll in */
 const dockMarkA = $(".dock-bar .mark");
+/* tapping the logo in the nav replays its animation (the click itself still routes home) */
+document.addEventListener("pointerdown", (e) => { const m = e.target.closest && e.target.closest(".dock-bar .mark, .pw-brand"); if (!m) return; playMark(m, 1050); if (m === dockMarkA && document.body.contains(hm)) setTimeout(() => playMark(hm, 1300), 350); }, true);
 dockMarkA.innerHTML = PW_MARK;
 const hm = document.createElement("div"); hm.className = "hero-mark"; hm.setAttribute("aria-hidden", "true"); hm.innerHTML = PW_MARK;
 document.body.appendChild(hm);
+playMark(hm, 1400);
 const preEl = $("#pre");
 const eIO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 let hmStart = null, hmS = 0;
