@@ -24,7 +24,7 @@ export default async function handler(req, res) {
   try {
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      headers: Object.assign(/^sk-ant-api/.test(key) ? { 'x-api-key': key } : { Authorization: 'Bearer ' + key }, { 'anthropic-version': '2023-06-01', 'content-type': 'application/json' }),
       body: JSON.stringify({ model: MODEL, max_tokens: 400, system: SYSTEM, messages: msgs })
     });
     const data = await r.json().catch(() => ({}));
