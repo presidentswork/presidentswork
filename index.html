@@ -1181,6 +1181,14 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 .wx .mr-open .mr-kick{margin-bottom:3.25rem !important}
 /* closing CTA headlines: larger on phones, the same size on every page */
 @media(max-width:767.98px){.wx .cta .disp{font-size:clamp(3.8rem,19vw,4.9rem) !important;line-height:.98;margin-bottom:3.5rem}}
+
+/* BrandOrder stop: name above the globe, then the line, then the button */
+.caption.cap-top{top:6.5rem !important;bottom:auto !important;left:50% !important;right:auto !important;transform:translateX(-50%) !important;width:min(34rem, calc(100vw - 2.5rem)) !important;text-align:center;display:flex !important;flex-direction:column;align-items:center;gap:.7rem}
+.caption.cap-top:not(.show){transform:translate(-50%,-10px) !important}
+.caption.cap-top #capCount{display:none}
+.caption.cap-top h2{font-family:"Instrument Serif",Georgia,serif !important;font-weight:400 !important;font-size:clamp(2.6rem,1.9rem + 3vw,4.2rem) !important;line-height:.95 !important;letter-spacing:-.02em;margin:0 !important;white-space:normal !important;overflow:visible !important}
+.caption.cap-top #capMeta{display:block !important;margin:0 !important;font-size:1.05rem;line-height:1.4;white-space:normal !important;opacity:1 !important;color:#fff}
+.caption.cap-top #capEnter{margin-top:.5rem}
 </style>
 </head>
 <body>
@@ -3156,7 +3164,7 @@ function setCaption(j) {
     const btn = $("#capEnter"), lbl = btn.lastChild;
     if (j === -2) {
       $("#capCount").textContent = "The Oval Office · West Wing";
-      caption.classList.add("cta-end");
+      caption.classList.add("cta-end"); caption.classList.remove("cap-top");
       splitInto(capTitle, "Ready to put your brand to work?", { stagger: 22, dur: 1100 });
       $("#capMeta").textContent = "In brand we trust. Ready to put yours on the floor?";
       btn.querySelectorAll(".lbl2").forEach((n) => n.remove()); btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = "none"));
@@ -3165,13 +3173,14 @@ function setCaption(j) {
       requestAnimationFrame(() => requestAnimationFrame(() => capTitle.classList.add("in")));
       return;
     }
-    caption.classList.remove("cta-end");
+    caption.classList.remove("cta-end"); caption.classList.remove("cap-top");
     btn.querySelectorAll(".lbl2").forEach((n) => n.remove()); btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = ""));
     const Pr = PROJECTS[j];
     if (Pr.kind) { btn.querySelectorAll(".lbl1").forEach((n) => (n.style.display = "none")); btn.insertAdjacentHTML("beforeend", `<span class="lbl2">${Pr.label}</span>`); }
     $("#capCount").textContent = `${pad(j + 1)} / ${pad(N)} · ${Pr.room}`;
     splitInto(capTitle, Pr.name, { stagger: 28, dur: 1100 });
-    $("#capMeta").textContent = `${Pr.sector} · ${Pr.scope.join(", ")}`;
+    const top = Pr.id === "x-brandorder"; caption.classList.toggle("cap-top", top);
+    $("#capMeta").textContent = top ? "See what is holding back your brand" : `${Pr.sector} · ${Pr.scope.join(", ")}`;
     caption.classList.add("show");
     requestAnimationFrame(() => requestAnimationFrame(() => capTitle.classList.add("in")));
   }, 220);
