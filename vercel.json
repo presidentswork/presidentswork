@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/assessment", "destination": "https://brandorder.presidents.work", "permanent": false },
+    { "source": "/brandorder", "destination": "https://brandorder.presidents.work", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/:slug((?!api$|api/)[a-z0-9-]+)", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/llms.txt", "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }] }
+  ]
+}
