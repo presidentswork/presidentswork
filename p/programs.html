@@ -1431,6 +1431,9 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 /* book and BrandOrder: the caption spans the screen, so let taps reach the object; only the button takes taps */
 .caption.cap-top,.caption.cap-top.show{pointer-events:none !important}
 .caption.cap-top #capEnter{pointer-events:auto !important}
+
+/* chooser pop-up on phones: lift the content clear of Safari's bottom bar */
+@media(max-width:767.98px){.ch-panel{padding-bottom:calc(5rem + env(safe-area-inset-bottom,0px)) !important}}
 </style>
 </head>
 <body>
