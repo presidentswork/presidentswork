@@ -2181,10 +2181,7 @@ const KF = [
   { t: 0.494, d: 0.0, pos: [-10.0, 1.75, -12.3], tgt: [-9.3, 2.05, -15.5] },
   { t: 0.511, d: 0.0, pos: [-7.9, 1.8, -13.6], tgt: [-7.9, 2, -24] },
   { t: 0.528, d: 0.0155, pos: [-8.4, 1.75, -20.65], tgt: [-13.2, 3.1, -20.65], stop: 1, pj: 5 },
-  { t: 0.552, d: 0.0, pos: [-7.9, 1.8, -15.4], tgt: [-6.3, 1.9, -11] },
-  { t: 0.566, d: 0.008, pos: [-5.4, 1.75, -12.3], tgt: [-4.6, 2.05, -15.5] },
-  { t: 0.585, d: 0.0, pos: [-2.2, 1.75, -12.3], tgt: [-1.5, 2.05, -15.5] },
-  { t: 0.6, d: 0.0, pos: [0, 1.8, -13.6], tgt: [0, 1.9, -24], anchor: "blue-room" },
+  { t: 0.572, d: 0.0, pos: [-6.7, 1.8, -20.65], tgt: [2, 1.9, -21.2], anchor: "blue-room" },
   { t: 0.615, d: 0.0155, pos: [-2.6, 1.75, -18.7], tgt: [0, 1.25, -20.65], stop: 1, pj: 6 },
   { t: 0.638, d: 0.0, pos: [0.4, 1.8, -15.4], tgt: [2, 1.9, -11] },
   { t: 0.652, d: 0.008, pos: [2.4, 1.75, -12.3], tgt: [3.2, 2.05, -15.5] },
@@ -3419,7 +3416,7 @@ function setCaption(j) {
 $("#capEnter").addEventListener("click", () => { if (capJ === -2) { location.hash = "contact"; return; } if (capJ >= 0) openProject(capJ, { fly: true }); });
 
 /* ───────────────────────── the frame loop ───────────────────────── */
-const ROOMS = [[0, "Entrance Hall"], [0.3402, "East Room"], [0.4574, "Cross Hall"], [0.511, "Green Room"], [0.55, "Cross Hall"], [0.6, "Blue Room"], [0.636, "Cross Hall"], [0.684, "Red Room"], [0.72, "Cross Hall"], [0.775, "State Dining Room"], [0.869, "The West Colonnade"], [0.9241, "The Oval Office"]];
+const ROOMS = [[0, "Entrance Hall"], [0.3402, "East Room"], [0.4574, "Cross Hall"], [0.511, "Green Room"], [0.56, "Blue Room"], [0.636, "Cross Hall"], [0.684, "Red Room"], [0.72, "Cross Hall"], [0.775, "State Dining Room"], [0.869, "The West Colonnade"], [0.9241, "The Oval Office"]];
 const roomAt = (p) => { let n = ""; ROOMS.forEach(([a, name]) => { if (p >= a) n = name; }); return n; };
 const P = new Spring(0, { tension: 90, friction: 26, prec: 0.00002 });
 const FOOT = new Spring(0, { tension: 140, friction: 30, prec: 0.0005 });
