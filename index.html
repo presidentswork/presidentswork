@@ -1301,6 +1301,18 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 .caption.cap-top.cap-bo #capMeta{margin-bottom:auto !important}
 .caption.cap-top.cap-bo{bottom:31svh !important}
 @media(min-width:768px){.caption.cap-top.cap-bo{bottom:24vh !important}}
+
+/* Method figures: a light dash travels each line; the gold lens fills from the bottom */
+.mr-fig .flow{fill:none;stroke:#f6d27e;stroke-width:3;stroke-linecap:round;stroke-dasharray:22 78;filter:drop-shadow(0 0 3px rgba(246,210,126,.8));stroke-dashoffset:100;opacity:0;transition:opacity .8s ease 1.6s}
+.mr-stop.in .mr-fig .flow{opacity:.95;animation:mrFlow 5.5s linear var(--fd,0s) infinite}
+.mr-fig circle.vr.flow{animation-direction:reverse}
+@keyframes mrFlow{to{stroke-dashoffset:0}}
+.mr-stop.in .mr-fig circle.vl:not(.flow),.mr-stop.in .mr-fig circle.vr:not(.flow),.mr-stop.in .mr-fig path.draw,.mr-stop.in .mr-fig svg.wheel>circle:not(.flow){stroke-opacity:.55}
+.mr-fig svg.wheel .flow{stroke-width:2.2;stroke-dasharray:16 84}
+.mr-fig .lens{opacity:1 !important;clip-path:inset(100% 0 0 0);transition:clip-path 1.6s cubic-bezier(.6,0,.2,1) 1.4s !important}
+.mr-stop.in .mr-fig .lens{clip-path:inset(0 0 0 0);animation:mrLens 4s ease-in-out 3.2s infinite}
+@keyframes mrLens{0%,100%{fill-opacity:1}50%{fill-opacity:.72}}
+@media(prefers-reduced-motion:reduce){.mr-fig .flow{animation:none !important;opacity:0 !important}.mr-fig .lens{animation:none !important}}
 </style>
 </head>
 <body>
@@ -4253,6 +4265,15 @@ function wireMethod() {
   const imm = siteMain.querySelector(".mr-imm"); if (!imm) return;
   siteEl.classList.add("mr-immersive");
   imm.querySelectorAll(".mr-fig .draw").forEach((el) => el.style.setProperty("--len", Math.ceil(el.getTotalLength())));
+  /* lines keep moving: a bright dash runs along each outline, and the lens fills up */
+  imm.querySelectorAll(".mr-fig svg").forEach((svg) => {
+    svg.querySelectorAll("circle.vl, circle.vr, svg.wheel > circle, path.draw").forEach((el, k) => {
+      if (el.closest(".spin")) return;
+      const c = el.cloneNode(false); c.classList.remove("draw"); c.classList.add("flow"); c.setAttribute("pathLength", "100"); c.style.removeProperty("transition-delay");
+      c.style.setProperty("--fd", (k * -1.3) + "s"); el.after(c);
+    });
+  });
+
   let anim = null, wheelDone = false, wheelF = -1;
   const mkWheel = () => { if (anim || !window.lottie || !$("#mrWheel")) return; try { anim = lottie.loadAnimation({ container: $("#mrWheel"), renderer: "svg", loop: false, autoplay: false, animationData: WHEEL }); anim.goToAndStop(0, true); } catch (e) { anim = null; } };
   mkWheel(); if (!anim && $("#mrWheel")) { const iv = setInterval(() => { mkWheel(); if (anim || !document.body.contains(imm)) clearInterval(iv); }, 300); }
