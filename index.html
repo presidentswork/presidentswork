@@ -1061,6 +1061,24 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
 #pjBack:focus-visible,.pj-btn:focus-visible{outline:1.5px solid currentColor;outline-offset:2px}
 #pjBack:focus:not(:focus-visible),.pj-btn:focus:not(:focus-visible){outline:none}
 @media(hover:hover) and (min-width:769px){#pjBack:hover{border-color:currentColor}}
+/* v16: Method opening without the dark wash, R U N changing in one place, glass cards */
+.wx .mr-open::before{display:none !important}
+.wx .mr-open,.wx .mr-open .mr-open-in{text-shadow:0 2px 28px rgba(0,0,0,.38),0 1px 3px rgba(0,0,0,.25)}
+.wx .mr-sec.mr-run3{display:block !important;height:300vh;height:300svh;min-height:0 !important;padding:0 !important}
+.wx .mr-run-pin{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;color:#fff}
+.wx .mr-rl{grid-area:1/1;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(3rem) scale(.96);filter:blur(10px);transition:opacity .7s var(--ease-settle),transform .9s var(--ease-settle),filter .7s var(--ease-settle)}
+.wx .mr-rl.on{opacity:1;transform:none;filter:none}
+.wx .mr-rl.past{opacity:0;transform:translateY(-3rem) scale(1.02);filter:blur(10px)}
+.wx .mr-rl b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(12rem, 8rem + 22vw, 26rem);line-height:.8;color:#fff}
+.wx .mr-rl span{display:block;margin-top:1.75rem;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:#fff}
+.wx .mr-run-dots{position:absolute;left:50%;bottom:7.5rem;translate:-50% 0;display:flex;gap:.5rem}
+.wx .mr-run-dots i{width:.4rem;height:.4rem;border-radius:50%;background:#fff;opacity:.35;transition:opacity .4s,transform .4s}
+.wx .mr-run-dots i.on{opacity:1;transform:scale(1.3)}
+.wx .mr-card,:root[data-mode=dark] .wx .mr-card{background:rgba(255,255,255,.14) !important;backdrop-filter:blur(22px) saturate(1.35) !important;-webkit-backdrop-filter:blur(22px) saturate(1.35) !important;border:1px solid rgba(255,255,255,.3);box-shadow:0 30px 80px rgba(0,0,0,.16) !important;color:#fff;--pfg:#fff;--pmut:rgba(255,255,255,.78);--pline:rgba(255,255,255,.3);text-shadow:0 1px 18px rgba(0,0,0,.28)}
+:root[data-mode=dark] .wx .mr-card{background:rgba(12,14,12,.22) !important}
+.wx .mr-card h2,.wx .mr-card h3,.wx .mr-card p,.wx .mr-card li,.wx .mr-card .disp{color:#fff}
+.wx .mr-card .mr-fig{color:#fff}
+.wx .mr-card .mr-fig .lab{text-shadow:none}
 </style>
 </head>
 <body>
@@ -1199,6 +1217,15 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
 
 <script src="js/lottie_svg.min.js" defer></script>
 <script type="module">
+/* Method: R, U and N take turns in one place as the run section scrolls */
+const runTick = () => {
+  const sec = document.querySelector(".mr-run3"); if (!sec) return;
+  const r = sec.getBoundingClientRect(), p = Math.min(0.999, Math.max(0, -r.top / Math.max(1, r.height - innerHeight))), k = Math.floor(p * 3);
+  sec.querySelectorAll(".mr-rl").forEach((el, i) => { el.classList.toggle("on", i === k); el.classList.toggle("past", i < k); });
+  sec.querySelectorAll(".mr-run-dots i").forEach((el, i) => el.classList.toggle("on", i === k));
+};
+document.addEventListener("scroll", () => requestAnimationFrame(runTick), { capture: true, passive: true });
+
 /* programs: each card eases back and dims as the next one slides over it */
 const stackTick = () => {
   const vh = innerHeight;
@@ -3407,7 +3434,7 @@ PAGES.method = () => `
 <div class="mr-imm">
 <section class="mr-sec mr-open mr-first mr-c" data-key="hero"><div class="mr-open-in"><p class="mr-kick fx">Our method</p><h1 class="mr-title rv">The Presidential Run©</h1></div><p class="mr-go">Scroll <i></i></p></section>
 <section class="mr-sec mr-open mr-c"><div class="mr-open-in"><p class="mr-sub2 rv">How Presidents campaign for greatness</p></div></section>
-${[["R", "Realize"], ["U", "Unite"], ["N", "Nurture"]].map(([l, w]) => `<section class="mr-sec mr-open mr-c mr-letter"><div class="mr-open-in"><b>${l}</b><span>${w}</span></div></section>`).join("")}
+<section class="mr-sec mr-open mr-run3"><div class="mr-run-pin">${[["R", "Realize"], ["U", "Unite"], ["N", "Nurture"]].map(([l, w], k) => `<div class="mr-rl${k ? "" : " on"}"><b>${l}</b><span>${w}</span></div>`).join("")}<p class="mr-run-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></p></div></section>
 <section class="mr-sec mr-open r" data-key="start"><div class="mr-open-in mr-open-sm"><h2 class="mr-title2 rv">The run</h2><p class="fx">Our method turns vision into action and aligns strategy with design, so your brand leads with purpose and power. Every engagement runs the same course, from the Oval Office into the Rose Garden, with three stops where strategy and design come together.</p></div></section>
 ${STOPS.map(([k, n, h, b], i) => `<section class="mr-sec mr-stop${i % 2 ? "" : " r"}" data-k="${k}" data-key="${k}"><div class="mr-card"><div class="mr-fig">${FIG[k]}</div><p class="mr-n">${n}</p><h3>${h}</h3><p class="body">${b}</p></div></section>`).join("")}
 <section class="mr-sec r" data-key="process"><div class="mr-card"><h2 class="disp rv">The Presidents Process</h2><p class="body fx">Five steps carry your brand from first conversation to launch.</p><p class="st-m rv">How we lead your brand into power©</p>
