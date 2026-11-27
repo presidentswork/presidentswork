@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>Presidents Work — The House</title>
-<meta name="description" content="Presidents Work is a strategic brand consultancy and creative studio that leads brands into power©.">
+<title>Presidents Work | Brand strategy and creative studio</title>
+<meta name="description" content="Presidents Work is a brand strategy consultancy and creative studio that leads brands into power©. Walk through our work, room by room.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Presidents Work">
 <meta property="og:title" content="Presidents Work — Leading brands into power©">
@@ -3415,7 +3415,7 @@ function openProject(i, { fly = true } = {}) {
   const already = state.open >= 0;
   state.open = i; setMenu(false); lastFocusEl = document.activeElement;
   if (location.hash.slice(1) !== PROJECTS[i].id) { try { history.pushState(null, "", "#" + PROJECTS[i].id); } catch (e) { /* sandboxed */ } }
-  fillPage(i);
+  fillPage(i); try { setProjectMeta(WORKDATA[(PROJECTS[i] && PROJECTS[i].id)] || PROJECTS[i]); } catch (e) { /* meta only */ }
   if (already) { pj.scrollTo({ top: 0 }); view.focus = i; jumpToStation(i); return; }
   const inStage = track.getBoundingClientRect().bottom > innerHeight * 0.5;
   if (!inStage || !fly) jumpToStation(i);
@@ -3431,6 +3431,7 @@ function openProject(i, { fly = true } = {}) {
   }, showAfter);
 }
 function closeProject() {
+  if (!state.page) { try { setMeta(SEO.home[0], SEO.home[1]); } catch (e) { /* meta only */ } }
   if (state.open < 0) return;
   state.open = -1; clearTimeout(pageTO);
   pj.classList.remove("open"); pj.setAttribute("aria-hidden", "true");
@@ -4459,13 +4460,42 @@ siteEl.addEventListener("scroll", checkFoot, { passive: true });
 const resetFoot = () => { pageFoot.classList.remove("in"); pageFoot.querySelector(".headline")?.classList.remove("in"); };
 const syncFootBg = () => { const src = $("#fbg").getAttribute("src"); const im = pageFoot.querySelector(".f-bg"); if (src && im && im.getAttribute("src") !== src) { im.src = src; im.classList.add("ready"); } };
 state.page = null;
-const BASE_TITLE = document.title;
+
+/* page names and meta descriptions for every page */
+const SEO = {
+  home: ["Presidents Work | Brand strategy and creative studio", "Presidents Work is a brand strategy consultancy and creative studio that leads brands into power©. Walk through our work, room by room."],
+  programs: ["Programs | Presidents Work", "Six ways to build your brand, from a one-week launch to organization-wide transformation. Find the Presidents Work program that fits your stage."],
+  launch: ["Launch™ | A strategic website in one week | Presidents Work", "Go from idea to launch, fast. Launch™ brings your business to market with a strategic one-page website, built and launched in one week."],
+  boardroom: ["Boardroom™ | Executive brand strategy session | Presidents Work", "Get executive-level clarity before your next big decision. A focused Boardroom™ session to challenge assumptions and define the clearest path forward."],
+  formation: ["Formation™ | Brand strategy and identity in 6 weeks | Presidents Work", "Go from 0-to-1, then to 100, fast. Formation™ turns your idea into a brand that stands out, with strategy and identity in six weeks."],
+  elevation: ["Elevation™ | Brand transformation for growing companies | Presidents Work", "Scale your brand with purpose and precision. Elevation™ helps established companies refine, reposition and lead their industry."],
+  direction: ["Direction™ | Ongoing brand and marketing direction | Presidents Work", "Lead with intent, insight and purpose. Direction™ is senior brand and marketing direction, month by month, alongside your team."],
+  enterprise: ["Enterprise | Organization-wide brand transformation | Presidents Work", "One brand system across every division, brand and location. Enterprise brings organization-wide brand transformation to companies with complex growth ahead."],
+  method: ["The Presidential Run© | Our method | Presidents Work", "Realize, unite, nurture. The Presidential Run© is the Presidents Work method that turns vision into action and aligns strategy with design."],
+  about: ["About | Presidents Work", "Presidents Work is a strategic brand consultancy and creative studio. From startup founders to C-suite executives, we help leaders build brands with power."],
+  contact: ["Contact | Start a project | Presidents Work", "Tell us where your brand is headed. Start a project with Presidents Work, book a complimentary call, or email hello@presidentswork.com."],
+  index: ["Work index | Presidents Work", "Every Presidents Work project in one list: brand identities, websites, packaging and campaigns for startups and scale-ups."],
+  yankyperl: ["Yanky Perl | Founder of Presidents Work", "Yanky Perl is a graphic designer and brand strategist, founder of Presidents Work and author of Building Nothing."],
+};
+const setMeta = (title, desc) => {
+  document.title = title;
+  const put = (sel, attr, val) => { let m = document.head.querySelector(sel); if (!m) { m = document.createElement("meta"); const [k, v] = attr; m.setAttribute(k, v); document.head.appendChild(m); } m.setAttribute("content", val); };
+  put('meta[name="description"]', ["name", "description"], desc);
+  put('meta[property="og:title"]', ["property", "og:title"], title);
+  put('meta[property="og:description"]', ["property", "og:description"], desc);
+  put('meta[name="twitter:title"]', ["name", "twitter:title"], title);
+  put('meta[name="twitter:description"]', ["name", "twitter:description"], desc);
+};
+const setPageMeta = (id) => { const m = SEO[id]; if (m) setMeta(m[0], m[1]); else setMeta(`${PAGE_TITLES[id] || "Presidents Work"} | Presidents Work`, SEO.home[1]); };
+const setProjectMeta = (P) => { if (!P) return; const d = (P.tagline || P.overview || "").replace(/\s+/g, " ").trim(); setMeta(`${P.name} | ${(P.scope || []).slice(0, 2).join(", ") || "Case study"} | Presidents Work`, (d + " A Presidents Work case study" + (P.services ? ": " + P.services + "." : ".")).slice(0, 300)); };
+setMeta(SEO.home[0], SEO.home[1]);
+const BASE_TITLE = SEO.home[0];
 function openPage(id) {
   if (state.open >= 0) closeProject();
   setMenu(false); siteMenu.hidden = true; $("#shBurger").setAttribute("aria-expanded", "false");
   state.page = id; closeChooser();
   siteMain.innerHTML = PAGES[id]();
-  document.title = `${PAGE_TITLES[id]} | Presidents Work`;
+  setPageMeta(id);
   const cur = NAV_OF[id] || id;
   siteEl.querySelectorAll(".sh-nav a, .sh-menu a").forEach((a) => (a.getAttribute("href") === "#" + cur ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current")));
   siteEl.classList.add("open"); siteEl.setAttribute("aria-hidden", "false"); siteEl.scrollTop = 0;
@@ -4478,7 +4508,7 @@ function openPage(id) {
 }
 function closePage() {
   if (!state.page) return;
-  state.page = null; siteEl.classList.remove("open"); siteEl.setAttribute("aria-hidden", "true"); document.title = BASE_TITLE;
+  state.page = null; siteEl.classList.remove("open"); siteEl.setAttribute("aria-hidden", "true"); setMeta(SEO.home[0], SEO.home[1]);
   if (state.open < 0 && lenis) lenis.start();
 }
 const clearHash = () => { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* sandboxed */ } };
