@@ -1,0 +1,23 @@
+{
+  "name": "primary",
+  "version": "1.0.0",
+  "description": "<!-- **presidentswork/presidentswork** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/presidentswork/presidentswork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/presidentswork/presidentswork/issues"
+  },
+  "homepage": "https://github.com/presidentswork/presidentswork#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
