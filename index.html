@@ -1079,6 +1079,13 @@ html[data-mode="dark"] .wx .prog article:nth-child(6n+6){--cbg:#203024;--pfg:#ff
 .wx .mr-card h2,.wx .mr-card h3,.wx .mr-card p,.wx .mr-card li,.wx .mr-card .disp{color:#fff}
 .wx .mr-card .mr-fig{color:#fff}
 .wx .mr-card .mr-fig .lab{text-shadow:none}
+/* in-site viewer: no browser chrome, just close and open-in-new-tab */
+.ib-dots,.ib-url{display:none !important}
+.ib-bar{position:absolute !important;top:.85rem;right:.85rem;left:auto;height:auto !important;padding:0 !important;gap:.5rem;background:none !important;border:0 !important;z-index:2}
+.ib-win{position:relative;background:#fff}
+.ib-btn{width:2.75rem !important;height:2.75rem !important;border-radius:50% !important;background:rgba(18,18,18,.55) !important;color:#fff !important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+@media(hover:hover){.ib-btn:hover{background:rgba(18,18,18,.8) !important}}
+.ib-load{position:fixed !important;left:0;top:0;bottom:auto !important;width:100% !important;height:2px;background:#fff !important}
 </style>
 </head>
 <body>
@@ -1760,7 +1767,9 @@ const KF = [
   { t: 0.4298, d: 0.018, pos: [-19.3, 1.75, -6.15], tgt: [-25, 2.9, -6.15], stop: 1, pj: 2 },
   { t: 0.4651, d: 0.018, pos: [-17.9, 1.65, -10.4], tgt: [-21, 1.3, -13], stop: 1, pj: 3 },
   { t: 0.5048, d: 0.018, pos: [-19.3, 2.1, -16.8], tgt: [-19.3, 3.2, -25.4], stop: 1, pj: 4 },
-  { t: 0.5356, d: 0, pos: [-15, 1.8, -12.75], tgt: [-4, 2, -13.5] },
+  { t: 0.5306, d: 0, pos: [-15, 1.8, -12.75], tgt: [-4, 2, -13.5] },
+  /* step back in the Cross Hall to take in the whole wall of client logos */
+  { t: 0.5416, d: 0.01, pos: [-12.9, 2.55, -10.55], tgt: [-2.4, 2.15, -15.45], stop: 1 },
   { t: 0.5576, d: 0, pos: [-7.9, 1.8, -13.6], tgt: [-7.9, 2, -24] },
   { t: 0.5885, d: 0.018, pos: [-8.4, 1.75, -20.65], tgt: [-13.2, 3.1, -20.65], stop: 1, pj: 5 },
   { t: 0.6149, d: 0, pos: [-6.7, 1.8, -20.65], tgt: [2, 1.9, -21.2], anchor: "blue-room" },
