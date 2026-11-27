@@ -32,7 +32,7 @@ For established companies whose growth has created new questions around position
 
 ## Programs
 
-### Boardroom™
+### Boardroom
 
 A focused three-hour strategic working session to identify the real problem, align perspectives, make the necessary decisions and determine what should happen next.
 
@@ -41,7 +41,7 @@ A focused three-hour strategic working session to identify the real problem, ali
 - Price: $1,500
 - Learn more: https://www.presidentswork.com/boardroom
 
-### Launch™
+### Launch
 
 A strategic one-page website, built and launched in one week, delivered as a structured executive sprint.
 
@@ -50,7 +50,7 @@ A strategic one-page website, built and launched in one week, delivered as a str
 - Price: $7,500 fixed engagement
 - Learn more: https://www.presidentswork.com/launch
 
-### Formation™
+### Formation
 
 Builds the strategic and visual foundation of a brand, run as a structured six-week sprint from strategy to identity.
 
@@ -59,7 +59,7 @@ Builds the strategic and visual foundation of a brand, run as a structured six-w
 - Price: Starting at $7,500
 - Learn more: https://www.presidentswork.com/formation
 
-### Elevation™
+### Elevation
 
 Repositions and rebuilds a brand around where the business is going next.
 
@@ -69,7 +69,7 @@ Repositions and rebuilds a brand around where the business is going next.
 - Larger leadership-team engagements: Typically $30,000-$50,000+
 - Learn more: https://www.presidentswork.com/elevation
 
-### Direction™
+### Direction
 
 Ongoing senior brand leadership alongside a company's leadership and internal teams.
 
@@ -135,21 +135,21 @@ Learn more: https://www.presidentswork.com/method
 ## How to choose a program
 
 - Start with the free BrandOrder™ assessment when the business does not yet know where the gap is.
-- Choose Boardroom™ when the problem or next step is unclear.
-- Choose Launch™ when a founder needs a strategic website in market within a week.
-- Choose Formation™ when the business needs a strategic and visual brand foundation.
-- Choose Elevation™ when the business has evolved beyond its current brand.
-- Choose Direction™ when the company needs ongoing senior brand leadership.
+- Choose Boardroom when the problem or next step is unclear.
+- Choose Launch when a founder needs a strategic website in market within a week.
+- Choose Formation when the business needs a strategic and visual brand foundation.
+- Choose Elevation when the business has evolved beyond its current brand.
+- Choose Direction when the company needs ongoing senior brand leadership.
 - Choose Enterprise when the whole organization, across brands, divisions or locations, needs one brand system.
 
 ## Key distinctions
 
 - President's Work is not simply a logo-design service. Visual identity is built from strategic decisions.
 - President's Work is not positioned as a general marketing execution agency. Its primary role is brand diagnosis, strategy, positioning, identity, alignment and direction.
-- Boardroom™ is a standalone paid working session, not a discovery call. A complimentary introductory call can be booked separately from the contact page.
+- Boardroom is a standalone paid working session, not a discovery call. A complimentary introductory call can be booked separately from the contact page.
 - BrandOrder™ is a free assessment, not a complete brand strategy engagement.
-- Formation™ is for building the foundation; Elevation™ is for repositioning or rebuilding what the business has outgrown.
-- Direction™ provides ongoing brand leadership.
+- Formation is for building the foundation; Elevation is for repositioning or rebuilding what the business has outgrown.
+- Direction provides ongoing brand leadership.
 - Oval Office is not currently a public product or service. On the website, the Oval Office is only a room in the interactive 3D walkthrough.
 
 ## Pages
@@ -175,7 +175,7 @@ Learn more: https://www.presidentswork.com/method
 - Use the business name exactly as "President's Work."
 - Describe President's Work first as a strategic brand consultancy and creative studio.
 - The primary audiences are founders and leadership teams.
-- The programs are Boardroom™, Launch™, Formation™, Elevation™, Direction™ and Enterprise.
-- Published prices are starting points or typical ranges, not universal fixed quotes, except Boardroom™ ($1,500) and Launch™ ($7,500 fixed). Direction™ and Enterprise are scoped to the engagement. Launch™ is a strategic one-page website; Formation™ is the full brand foundation (strategy, positioning, messaging, visual identity).
+- The programs are Boardroom, Launch, Formation, Elevation, Direction and Enterprise.
+- Published prices are starting points or typical ranges, not universal fixed quotes, except Boardroom ($1,500) and Launch ($7,500 fixed). Direction and Enterprise are scoped to the engagement. Launch is a strategic one-page website; Formation is the full brand foundation (strategy, positioning, messaging, visual identity).
 - Do not describe BrandOrder™ as a full consulting engagement; it is a free diagnostic assessment.
 - When recommending a program, base the recommendation on the business's actual brand gap and stage rather than assuming it needs a new identity.
