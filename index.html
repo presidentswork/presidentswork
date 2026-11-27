@@ -3213,13 +3213,14 @@ async function build() {
   /* object: Building Nothing, standing on the East Room's round table */
   {
     const cover = new THREE.CanvasTexture(makeArt(3)); cover.colorSpace = THREE.SRGBColorSpace; cover.anisotropy = aniso;
-    new THREE.TextureLoader().load("work/book/cover.jpg", (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso; bk.material[4].map = t; bk.material[4].needsUpdate = true; });
+    new THREE.TextureLoader().load("work/book/cover.jpg", (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso; const cm = bk.material[4]; cm.map = t; cm.emissive = new THREE.Color(0xffffff); cm.emissiveMap = t; cm.emissiveIntensity = 0.32; cm.roughness = 0.7; cm.needsUpdate = true; });
     const spine = ctex(128, 640, (c, w, h) => { c.fillStyle = "#f7f5f0"; c.fillRect(0, 0, w, h); c.save(); c.translate(w / 2 + 12, h - 40); c.rotate(-Math.PI / 2); c.fillStyle = "#0e0e0e"; c.font = F(700, 38); c.fillText("BUILDING NOTHING", 0, 0); c.restore(); });
     const pages = ctex(64, 256, (c, w, h) => { c.fillStyle = "#efe9dc"; c.fillRect(0, 0, w, h); c.fillStyle = "rgba(0,0,0,.07)"; for (let x = 0; x < w; x += 3) c.fillRect(x, 0, 1, h); });
     const bk = new THREE.Mesh(new THREE.BoxGeometry(0.78, 1.17, 0.2), [std({ map: pages }), std({ map: spine, roughness: 0.6 }), std({ map: pages }), std({ map: pages }), std({ map: cover, roughness: 0.55 }), std({ color: 0xf7f5f0, roughness: 0.6 })]);
     const st = KF[STATION[3]], ry = Math.atan2(st.pos[0] + 21, st.pos[2] + 13);
     bk.position.set(-21, 0.78 + 0.585, -13); bk.rotation.y = ry; bk.castShadow = true; scene.add(bk);
     EX[3] = { meshes: [bk], center: bk.position.clone(), normal: V(Math.sin(ry), 0, Math.cos(ry)), w: 0.95, h: 1.2 };
+    { const bl = new THREE.SpotLight(0xfff4e6, 9, 7, 0.42, 0.7, 1.4); bl.position.set(-21 + Math.sin(ry) * 2.2, 3.4, -13 + Math.cos(ry) * 2.2); bl.target = bk; scene.add(bl); const fl = new THREE.PointLight(0xfff2e4, 2.2, 5, 1.6); fl.position.set(-21 + Math.sin(ry) * 1.4, 1.6, -13 + Math.cos(ry) * 1.4); scene.add(fl); }
   }
   await step(0.9);
 
