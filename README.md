@@ -14,3 +14,10 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## Front-door pages and share images
+
+Every page and project has a front-door file in `p/<slug>.html` (its own title, description, share image and search text) and a share image in `og/<slug>.jpg`. After changing `index.html`, regenerate them before pushing:
+
+    python3 scripts/make-og.py     # only when names, taglines or cover photos change
+    python3 scripts/build-pages.py # always, after any change to index.html
