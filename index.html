@@ -2562,15 +2562,15 @@ async function build() {
     for (let z = -28; z >= -40; z -= 2.2) bush(39.5, z, 0.8);
     /* a portrait bust on a marble plinth at the back of the room, slowly turning */
     {
-      const px = cx + 2.55, pz = cz - 3.3;
+      const px = cx + 3.25, pz = cz; /* straight ahead as you come through the door */
       put(CYL, M.marble, px, 0.55, pz, { sx: 0.32, sy: 1.1, sz: 0.32 }); put(BOX, M.marble, px, 1.13, pz, { sx: 0.75, sy: 0.06, sz: 0.75 }); put(BOX, M.marble, px, 0.04, pz, { sx: 0.8, sy: 0.08, sz: 0.8 });
       import("three/addons/loaders/GLTFLoader.js").then(({ GLTFLoader }) => new GLTFLoader().load("models/bust.glb", (gl) => {
         const m = gl.scene; const rm = []; m.traverse((o) => { if (o.isLight) rm.push(o); if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); rm.forEach((o) => o.parent && o.parent.remove(o));
-        const bb = new THREE.Box3().setFromObject(m), sz = bb.getSize(V(0, 0, 0)), k = 0.72 / Math.max(sz.y, 0.001);
+        const bb = new THREE.Box3().setFromObject(m), sz = bb.getSize(V(0, 0, 0)), k = 0.9 / Math.max(sz.y, 0.001);
         const pivot = new THREE.Group(); pivot.position.set(px, 1.16, pz); scene.add(pivot);
         m.scale.setScalar(k); const c2 = bb.getCenter(V(0, 0, 0)); m.position.set(-c2.x * k, -bb.min.y * k, -c2.z * k); pivot.add(m);
-        pivot.rotation.y = -Math.PI / 2; window.__pwBust = pivot;
-        const sl = new THREE.SpotLight(0xfff0dc, 6, 6, 0.42, 0.6, 1.2); sl.position.set(px - 1.4, 3.6, pz + 0.6); sl.target = pivot; scene.add(sl); scene.add(sl.target);
+        pivot.rotation.y = -Math.PI / 2; pivot.userData.base = -Math.PI / 2; window.__pwBust = pivot;
+        const sl = new THREE.SpotLight(0xfff0dc, 6, 6, 0.42, 0.6, 1.2); sl.position.set(px - 2.2, 3.8, pz + 0.4); sl.target = pivot; scene.add(sl); scene.add(sl.target);
       }, undefined, () => {})).catch(() => {});
     }
   }
@@ -2992,7 +2992,7 @@ sub((t, dt) => {
   G.renderer.toneMappingExposure = lerp(1.0, 0.92, ins);
   G.lamps.forEach((l) => (l.intensity = lerp(18, 30, ins)));
   if (!reduce) {
-    if (window.__pwBust) window.__pwBust.rotation.y += dt * 0.00018;
+    if (window.__pwBust) { const b = window.__pwBust; b.userData.t = (b.userData.t || 0) + dt; b.rotation.y = b.userData.base + Math.sin(b.userData.t * 0.00035) * 0.45; }
     G.EX.forEach((e) => { if (e.spin) { e.spin.rotation.y += dt * 0.00034; if (e.clouds) e.clouds.rotation.y += dt * 0.00046; } });
     if (p < 0.3) G.jets.forEach((j, k) => {
       j.jet.scale.y = 1 + Math.sin(t * 0.004 + k) * 0.03;
