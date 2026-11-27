@@ -3058,9 +3058,34 @@ async function build() {
       }
     }
     /* the view through the Oval Office windows: sky over the Rose Garden */
-    const ovalView = new THREE.MeshBasicMaterial({ toneMapped: false, map: ctex(128, 320, (c, w, h) => {
-      const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, "#9ec4e8"); g.addColorStop(0.5, "#d6e7f3"); g.addColorStop(0.62, "#cfe0c8"); g.addColorStop(0.66, "#5f8a4a"); g.addColorStop(1, "#3e6a33"); c.fillStyle = g; c.fillRect(0, 0, w, h);
-      const r = mulberry(9); for (let i = 0; i < 26; i++) { c.fillStyle = `rgba(${40 + r() * 30},${90 + r() * 40},${40 + r() * 20},.85)`; c.beginPath(); c.arc(r() * w, h * (0.6 + r() * 0.1), 8 + r() * 18, 0, Math.PI * 2); c.fill(); }
+    const ovalView = new THREE.MeshBasicMaterial({ toneMapped: false, map: ctex(512, 1280, (c, w, h) => {
+      const r = mulberry(9), hz = h * 0.6;
+      /* sky with soft clouds */
+      let g = c.createLinearGradient(0, 0, 0, hz); g.addColorStop(0, "#8fbbe4"); g.addColorStop(0.75, "#cfe2f1"); g.addColorStop(1, "#e4eef2"); c.fillStyle = g; c.fillRect(0, 0, w, hz);
+      for (let i = 0; i < 14; i++) { const x = r() * w, y = h * (0.08 + r() * 0.35), rr = 40 + r() * 70; const cg = c.createRadialGradient(x, y, 0, x, y, rr); cg.addColorStop(0, "rgba(255,255,255,.55)"); cg.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = cg; c.fillRect(x - rr, y - rr, rr * 2, rr * 2); }
+      /* distant tree line in layers, hazy at the back and darker in front */
+      const canopy = (y0, n, rMin, rMax, cols) => { for (let i = 0; i < n; i++) { const x = r() * w, y = y0 + (r() - 0.5) * 30, rr = rMin + r() * (rMax - rMin); c.fillStyle = cols[(r() * cols.length) | 0]; c.beginPath(); c.arc(x, y, rr, 0, Math.PI * 2); c.fill(); } };
+      canopy(hz - 120, 60, 40, 80, ["#9fb7a0", "#a9bfa6", "#93ad97"]);
+      canopy(hz - 75, 80, 34, 66, ["#6f9666", "#7ba36c", "#668c5c"]);
+      canopy(hz - 40, 100, 26, 52, ["#5f8a55", "#6b955c", "#557f4b", "#78a066"]);
+      canopy(hz - 12, 120, 14, 30, ["#3f6b35", "#4a7a3d", "#35602e", "#56853f"]);
+      for (let i = 0; i < 260; i++) { c.fillStyle = `rgba(${150 + r() * 60},${190 + r() * 40},${110 + r() * 40},.35)`; c.beginPath(); c.arc(r() * w, hz - 80 + r() * 80, 2 + r() * 4, 0, Math.PI * 2); c.fill(); }
+      /* lawn: mown stripes that widen toward the window */
+      g = c.createLinearGradient(0, hz, 0, h); g.addColorStop(0, "#5d8c45"); g.addColorStop(1, "#3c6a2c"); c.fillStyle = g; c.fillRect(0, hz, w, h - hz);
+      for (let k = 0; k < 9; k++) { const y0 = hz + (h - hz) * (k / 9) ** 1.6, y1 = hz + (h - hz) * ((k + 1) / 9) ** 1.6; if (k % 2) { c.fillStyle = "rgba(255,255,200,.13)"; c.fillRect(0, y0, w, y1 - y0); } }
+      /* boxwood border and a bed of tulips along the far edge of the lawn */
+      c.fillStyle = "#2b4f22"; c.fillRect(0, hz + 6, w, 18);
+      for (let i = 0; i < 160; i++) { c.fillStyle = `rgba(${30 + r() * 30},${70 + r() * 40},${25 + r() * 20},.9)`; c.beginPath(); c.arc(r() * w, hz + 6 + r() * 18, 3 + r() * 5, 0, Math.PI * 2); c.fill(); }
+      const tul = ["#c8202a", "#e3b51f", "#f3efe6", "#e86a8a"];
+      for (let i = 0; i < 220; i++) { const x = r() * w; c.fillStyle = tul[Math.min(3, (x / (w / 4)) | 0)]; c.beginPath(); c.arc(x, hz + 2 + r() * 6, 2 + r() * 2, 0, Math.PI * 2); c.fill(); }
+      /* grass blades, finer far away and longer up close */
+      for (let i = 0; i < 700; i++) { const t = r(), y = hz + 26 + t * (h - hz - 26), rr = 6 + t * 40; c.fillStyle = r() < 0.5 ? "rgba(30,60,20,.12)" : "rgba(170,200,90,.1)"; c.beginPath(); c.ellipse(r() * w, y, rr * 2, rr * 0.5, 0, 0, Math.PI * 2); c.fill(); }
+      /* a couple of clipped shrubs and a stone path out to the garden */
+      c.fillStyle = "#d9d2c0"; c.beginPath(); c.moveTo(w * 0.47, hz + 24); c.lineTo(w * 0.53, hz + 24); c.lineTo(w * 0.7, h); c.lineTo(w * 0.3, h); c.closePath(); c.fill();
+      for (let k = 0; k < 14; k++) { const y = hz + 24 + (h - hz - 24) * (k / 14) ** 1.6; c.strokeStyle = "rgba(120,110,90,.35)"; c.lineWidth = 1 + k * 0.2; c.beginPath(); const sp = 0.03 + 0.17 * (y - hz) / (h - hz); c.moveTo(w * (0.5 - sp), y); c.lineTo(w * (0.5 + sp), y); c.stroke(); }
+      [[0.14, 0.7, 38], [0.86, 0.7, 38], [0.08, 0.82, 64], [0.92, 0.82, 64]].forEach(([fx, fy, rr]) => { const x = fx * w, y = fy * h; c.fillStyle = "rgba(0,0,0,.25)"; c.beginPath(); c.ellipse(x, y + rr * 0.8, rr * 1.1, rr * 0.25, 0, 0, Math.PI * 2); c.fill(); for (let j = 0; j < 60; j++) { c.fillStyle = `rgb(${35 + r() * 30},${75 + r() * 45},${30 + r() * 20})`; c.beginPath(); c.arc(x + (r() - 0.5) * rr * 1.6, y + (r() - 0.6) * rr * 1.4, rr * (0.18 + r() * 0.2), 0, Math.PI * 2); c.fill(); } });
+      for (let i = 0; i < 12000; i++) { const t = r() ** 0.7, y = hz + 26 + t * (h - hz - 26), len = 3 + t * 22, x = r() * w, lean = (r() - 0.5) * len * 0.6;
+        c.strokeStyle = `rgba(${40 + r() * 70},${95 + r() * 80},${30 + r() * 40},${0.5 + r() * 0.45})`; c.lineWidth = 0.8 + t * 2; c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x + lean * 0.3, y - len * 0.6, x + lean, y - len); c.stroke(); }
     }) });
     [-Math.PI / 2, -Math.PI / 2 - 0.5, -Math.PI / 2 + 0.5].forEach((a) => {
       const x = cx + (rx - 0.16) * Math.cos(a), z = cz + (rz - 0.16) * Math.sin(a), ry = Math.atan2(-(x - cx) / rx ** 2, -(z - cz) / rz ** 2);
@@ -3103,9 +3128,11 @@ async function build() {
           hand((m + sec / 60) / 60 * Math.PI * 2, 176, 8, "#0d1a3a");
           hand(sec / 60 * Math.PI * 2, 190, 3, "#c9a24e");
           c.fillStyle = "#c9a24e"; c.beginPath(); c.arc(256, 256, 11, 0, Math.PI * 2); c.fill();
-          c.fillStyle = "#0d1a3a"; c.textAlign = "center"; c.font = "500 46px 'Instrument Sans', system-ui, sans-serif";
+          c.fillStyle = "#0d1a3a"; c.textAlign = "center";
           const label = (city ? city.toUpperCase() + "  ·  " : "") + now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-          c.save(); c.letterSpacing = "5px"; c.fillText(label, 256, 600); c.restore();
+          c.save(); c.letterSpacing = "4px"; let fs = 42; c.font = `500 ${fs}px 'Instrument Sans', system-ui, sans-serif`;
+          while (fs > 18 && c.measureText(label).width > 440) { fs -= 2; c.font = `500 ${fs}px 'Instrument Sans', system-ui, sans-serif`; }
+          c.fillText(label, 256, 600); c.restore();
           tex.needsUpdate = true;
         };
 
