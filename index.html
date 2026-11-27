@@ -3404,7 +3404,7 @@ sub((t, dt) => {
 
   /* station caption */
   let act = -1;
-  if (inTrack && state.open < 0 && view.k === 0) { PROJECTS.forEach((_, j) => { const k = KF[STATION[j]]; if (p >= k.t - 0.012 && p <= k.t + k.d + 0.012) act = j; }); const ks = KF[KF.length - 1]; if (p >= ks.t - 0.012) act = -2; }
+  if (inTrack && state.open < 0 && view.k === 0) { PROJECTS.forEach((_, j) => { const k = KF[STATION[j]]; if (p >= k.t - 0.01 && p <= k.t + k.d + 0.003) act = j; }); const ks = KF[KF.length - 1]; if (p >= ks.t - 0.012) act = -2; }
   setCaption(act);
 
   /* footer */
