@@ -1113,16 +1113,16 @@ html.snd-on .snd-btn .t-on{display:inline}html.snd-on .snd-btn .t-off{display:no
 .snd-hero.gone{opacity:0;translate:0 -.5rem;pointer-events:none}
 @media(max-width:767.98px){.dock-bar .dock-act .snd-btn{display:none !important}.dock-menu .dm-snd{margin-top:0;padding-top:.2rem;border-top:0}}
 @media(prefers-reduced-motion:reduce){html.snd-on .snd-btn .w1,html.snd-on .snd-btn .w2{animation:none}}
-/* chooser pop-up on phones: big type that scales with the screen height so it always fits */
+/* chooser pop-up on phones: about three quarters of the screen, type scaled to the screen height, not oversized */
 @media(max-width:767.98px){
-  .ch-panel{padding:clamp(1.9rem,4.2svh,2.75rem) 1.5rem clamp(1.6rem,3.4svh,2.4rem);max-height:94svh}
-  .ch-panel h2{font-size:clamp(2.7rem,7.4svh,3.9rem);line-height:.98;margin:0 3rem clamp(.7rem,1.6svh,1.1rem) 0}
-  .ch-panel .ch-lede{font-size:clamp(.98rem,2.1svh,1.12rem);line-height:1.5;margin-bottom:clamp(1.3rem,3svh,2rem)}
-  .ch-list a{padding:clamp(1.05rem,2.5svh,1.6rem) 0;gap:clamp(.3rem,.8svh,.55rem) .75rem}
-  .ch-list .nm{font-size:clamp(1.45rem,3.5svh,1.85rem);line-height:1.1}
-  .ch-list .d{font-size:clamp(.92rem,1.95svh,1.04rem);line-height:1.5}
-  .ch-foot{font-size:clamp(.9rem,1.9svh,1rem);line-height:1.5;margin-top:clamp(1.1rem,2.6svh,1.75rem)}
-  .ch-x{width:2.6rem;height:2.6rem;top:1rem;right:1rem}
+  .ch-panel{padding:clamp(1.6rem,3.2svh,2.2rem) 1.5rem clamp(1.4rem,2.6svh,1.9rem);max-height:82svh}
+  .ch-panel h2{font-size:clamp(2.2rem,5.2svh,2.9rem);line-height:1;margin:0 3rem clamp(.55rem,1.2svh,.85rem) 0}
+  .ch-panel .ch-lede{font-size:clamp(.9rem,1.8svh,1rem);line-height:1.5;margin-bottom:clamp(1rem,2.2svh,1.5rem)}
+  .ch-list a{padding:clamp(.85rem,1.9svh,1.2rem) 0;gap:clamp(.2rem,.5svh,.4rem) .75rem}
+  .ch-list .nm{font-size:clamp(1.25rem,2.7svh,1.5rem);line-height:1.15}
+  .ch-list .d{font-size:clamp(.85rem,1.7svh,.95rem);line-height:1.5}
+  .ch-foot{font-size:clamp(.84rem,1.65svh,.92rem);line-height:1.5;margin-top:clamp(.9rem,2svh,1.4rem)}
+  .ch-x{width:2.5rem;height:2.5rem;top:1rem;right:1rem}
 }
 /* footer: the big Presidents Work wordmark on top, links in the middle, Work with us and the two buttons at the bottom */
 footer .wordmark,.site footer.f-page .wordmark{position:absolute !important;left:0;right:0;top:5.5rem;height:auto !important;margin:0 !important;padding:0 !important;align-items:flex-start !important;z-index:14}
