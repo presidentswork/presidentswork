@@ -3057,17 +3057,7 @@ async function build() {
     {
       const px = cx + 3.25, pz = cz; /* straight ahead as you come through the door */
       put(CYL, M.marble, px, 0.55, pz, { sx: 0.32, sy: 1.1, sz: 0.32 }); put(BOX, M.marble, px, 1.13, pz, { sx: 0.75, sy: 0.06, sz: 0.75 }); put(BOX, M.marble, px, 0.04, pz, { sx: 0.8, sy: 0.08, sz: 0.8 });
-      /* a gilt-framed portrait stands on the plinth (the 3D bust model has broken geometry, so it is not shown) */
-      {
-        const g = new THREE.Group(); g.position.set(px, 1.16, pz); g.rotation.y = -Math.PI / 2; scene.add(g);
-        const W = 0.62, H = 0.73;
-        const fr = new THREE.Mesh(BOX, M.gold); fr.scale.set(W + 0.1, H + 0.1, 0.05); fr.position.set(0, H / 2 + 0.05, 0); g.add(fr);
-        const pt = new THREE.TextureLoader().load("img/founder-portrait.jpg"); pt.colorSpace = THREE.SRGBColorSpace; pt.anisotropy = aniso;
-        const pm = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshStandardMaterial({ map: pt, roughness: 0.6 })); pm.position.set(0, H / 2 + 0.05, 0.027); g.add(pm);
-        const leg = new THREE.Mesh(BOX, M.gold); leg.scale.set(0.04, 0.5, 0.04); leg.position.set(0, 0.25, -0.16); leg.rotation.x = -0.32; g.add(leg);
-        const sl = new THREE.SpotLight(0xfff0dc, 2.6, 6, 0.5, 0.8, 1.2); sl.position.set(px - 2.4, 3.2, pz + 0.8); sl.target = g; scene.add(sl);
-      }
-      if (false) import("three/addons/loaders/GLTFLoader.js").then(({ GLTFLoader }) => new GLTFLoader().load("models/bust.glb", (gl) => {
+      import("three/addons/loaders/GLTFLoader.js").then(({ GLTFLoader }) => new GLTFLoader().load("models/bust.glb", (gl) => {
         const m = gl.scene; const rm = []; m.traverse((o) => { if (o.isLight) rm.push(o); if (o.isMesh) { o.castShadow = false; o.receiveShadow = false; const nm = o.name || ""; if (/^Lens|flyaways/i.test(nm) || /^Lens|flyaways/i.test((o.parent && o.parent.name) || "")) rm.push(o); else if (o.material && /Head|Neck|Jacket|ear/i.test(o.material.name || "")) { o.material.polygonOffset = true; o.material.polygonOffsetFactor = 2; o.material.polygonOffsetUnits = 2; } } }); rm.forEach((o) => o.parent && o.parent.remove(o));
         const bb = new THREE.Box3().setFromObject(m), sz = bb.getSize(V(0, 0, 0)), k = 0.9 / Math.max(sz.y, 0.001);
         const pivot = new THREE.Group(); pivot.position.set(px, 1.16, pz); scene.add(pivot);
