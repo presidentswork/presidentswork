@@ -1434,6 +1434,10 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 
 /* chooser pop-up on phones: lift the content clear of Safari's bottom bar */
 @media(max-width:767.98px){.ch-panel{padding-bottom:calc(5rem + env(safe-area-inset-bottom,0px)) !important}}
+
+/* the hidden page layer (and its footer) never catches taps on the house */
+.site:not(.open),.site:not(.open) *{pointer-events:none !important}
+#caption.cap-top #capEnter,#caption.cap-top.show #capEnter{pointer-events:auto !important}
 </style>
 </head>
 <body>
@@ -3150,9 +3154,21 @@ async function build() {
         [0.17, 0.42, 0.62].forEach((py) => put(BEAD, M.gold, px, py, 0.57, { parent: g, sx: 0.018, sy: 0.018, sz: 0.012, cast: false }));
       });
       put(rbox(0.86, 0.6, 0.06, 0.02), oak, 0, 0.45, 0.5, { parent: g });
-      put(new THREE.CylinderGeometry(0.2, 0.2, 0.025, 32), M.gold, 0, 0.46, 0.54, { parent: g, rx: Math.PI / 2, cast: false });
-      put(new THREE.CylinderGeometry(0.17, 0.17, 0.03, 32), std({ color: 0x0d1a3a, roughness: 0.5 }), 0, 0.46, 0.545, { parent: g, rx: Math.PI / 2, cast: false });
-      put(BEAD, M.gold, 0, 0.46, 0.565, { parent: g, sx: 0.07, sy: 0.07, sz: 0.012, cast: false });
+      /* carved detail: raised panel frames, a rope edge under the top, plinth and corner rosettes */
+      const frame = (px, py, w, h, z) => { [[0, h / 2, w, 0.025], [0, -h / 2, w, 0.025], [-w / 2, 0, 0.025, h], [w / 2, 0, 0.025, h]].forEach(([dx, dy, fw, fh]) => put(rbox(fw, fh, 0.02, 0.006), oakDk, px + dx, py + dy, z, { parent: g, cast: false })); };
+      frame(0, 0.45, 0.72, 0.48, 0.535);
+      [-0.78, 0.78].forEach((px) => { [0.17, 0.42, 0.62].forEach((py, k) => frame(px, py, 0.62, k ? 0.18 : 0.28, 0.565)); [-0.33, 0.33].forEach((ex) => put(rbox(0.05, 0.7, 0.05, 0.01), oakDk, px + ex, 0.38, 0.55, { parent: g, cast: false })); });
+      put(new THREE.CylinderGeometry(0.018, 0.018, 2.3, 8), M.gold, 0, 0.745, 0.6, { parent: g, rz: Math.PI / 2, cast: false });
+      for (let k = -11; k <= 11; k++) put(BEAD, oakDk, k * 0.1, 0.745, 0.605, { parent: g, sx: 0.022, sy: 0.022, sz: 0.016, cast: false });
+      [-1.12, 1.12].forEach((x) => [-0.55, 0.55].forEach((z) => { put(BEAD, M.gold, x, 0.79, z, { parent: g, sx: 0.035, sy: 0.02, sz: 0.035, cast: false }); put(rbox(0.12, 0.07, 0.12, 0.02), oakDk, x * 0.98, 0.035, z * 0.96, { parent: g, cast: false }); }));
+      /* the medallion: a gold-rimmed navy disc with the Presidents Work logomark */
+      const medTex = (() => { const cv = document.createElement("canvas"); cv.width = cv.height = 512; const c = cv.getContext("2d"); const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = aniso;
+        const base = () => { const gr = c.createRadialGradient(256, 220, 20, 256, 256, 256); gr.addColorStop(0, "#1f3266"); gr.addColorStop(1, "#0a1430"); c.fillStyle = gr; c.beginPath(); c.arc(256, 256, 250, 0, Math.PI * 2); c.fill(); c.strokeStyle = "#e3b95a"; c.lineWidth = 14; c.beginPath(); c.arc(256, 256, 232, 0, Math.PI * 2); c.stroke(); c.lineWidth = 3; c.beginPath(); c.arc(256, 256, 206, 0, Math.PI * 2); c.stroke(); c.fillStyle = "#e3b95a"; for (let i = 0; i < 40; i++) { const a = (i / 40) * Math.PI * 2; c.beginPath(); c.arc(256 + Math.cos(a) * 219, 256 + Math.sin(a) * 219, 3.5, 0, Math.PI * 2); c.fill(); } };
+        base(); tx.needsUpdate = true;
+        const svg = document.querySelector(".dock-bar .mark svg"); if (svg) { const src = svg.outerHTML.replace(/currentColor/g, "#e9c46a").replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="284"'); const im = new Image(); im.onload = () => { c.drawImage(im, 256 - 150, 256 - 142, 300, 284); tx.needsUpdate = true; }; im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(src); }
+        return tx; })();
+      put(new THREE.CylinderGeometry(0.215, 0.215, 0.03, 48), M.gold, 0, 0.46, 0.54, { parent: g, rx: Math.PI / 2, cast: false });
+      put(new THREE.CircleGeometry(0.19, 48), new THREE.MeshStandardMaterial({ map: medTex, roughness: 0.45, metalness: 0.15 }), 0, 0.46, 0.557, { parent: g, cast: false });
       put(rbox(2.36, 0.08, 0.06, 0.02), oakDk, 0, 0.03, 0.56, { parent: g, cast: false });
       put(rbox(0.22, 0.06, 0.18, 0.02), std({ color: 0x141414, roughness: 0.4 }), -0.75, 0.86, 0.15, { parent: g, cast: false });
       put(rbox(0.32, 0.03, 0.24, 0.01), std({ color: 0x6b1d1d, roughness: 0.6 }), 0.55, 0.85, 0.1, { parent: g, cast: false });
