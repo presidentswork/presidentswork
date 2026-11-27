@@ -3130,10 +3130,12 @@ async function build() {
           hand(sec / 60 * Math.PI * 2, 190, 3, "#c9a24e");
           c.fillStyle = "#c9a24e"; c.beginPath(); c.arc(256, 256, 11, 0, Math.PI * 2); c.fill();
           c.fillStyle = "#0d1a3a"; c.textAlign = "center";
-          const label = (city ? city.toUpperCase() + "  ·  " : "") + now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-          c.save(); c.letterSpacing = "4px"; let fs = 42; c.font = `500 ${fs}px 'Instrument Sans', system-ui, sans-serif`;
-          while (fs > 18 && c.measureText(label).width > 440) { fs -= 2; c.font = `500 ${fs}px 'Instrument Sans', system-ui, sans-serif`; }
-          c.fillText(label, 256, 600); c.restore();
+          const fit = (txt, fs, max, ls) => { c.letterSpacing = ls; c.font = `500 ${fs}px 'Instrument Sans', system-ui, sans-serif`; while (fs > 16 && c.measureText(txt).width > max) { fs -= 2; c.font = `500 ${fs}px 'Instrument Sans', system-ui, sans-serif`; } };
+          c.save();
+          /* the time on one line, the city on its own line under it */
+          fit(now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }), 46, 440, "2px"); c.fillText(now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }), 256, 566);
+          if (city) { c.globalAlpha = 0.7; fit(city.toUpperCase(), 26, 440, "6px"); c.fillText(city.toUpperCase(), 256, 618); }
+          c.restore();
           tex.needsUpdate = true;
         };
 
