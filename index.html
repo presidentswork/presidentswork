@@ -1004,6 +1004,7 @@ footer .f-acts .f-main{border-bottom:0 !important;padding-bottom:0 !important;te
 .wx .q.zq.qfill figcaption{border-top-color:rgba(18,18,18,.25)}
 /* v16: footer slides up over the page */
 .site main.ftuck{position:sticky;z-index:0}
+.site main.ftuck{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom,0px))}@media(max-width:767.98px){.site main.ftuck{padding-bottom:calc(8rem + env(safe-area-inset-bottom,0px))}}
 .site main.ftuck::after{content:"";position:absolute;inset:0;background:#000;opacity:calc(var(--fc,0) * .55);pointer-events:none}
 .site footer.f-page{z-index:2 !important;box-shadow:0 -30px 60px rgba(0,0,0,.18)}
 /* v16: capabilities, grouped */
@@ -1112,16 +1113,16 @@ html.snd-on .snd-btn .t-on{display:inline}html.snd-on .snd-btn .t-off{display:no
 .snd-hero.gone{opacity:0;translate:0 -.5rem;pointer-events:none}
 @media(max-width:767.98px){.dock-bar .dock-act .snd-btn{display:none !important}.dock-menu .dm-snd{margin-top:0;padding-top:.2rem;border-top:0}}
 @media(prefers-reduced-motion:reduce){html.snd-on .snd-btn .w1,html.snd-on .snd-btn .w2{animation:none}}
-/* chooser pop-up: a touch smaller so it all fits on a phone */
+/* chooser pop-up on phones: big type that scales with the screen height so it always fits */
 @media(max-width:767.98px){
-  .ch-panel{padding:1.6rem 1.25rem 1.5rem;max-height:92svh}
-  .ch-panel h2{font-size:2.3rem;margin-bottom:.5rem}
-  .ch-panel .ch-lede{font-size:.9rem;margin-bottom:1.1rem}
-  .ch-list a{padding:.85rem 0}
-  .ch-list .nm{font-size:1.2rem}
-  .ch-list .d{font-size:.82rem;line-height:1.35}
-  .ch-foot{font-size:.82rem;margin-top:1rem}
-  .ch-x{width:2.4rem;height:2.4rem;top:.8rem;right:.8rem}
+  .ch-panel{padding:clamp(1.9rem,4.2svh,2.75rem) 1.5rem clamp(1.6rem,3.4svh,2.4rem);max-height:94svh}
+  .ch-panel h2{font-size:clamp(2.7rem,7.4svh,3.9rem);line-height:.98;margin:0 3rem clamp(.7rem,1.6svh,1.1rem) 0}
+  .ch-panel .ch-lede{font-size:clamp(.98rem,2.1svh,1.12rem);line-height:1.5;margin-bottom:clamp(1.3rem,3svh,2rem)}
+  .ch-list a{padding:clamp(1.05rem,2.5svh,1.6rem) 0;gap:clamp(.3rem,.8svh,.55rem) .75rem}
+  .ch-list .nm{font-size:clamp(1.45rem,3.5svh,1.85rem);line-height:1.1}
+  .ch-list .d{font-size:clamp(.92rem,1.95svh,1.04rem);line-height:1.5}
+  .ch-foot{font-size:clamp(.9rem,1.9svh,1rem);line-height:1.5;margin-top:clamp(1.1rem,2.6svh,1.75rem)}
+  .ch-x{width:2.6rem;height:2.6rem;top:1rem;right:1rem}
 }
 /* footer: the big Presidents Work wordmark on top, links in the middle, Work with us and the two buttons at the bottom */
 footer .wordmark,.site footer.f-page .wordmark{position:absolute !important;left:0;right:0;top:5.5rem;height:auto !important;margin:0 !important;padding:0 !important;align-items:flex-start !important;z-index:14}
@@ -1134,6 +1135,21 @@ footer .f-cta{order:2;margin-top:auto}
 /* sound: icon-only in the hero on phones, room for it in the desktop bar */
 @media(max-width:767.98px){.snd-hero{width:2.6rem !important;padding:0 !important;justify-content:center;top:1.2rem}.snd-hero span{display:none !important}}
 @media(min-width:640px){.dock-bar{width:27.5rem}}
+
+/* v17 dock: two-line menu icon that turns into an X, label sits left by the logomark, quieter menu toggles */
+#menuBtn .hb{position:relative;display:block;width:1.375rem;height:.75rem}
+#menuBtn .hb i{position:absolute;left:0;right:0;height:1.5px;border-radius:2px;background:currentColor;transition:top .32s var(--ease-settle),transform .38s var(--ease-settle) .06s}
+#menuBtn .hb i:first-child{top:0}#menuBtn .hb i:last-child{top:calc(100% - 1.5px)}
+#menuBtn.x .hb i{transition:top .3s var(--ease-settle) .04s,transform .4s var(--ease-settle) .14s}
+#menuBtn.x .hb i:first-child{top:calc(50% - .75px);transform:rotate(45deg)}
+#menuBtn.x .hb i:last-child{top:calc(50% - .75px);transform:rotate(-45deg)}
+@media(prefers-reduced-motion:reduce){#menuBtn .hb i{transition:none}}
+.dock-bar .lbl{flex:1 1 auto;min-width:0;text-align:left}
+.dock-bar .mark{flex:none;transition:opacity .3s var(--ease-glide),width .4s var(--ease-settle),margin .4s var(--ease-settle)}
+.dock-bar .mark.hold{width:0 !important;margin-right:-1rem;overflow:hidden}
+@media(max-width:639.98px){.dock-bar .mark.hold{margin-right:-.5rem}}
+.dock-menu .dm-row{text-transform:none !important;letter-spacing:0 !important;font-size:.95rem !important;font-weight:400 !important;opacity:.85}
+.dock-menu .dm-row svg{width:1rem !important;height:1rem !important}
 </style>
 </head>
 <body>
@@ -1237,10 +1253,7 @@ footer .f-cta{order:2;margin-top:auto}
     <div class="dock-bar">
       <a class="mark" href="#top" aria-label="Presidents Work — back to the start"><svg viewBox="0 0 31.8515 30.1058" aria-hidden="true" focusable="false"><path fill="currentColor" d="M31.8237,15.0926c.0171-.3022.0278-.6061.0278-.9126,0-.2642-.0072-.5267-.0199-.7878l-9.3584-.0158,9.0513-2.421c-.1153-.5609-.2625-1.1099-.4351-1.6476l-9.1085,2.4361,8.1722-4.7183c-.2563-.5087-.5391-1.0015-.8466-1.4771l-8.2429,4.7616.1812-.1682,6.5625-6.5626c-.3786-.424-.778-.8289-1.1994-1.2103l-6.7086,6.7087L24.646.8562c-.4741-.3109-.966-.5963-1.4735-.8562l-4.3397,7.5167-.0669.1196c-1.1545-.8982-.9947-3.5958-1.1571-4.5184-.2284-1.2973-1.8277-1.8194-2.9792-1.5723-.4949.1062-.9583.35-1.3311.6917-.3536.324-.7968.8712-.586,1.3819,0,0,.5036-.4324,1.3982-.1935,1.0583.2828.4839,3.1646-.974,4.2948L8.679,0c-.5075.2599-.9994.5452-1.4735.8562l4.7466,8.2214L5.2436,2.369c-.4215.3815-.821.7865-1.1997,1.2106l6.6992,6.7003L2.5458,5.5473c-.3078.476-.5908.9691-.8473,1.4783l8.1969,4.7324L.7612,9.3105c-.1725.5377-.3196,1.0867-.4348,1.6476l8.8784,2.379-9.1825.0026c-.0145.2783-.0223.5584-.0223.8403,0,.2903.0088.5785.0242.865h9.6646L.3662,17.5742c.1218.5609.274,1.1101.4532,1.6472l8.999-2.4292L1.7561,21.447c.2607.5072.5466.9991.8584,1.4729l8.1329-4.6905-6.6172,6.6506c.3665.4038.7547.7874,1.1605,1.1518.0247.0084.049.0177.0739.0259l6.6862-6.686-4.1856,7.2495c.1856.0237.3739.0384.5616.0551l-.6763,1.1714c.1623.0973.3265.1916.4925.2832l.8162-1.4136c.1817.0078.3627.0187.5464.0187.0549,0,.1089-.0035.1636-.0041l3.7572-6.5078-1.6954,6.3275c.1525-.0251.3041-.0531.4549-.0831l-.8049,3.0039c.2268.0658.4553.1272.6861.183l.9027-3.369c.2173-.0569.4331-.117.646-.1845l1.4567-5.4367v4.8781c.1113-.05.2176-.1086.3272-.1614v4.7131c.142.0037.2831.0108.426.0108s.284-.007.426-.0108v-5.1619c.176-.1008.3539-.1988.5249-.3073v-3.9608l.8961,3.3443c.0709-.0533.1371-.1125.2069-.1672l1.5663,5.8454c.3241-.0754.645-.159.9612-.2538l-1.6897-6.306c.1295-.1195.2622-.2354.3869-.3598l-.6816-2.5439,1.1713,2.029c.0397-.0439.0754-.0913.1145-.1357l3.5494,6.1477c.3356-.1774.6638-.3665.9846-.5667l-3.7723-6.5338c.0863-.1179.1768-.2324.2594-.3531l-.7804-1.3518,1.012.9981c.0082-.0127.0151-.0262.0232-.0389l5.5496,5.5496c.3504-.3185.685-.654,1.0059-1.0022l-5.8358-5.8357c.0368-.0746.0779-.1464.1133-.2218l-.5126-.5056,7.8299,4.5206c.3123-.4745.5988-.967.8599-1.475l-8.0419-4.6488,8.988,2.3964c.1803-.5436.3335-1.0993.4551-1.6671l-9.079-2.4578,9.407.0214ZM15.9258,18.8838c-2.526,0-4.5737-2.0477-4.5737-4.5736s2.0477-4.5737,4.5737-4.5737,4.5736,2.0477,4.5736,4.5737-2.0477,4.5736-4.5736,4.5736Z"/></svg></a>
       <span class="lbl" id="dockLbl">Scroll down</span>
-      <div class="dock-act"><button class="snd-btn" type="button" aria-pressed="false" aria-label="Turn sound on"><svg class="snd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button><button class="mode-btn" type="button" aria-pressed="false" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button><button type="button" id="menuBtn" aria-expanded="false" aria-controls="dock-menu" aria-label="Open menu">
-        <svg id="icMenu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        <svg id="icClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false" style="display:none"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button></div>
+      <div class="dock-act"><button class="snd-btn" type="button" aria-pressed="false" aria-label="Turn sound on"><svg class="snd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button><button class="mode-btn" type="button" aria-pressed="false" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button><button type="button" id="menuBtn" aria-expanded="false" aria-controls="dock-menu" aria-label="Open menu"><span class="hb" aria-hidden="true"><i></i><i></i></span></button></div>
     </div>
   </nav>
 </div>
@@ -1275,59 +1288,115 @@ footer .f-cta{order:2;margin-top:auto}
 
 <script src="js/lottie_svg.min.js" defer></script>
 <script type="module">
-/* ambient sound: a soft harp over a string pad, made live with Web Audio; off until someone turns it on */
+/* ambient sound: harp, strings, cello and a soft high line, made live with Web Audio; on by default, starts with the first touch */
 const SND = (() => {
-  let ctx = null, master = null, verb = null, on = false, timer = 0, step = 0, chordAt = 0, padNodes = [];
-  const CH = [[50, 57, 62, 66, 69, 73, 76], [47, 54, 59, 62, 66, 69, 74], [43, 50, 55, 59, 62, 66, 71], [45, 52, 57, 61, 64, 69, 71]];
+  let ctx = null, master = null, verb = null, comp = null, on = false, timer = 0, step = 0, at = 0, bar = 0, unlockEl = null;
+  /* eight chords, two bars each, about 96 seconds before it comes round again */
+  const CH = [
+    [38, 50, 57, 62, 66, 69, 74, 78], [35, 47, 54, 59, 62, 66, 71, 74], [31, 43, 50, 55, 59, 62, 67, 71], [33, 45, 52, 57, 61, 64, 69, 73],
+    [38, 50, 54, 59, 62, 66, 71, 74], [40, 52, 55, 59, 64, 67, 71, 76], [31, 43, 50, 54, 57, 62, 66, 69], [33, 45, 49, 52, 57, 61, 64, 69]];
+  const MEL = [[78, 76, 74, 0, 73, 74, 0, 0], [74, 0, 71, 73, 74, 0, 0, 0], [71, 74, 76, 0, 74, 71, 0, 0], [73, 0, 69, 0, 71, 73, 0, 0],
+    [74, 76, 78, 0, 79, 78, 0, 0], [76, 0, 74, 71, 0, 0, 0, 0], [69, 71, 74, 0, 73, 0, 0, 0], [73, 71, 69, 0, 0, 0, 0, 0]];
+  const PATS = [[1, 3, 5, 7, 6, 4, 5, 2], [1, 2, 3, 5, 4, 6, 7, 5], [2, 4, 6, 7, 5, 3, 4, 1], [1, 4, 3, 6, 5, 7, 6, 3]];
+  const BEAT = 0.75, BAR = 8;
   const hz = (m) => 440 * Math.pow(2, (m - 69) / 12);
   const build = () => {
     ctx = new (window.AudioContext || window.webkitAudioContext)();
-    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
-    verb = ctx.createConvolver(); const len = ctx.sampleRate * 3.6, ir = ctx.createBuffer(2, len, ctx.sampleRate);
-    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
-    verb.buffer = ir; const wet = ctx.createGain(); wet.gain.value = 0.55; verb.connect(wet); wet.connect(master);
+    comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3; comp.connect(ctx.destination);
+    master = ctx.createGain(); master.gain.value = 0; master.connect(comp);
+    verb = ctx.createConvolver(); const len = ctx.sampleRate * 5.2, ir = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3) * (i < ctx.sampleRate * 0.02 ? i / (ctx.sampleRate * 0.02) : 1); }
+    verb.buffer = ir; const wet = ctx.createGain(); wet.gain.value = 0.62; verb.connect(wet); wet.connect(master);
   };
-  const out = (node, dry = 0.6) => { const g = ctx.createGain(); g.gain.value = dry; node.connect(g); g.connect(master); node.connect(verb); };
-  const pluck = (m, t, v = 0.22) => {
-    const f = hz(m), g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.setValueAtTime(Math.min(9000, f * 9), t); lp.frequency.exponentialRampToValueAtTime(Math.max(300, f * 1.6), t + 1.8);
-    [[1, "triangle", 1], [2, "sine", 0.35], [3, "sine", 0.12]].forEach(([k, type, a]) => { const o = ctx.createOscillator(); o.type = type; o.frequency.value = f * k; o.detune.value = (Math.random() - 0.5) * 6; const og = ctx.createGain(); og.gain.value = a; o.connect(og); og.connect(lp); o.start(t); o.stop(t + 4.5); });
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0008, t + 4.2);
-    lp.connect(g); out(g);
+  const out = (node, dry = 0.6, pan = 0, send = 1) => {
+    const p = ctx.createStereoPanner ? ctx.createStereoPanner() : null, g = ctx.createGain(); g.gain.value = dry;
+    if (p) { p.pan.value = pan; node.connect(p); p.connect(g); } else node.connect(g);
+    g.connect(master); const s = ctx.createGain(); s.gain.value = send; node.connect(s); s.connect(verb);
   };
-  const pad = (notes, t, dur) => {
-    notes.slice(0, 3).forEach((m) => {
-      const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; const g = ctx.createGain();
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.028, t + dur * 0.4); g.gain.linearRampToValueAtTime(0, t + dur + 1.5);
-      [-7, 7].forEach((dt) => { const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = hz(m); o.detune.value = dt; o.connect(lp); o.start(t); o.stop(t + dur + 1.6); padNodes.push(o); });
-      lp.connect(g); out(g, 0.4);
+  const pluck = (m, t, v = 0.2, pan = 0) => {
+    const f = hz(m), g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = "lowpass";
+    lp.frequency.setValueAtTime(Math.min(10000, f * 10), t); lp.frequency.exponentialRampToValueAtTime(Math.max(320, f * 1.5), t + 2.2);
+    [[1, "triangle", 1], [2, "sine", 0.4], [3, "sine", 0.14], [4.01, "sine", 0.06]].forEach(([k, type, a]) => { const o = ctx.createOscillator(); o.type = type; o.frequency.value = f * k; o.detune.value = (Math.random() - 0.5) * 5; const og = ctx.createGain(); og.gain.value = a; o.connect(og); og.connect(lp); o.start(t); o.stop(t + 5.5); });
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0006, t + 5.2);
+    lp.connect(g); out(g, 0.55, pan, 0.9);
+  };
+  /* strings: three detuned saws per note, slow vibrato and a breathing filter; chords overlap so it never drops out */
+  const strings = (notes, t, dur) => {
+    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 0.6; lp.frequency.setValueAtTime(700, t); lp.frequency.linearRampToValueAtTime(1400, t + dur * 0.5); lp.frequency.linearRampToValueAtTime(800, t + dur + 3);
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1, t + 3.2); g.gain.setValueAtTime(1, t + dur); g.gain.linearRampToValueAtTime(0, t + dur + 3.4);
+    const vib = ctx.createOscillator(), vg = ctx.createGain(); vib.frequency.value = 4.6; vg.gain.value = 5; vib.connect(vg); vib.start(t); vib.stop(t + dur + 3.6);
+    notes.slice(1, 6).forEach((m, j) => {
+      const ng = ctx.createGain(); ng.gain.value = j === 0 ? 0.03 : 0.022;
+      [-9, 0, 9].forEach((dt) => { const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = hz(m); o.detune.value = dt + (Math.random() - 0.5) * 3; vg.connect(o.detune); o.connect(ng); o.start(t); o.stop(t + dur + 3.6); });
+      ng.connect(lp);
     });
+    lp.connect(g); out(g, 0.42, 0, 1.1);
+    /* cello underneath */
+    const c = ctx.createOscillator(), cl = ctx.createBiquadFilter(), cg = ctx.createGain(); c.type = "sawtooth"; c.frequency.value = hz(notes[0]); vg.connect(c.detune);
+    cl.type = "lowpass"; cl.frequency.value = 420; cg.gain.setValueAtTime(0, t); cg.gain.linearRampToValueAtTime(0.07, t + 2.4); cg.gain.setValueAtTime(0.07, t + dur); cg.gain.linearRampToValueAtTime(0, t + dur + 3);
+    c.connect(cl); cl.connect(cg); out(cg, 0.5, 0, 0.6); c.start(t); c.stop(t + dur + 3.2);
   };
-  const PAT = [0, 2, 4, 6, 5, 3, 4, 1];
+  /* a soft high line, flute-like, on every other pass */
+  const flute = (m, t, d) => {
+    const o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(), v = ctx.createOscillator(), vg = ctx.createGain();
+    o.type = "sine"; o2.type = "triangle"; o.frequency.value = hz(m); o2.frequency.value = hz(m) * 2; v.frequency.value = 5.2; vg.gain.value = 7; v.connect(vg); vg.connect(o.detune); vg.connect(o2.detune);
+    const g2 = ctx.createGain(); g2.gain.value = 0.12; o2.connect(g2); g2.connect(g); o.connect(g);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.045, t + 0.35); g.gain.setValueAtTime(0.045, t + d * 0.7); g.gain.linearRampToValueAtTime(0, t + d + 0.6);
+    out(g, 0.45, 0.25, 1.2); [o, o2, v].forEach((x) => { x.start(t); x.stop(t + d + 0.8); });
+  };
   const tick = () => {
     if (!on) return;
-    const now = ctx.currentTime, beat = 0.6;
-    while (chordAt < now + 0.4) {
-      const ci = Math.floor(step / 8) % CH.length, n = CH[ci];
-      if (step % 8 === 0) pad(n, chordAt, beat * 8);
-      const k = PAT[step % 8]; pluck(n[k] + (step % 16 >= 8 && k > 3 ? 0 : 0), chordAt, 0.16 + Math.random() * 0.08);
-      if (step % 4 === 0) pluck(n[0] - 12, chordAt, 0.12);
-      step++; chordAt += beat * (Math.random() < 0.12 ? 1.5 : 1);
+    const now = ctx.currentTime;
+    if (at < now) at = now + 0.05;
+    while (at < now + 0.6) {
+      const b = Math.floor(step / BAR), ci = Math.floor(b / 2) % CH.length, n = CH[ci], i = step % BAR, pass = Math.floor(b / (CH.length * 2));
+      if (b % 2 === 0 && i === 0) strings(n, at, BEAT * BAR * 2);
+      const pat = PATS[(ci + pass) % PATS.length], k = pat[i];
+      pluck(n[k] + (b % 2 && i > 5 ? 12 : 0), at, 0.13 + Math.random() * 0.07, (k / 7 - 0.5) * 0.7);
+      if (i === 0) pluck(n[0] + 12, at, 0.12, -0.3);
+      if (i === 4 && Math.random() < 0.5) pluck(n[1], at + BEAT * 0.5, 0.08, -0.2);
+      if (pass % 2 === 1 && b % 2 === 1) { const mm = MEL[ci][i]; if (mm) flute(mm, at, BEAT * (MEL[ci][i + 1] ? 1 : 2.2)); }
+      step++; at += BEAT * (i === BAR - 1 && Math.random() < 0.3 ? 1.25 : 1);
     }
-    timer = setTimeout(tick, 120);
+    timer = setTimeout(tick, 150);
   };
-  const set = (v) => {
-    on = v;
-    try { localStorage.setItem("pw-sound", v ? "1" : "0"); } catch (e) { /* private mode */ }
+  /* iPhones mute Web Audio on silent mode unless a media element is playing; a silent looping clip keeps it audible */
+  const unlock = () => {
+    if (unlockEl) { unlockEl.play().catch(() => {}); return; }
+    unlockEl = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA="); unlockEl.loop = true; unlockEl.setAttribute("playsinline", ""); unlockEl.play().catch(() => {});
+  };
+  const ui = (v) => {
     document.querySelectorAll(".snd-btn").forEach((b) => { b.setAttribute("aria-pressed", String(v)); b.setAttribute("aria-label", v ? "Turn sound off" : "Turn sound on"); });
     document.documentElement.classList.toggle("snd-on", v);
-    if (v) {
-      if (!ctx) build();
-      ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 2.5);
-      chordAt = ctx.currentTime + 0.1; clearTimeout(timer); tick();
-    } else if (ctx) {
-      clearTimeout(timer); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.8);
-    }
   };
+  const start = () => {
+    if (!ctx) build();
+    const go = () => {
+      if (!on || ctx.state !== "running") return;
+      master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 3);
+      clearTimeout(timer); tick();
+    };
+    const r = ctx.resume(); if (r && r.then) r.then(go, () => {}); else go();
+  };
+  const set = (v, save = true) => {
+    on = v; ui(v);
+    if (save) { try { localStorage.setItem("pw-sound", v ? "1" : "0"); } catch (e) { /* private mode */ } }
+    if (v) { unlock(); start(); }
+    else if (ctx) { clearTimeout(timer); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.8); if (unlockEl) unlockEl.pause(); }
+  };
+  /* autoplay: on unless someone turned it off before; browsers only let it start after a first tap, click or key */
+  let pref = null; try { pref = localStorage.getItem("pw-sound"); } catch (e) { /* private mode */ }
+  if (pref !== "0") {
+    on = true; ui(true);
+    try { build(); start(); } catch (e) { /* no audio */ }
+    const first = (e) => {
+      if (e.target && e.target.closest && e.target.closest(".snd-btn")) { gone(); return; }
+      gone(); if (on) { unlock(); start(); }
+    };
+    const evs = ["pointerdown", "touchend", "keydown", "click"];
+    const gone = () => evs.forEach((n) => removeEventListener(n, first, true));
+    evs.forEach((n) => addEventListener(n, first, { capture: true, passive: true }));
+  }
   document.addEventListener("click", (e) => { if (e.target.closest && e.target.closest(".snd-btn")) set(!on); });
   document.addEventListener("visibilitychange", () => { if (!ctx) return; if (document.hidden) ctx.suspend(); else if (on) ctx.resume(); });
   return { set, get on() { return on; } };
@@ -1847,7 +1916,7 @@ let menuOpen = false;
 const setMenu = (o) => {
   menuOpen = o; dockMenu.classList.toggle("open", o); dockMenu.inert = !o;
   menuBtn.setAttribute("aria-expanded", String(o)); menuBtn.setAttribute("aria-label", o ? "Close menu" : "Open menu");
-  $("#icMenu").style.display = o ? "none" : ""; $("#icClose").style.display = o ? "" : "none";
+  menuBtn.classList.toggle("x", o);
 };
 menuBtn.addEventListener("click", () => setMenu(!menuOpen));
 dockMenu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
@@ -2821,6 +2890,45 @@ async function build() {
         c.rgb += (hash(gl_FragCoord.xy) - .5) * .022; gl_FragColor = c; }`,
   });
   composer.addPass(grade);
+
+  /* fly-in clouds: clumps of soft puffs along the opening descent; the camera drops through them and they thin out */
+  {
+    const small = innerWidth < 768;
+    const puff = (seed) => ctex(256, 256, (c, w, h) => {
+      const r = mulberry(seed);
+      for (let i = 0; i < 34; i++) {
+        const a = r() * Math.PI * 2, d = Math.pow(r(), 0.8) * 70, x = w / 2 + Math.cos(a) * d * 1.1, y = h / 2 + Math.sin(a) * d * 0.55 - 8, rr = 22 + r() * 34 * (1 - d / 100);
+        const g = c.createRadialGradient(x, y, 0, x, y, rr); g.addColorStop(0, "rgba(255,255,255,.9)"); g.addColorStop(0.5, "rgba(255,255,255,.55)"); g.addColorStop(1, "rgba(255,255,255,0)");
+        c.fillStyle = g; c.fillRect(0, 0, w, h);
+      }
+      c.globalCompositeOperation = "source-atop";
+      const sh = c.createLinearGradient(0, h * 0.3, 0, h * 0.8); sh.addColorStop(0, "rgba(255,255,255,0)"); sh.addColorStop(1, "rgba(160,170,192,.75)");
+      c.fillStyle = sh; c.fillRect(0, 0, w, h);
+      c.globalCompositeOperation = "destination-in";
+      const m = c.createRadialGradient(w / 2, h / 2, w * 0.28, w / 2, h / 2, w * 0.5); m.addColorStop(0, "rgba(0,0,0,1)"); m.addColorStop(1, "rgba(0,0,0,0)");
+      c.fillStyle = m; c.fillRect(0, 0, w, h);
+    });
+    const tex = [puff(5), puff(17), puff(29), puff(43), puff(61)];
+    const rr = mulberry(77), n = KF.length - 1, FLY = [];
+    const pt = V(0, 0, 0), nx = V(0, 0, 0), up = V(0, 1, 0), tg = V(0, 0, 0), cen = V(0, 0, 0);
+    const clumps = small ? 20 : 30;
+    for (let i = 0; i < clumps; i++) {
+      const s = (0.02 + Math.pow(i / clumps, 1.5) * 1.9 + rr() * 0.08) / n;
+      posCurve.getPoint(Math.min(s, 2.1 / n), pt); posCurve.getTangent(Math.min(s, 2.1 / n), tg); nx.crossVectors(tg, up).normalize();
+      const sideSign = i % 2 ? 1 : -1, side = sideSign * (5 + rr() * 24), lift = -9 + rr() * 13;
+      cen.copy(pt).addScaledVector(nx, side).addScaledVector(up, lift);
+      const k = 4 + Math.floor(rr() * 4), big = 7 + rr() * 6;
+      for (let j = 0; j < k; j++) {
+        const mat = new THREE.SpriteMaterial({ map: tex[(i + j) % 5], transparent: true, opacity: 0, fog: false, depthWrite: false, rotation: (rr() - 0.5) * 0.5 });
+        const sp = new THREE.Sprite(mat), sc = big * (0.6 + rr() * 0.6);
+        sp.position.set(cen.x + (rr() - 0.5) * big * 2.4, cen.y + (rr() - 0.3) * big * 0.5, cen.z + (rr() - 0.5) * big * 2.4);
+        sp.scale.set(sc * 2, sc * 1.1, 1); sp.renderOrder = 5;
+        sp.userData = { base: 0.8 + rr() * 0.2, drift: 0.5 + rr(), x0: sp.position.x };
+        scene.add(sp); FLY.push(sp);
+      }
+    }
+    window.__pwFly = FLY;
+  }
   G = { THREE, renderer, composer, gtao, grade, roomEnv, skyEnv, scene, camera, sky, sun, hemi, lamps, EX, hitList, posCurve, angCurve, jets, flag, flagBase, ray: new THREE.Raycaster(), v1: V(0, 0, 0), v2: V(0, 0, 0), v3: V(0, 0, 0), dir: V(0, 0, 0) };
   resize();
   placeCamera(0, 0, 0);
@@ -3114,6 +3222,8 @@ sub((t, dt) => {
     if (p < 0.3) { const fp = G.flag.geometry.attributes.position; for (let i = 0; i < fp.count; i++) { const x = G.flagBase[i * 3]; fp.setZ(i, Math.sin(x * 2.2 - t * 0.004) * 0.14 * (x / 3.4)); } fp.needsUpdate = true; }
   }
   placeCamera(p, view.mx, view.my);
+
+  if (window.__pwFly) { const fade = 1 - span(p, [0.1, 0.15]), cp = G.camera.position; window.__pwFly.forEach((c) => { c.visible = fade > 0.001; if (!c.visible) return; if (!reduce) c.position.x = c.userData.x0 + Math.sin(t * 0.00012 * c.userData.drift + c.userData.x0) * 2.5; const d = c.position.distanceTo(cp), near = Math.min(1, Math.max(0, (d - 2) / 9)), far = 1 - Math.min(1, Math.max(0, (d - 140) / 80)); c.material.opacity = c.userData.base * near * near * far * fade; }); }
   if (pointer.moved && pointer.inside && state.open < 0 && view.k === 0) {
     pointer.moved = false;
     setHover(innerWidth > 768 && ins > 0.5 ? pick(pointer.x, pointer.y) : -1);
