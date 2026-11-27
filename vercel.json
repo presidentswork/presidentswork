@@ -1,5 +1,4 @@
 {
-  "cleanUrls": true,
   "redirects": [
     {
       "source": "/assessment",
@@ -15,91 +14,91 @@
   "rewrites": [
     {
       "source": "/programs",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/boardroom",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/formation",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/elevation",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/direction",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/launch",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/enterprise",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/method",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/about",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/contact",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/work",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/founders",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/leadership",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/yankyperl",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/index",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/strategicbank",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/specialtyrx",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/pyle",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/hireends",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/spritzonme",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/pedal",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/moonwalk-orthotics",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ],
   "headers": [
