@@ -1350,6 +1350,9 @@ h1.mr-title.mr-t3 .split{display:block !important}h1.mr-title.mr-t3 .split .w{di
 .wx .pi .pi-bld{transform-box:fill-box;transform-origin:50% 100%;animation:pibld 4.8s cubic-bezier(.65,0,.35,1) calc(var(--i) * .14s) infinite}
 @keyframes pibld{0%{transform:scaleY(0)}40%,82%{transform:scaleY(1)}100%{transform:scaleY(0)}}
 @media(prefers-reduced-motion:reduce){.wx .pi .pi-bld{animation:none}}
+
+/* phone menu: Dark mode and Sound sit centred, each in its own half */
+@media(max-width:767.98px){.dock-menu .dm-mode{flex:1 1 50% !important;width:50% !important;padding-right:0 !important;display:flex !important;justify-content:center}.dock-menu .dm-row{justify-content:center}}
 </style>
 </head>
 <body>
