@@ -2274,10 +2274,9 @@ const KF = [
   { t: 0.875, d: 0.0, pos: [28.2, 3.1, -13.2], tgt: [40, 3.6, -22] },
   { t: 0.8922, d: 0.0, pos: [36, 8, -21], tgt: [48, 2.5, -34] },
   { t: 0.9138, d: 0.0103, pos: [38.5, 2, -34], tgt: [52, 2.3, -34], stop: 1, anchor: "oval-office" },
-  { t: 0.928, d: 0.0, pos: [48.2, 1.85, -33.6], tgt: [55, 2.3, -31.6] },
-  { t: 0.936, d: 0.008, pos: [50.6, 1.8, -32.9], tgt: [55.4, 2.55, -30.9], pod: 1 },
-  { t: 0.949, d: 0.006, pos: [50.6, 1.8, -35.1], tgt: [55.4, 2.55, -37.1], pod: 2 },
-  { t: 0.959, d: 0.006, pos: [52.4, 1.9, -30.4], tgt: [52, 1.5, -38.6] },
+  { t: 0.93, d: 0.008, pos: [50.2, 1.9, -30.2], tgt: [52, 1.55, -38.6] },
+  { t: 0.946, d: 0.007, pos: [50.6, 1.8, -35.1], tgt: [55.4, 2.55, -37.1], pod: 2 },
+  { t: 0.959, d: 0.007, pos: [50.6, 1.8, -32.9], tgt: [55.4, 2.55, -30.9], pod: 1 },
   { t: 0.9705, d: 0.0295, pos: [48.4, 3.9, -34], tgt: [52, 0, -34], stop: 1, seal: 1 },
 ];
 const STATION = []; KF.forEach((k, i) => { if (k.pj !== undefined) STATION[k.pj] = i; });
@@ -3110,7 +3109,8 @@ async function build() {
           lbox(fg, -1.27, 1.27, 1.8, 3.38, 0, 0.06, M.gold);
           const pc = document.createElement("canvas"); pc.width = 1280; pc.height = 720; const ptx = new THREE.CanvasTexture(pc); ptx.colorSpace = THREE.SRGBColorSpace; ptx.anisotropy = aniso;
           const pim = new Image(); pim.onload = () => { const c = pc.getContext("2d"); c.drawImage(pim, 0, 0, 1280, 720); c.fillStyle = "rgba(0,0,0,.28)"; c.beginPath(); c.arc(640, 360, 78, 0, Math.PI * 2); c.fill(); c.strokeStyle = "rgba(255,255,255,.9)"; c.lineWidth = 5; c.stroke(); c.fillStyle = "#fff"; c.beginPath(); c.moveTo(618, 322); c.lineTo(618, 398); c.lineTo(684, 360); c.closePath(); c.fill(); c.fillStyle = "rgba(10,12,10,.62)"; c.fillRect(0, 0, 1280, 64); c.fillStyle = "#f4ce78"; c.font = "600 30px 'Instrument Sans', system-ui, sans-serif"; c.fillText(tag, 34, 43); ptx.needsUpdate = true; }; pim.src = src;
-          put(new THREE.PlaneGeometry(2.4, 1.35), new THREE.MeshBasicMaterial({ map: ptx, toneMapped: false }), 0, 2.59, 0.065, { parent: fg, cast: false });
+          const pm = put(new THREE.PlaneGeometry(2.4, 1.35), new THREE.MeshBasicMaterial({ map: ptx, toneMapped: false }), 0, 2.59, 0.065, { parent: fg, cast: false });
+          (window.__pwPods = window.__pwPods || []).push({ mesh: pm, yt: /latest/.test(src) ? "aRQXtUITtBc" : "o6xShvRWhTg" });
         });
         draw(); setInterval(() => { if (!document.hidden) draw(); }, 1000);
         const [x, z, ry] = wallAt(0, 0.15), g = grp(x, 0, z, ry);
@@ -3476,7 +3476,9 @@ function setHover(i) {
 canvas.addEventListener("click", (e) => {
   if (state.open >= 0 || view.k > 0) return;
   const r = canvas.getBoundingClientRect();
-  const i = pick(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  const nx = ((e.clientX - r.left) / r.width) * 2 - 1, ny = -((e.clientY - r.top) / r.height) * 2 + 1;
+  if (window.__pwPods && G) { G.ray.setFromCamera({ x: nx, y: ny }, G.camera); const ph = G.ray.intersectObjects(window.__pwPods.map((q) => q.mesh), false)[0]; if (ph && ph.distance < 14) { const q = window.__pwPods.find((z) => z.mesh === ph.object); inBrowser("https://www.youtube.com/embed/" + q.yt + "?autoplay=1&rel=0&playsinline=1"); return; } }
+  const i = pick(nx, ny);
   if (i >= 0) openProject(i, { fly: true });
 });
 
